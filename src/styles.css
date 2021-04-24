@@ -1,1 +1,117 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/purple-green.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+}
+
+.mat-list-item,
+.mat-menu-item {
+  font-size: 14px !important;
+}
+
+.album-cover:hover{
+  cursor: pointer;
+}
+
+mat-chip:hover{
+  cursor:pointer;
+}
+
+.navbar-spacer {
+  flex: 1 1 auto;
+}
+
+.navbar {
+  z-index: 2;
+}
+
+.navbar-brand {
+  text-decoration: none;
+  color: white;
+}
+
+.navbar-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fafafa;
+
+}
+
+/*Set sidenav width*/
+
+mat-sidenav {
+  min-width: 180px !important;
+  border-right: 1px solid #eee;
+  box-shadow: 6px 0 6px rgba(0, 0, 0, .1);
+  /* background-color:rgb(63, 81, 181); */
+}
+
+
+#push-bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+.mat-toolbar{
+  min-height: 64px
+}
+
+.sidenav-content{
+  padding: 40px;
+}
+
+.bottom-spacer{
+  height: 80px;
+}
+  
+@media only screen and (max-width: 600px) {
+
+  mat-sidenav {
+    position: fixed !important;
+  }
+
+  mat-sidenav-content{
+    margin-left: 0px !important;
+  }
+
+  .sidenav-content{
+    padding:20px;
+  }
+
+  .bottom-spacer{
+    height: 40px;
+  }
+}
+
+.mat-drawer-container{
+  overflow: auto !important;
+  height: 100%;
+}
+
+.mat-drawer-content{
+  height: auto !important;
+}
+
+.mat-list-base .mat-list-item .mat-line {
+  white-space: normal !important;
+}
+
+.mat-sidenav-content .mat-list-item {
+  height: auto !important;
+}
+.sidenav-content{
+    padding:20px 35px 10px 35px;
+}
