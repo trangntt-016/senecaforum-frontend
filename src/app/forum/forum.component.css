@@ -1,0 +1,44 @@
+::ng-deep .parent {
+    padding-left:15vw;
+}
+
+
+
+.container{
+    background-color: purple;
+    width:fit-content;
+    display:flex;
+    flex-direction: column;
+    display:absolute;
+    float:right;
+    padding:5px 15px 15px 15px;
+}
+#order{
+    margin-left:10px;
+}
+
+#sort{
+    margin-right:10px;
+}
+
+@media only screen and (max-width: 600px) {
+    #order,
+    #sort{
+        width:100%;
+    }
+
+    #order{
+        margin-left:0px;
+    }
+
+    ::ng-deep .child{
+        background-color: salmon;
+        margin-left:0px;
+        
+    }
+    
+    ::ng-deep .parent{
+        background-color: yellow;
+        margin-left:0px;
+    }
+}
