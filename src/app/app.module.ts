@@ -13,8 +13,7 @@ import { ForumComponent } from './forum/forum.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ForumComponent
-  ],
+    ForumComponent  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -12,17 +12,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MenubarModule} from 'primeng/menubar';
-import { FormsModule } from '@angular/forms';
-import { AutoCompleteModule } from "primeng/autocomplete";
-import { CalendarModule } from "primeng/calendar";
-import { ChipsModule } from "primeng/chips";
-import { DropdownModule } from "primeng/dropdown";
-import { InputMaskModule } from "primeng/inputmask";
-import { InputNumberModule } from "primeng/inputnumber";
-import { CascadeSelectModule } from "primeng/cascadeselect";
-import { MultiSelectModule } from "primeng/multiselect";
-import { InputTextareaModule } from "primeng/inputtextarea";
-import { InputTextModule } from "primeng/inputtext";
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 
 
@@ -42,17 +36,10 @@ import { InputTextModule } from "primeng/inputtext";
         FlexLayoutModule,
         MenubarModule,
         FormsModule,
-        AutoCompleteModule,
-        MultiSelectModule,
-        InputTextareaModule,
-        InputTextModule,
-        DropdownModule,
-        CascadeSelectModule,
-        CalendarModule,
-        ChipsModule,
-        InputMaskModule,
-        InputNumberModule
-
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSelectModule,
+        MatGridListModule
         
     ],
     exports:[
@@ -70,12 +57,14 @@ import { InputTextModule } from "primeng/inputtext";
         FlexLayoutModule,
         MenubarModule,
         FormsModule,
-        AutoCompleteModule,
-        MultiSelectModule,
-        InputTextareaModule,
-        InputTextModule,
-        DropdownModule,
-        CascadeSelectModule
+        MatDatepickerModule,
+        MatNativeDateModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatGridListModule
+
     ]
 })
 export class MaterialModule{}
