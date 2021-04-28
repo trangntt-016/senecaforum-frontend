@@ -1,61 +1,178 @@
 <p-menubar [model]="items" styleClass="parent"></p-menubar>
 
 <br>
+         
+<div class="table-responsive-sm table-responsive-md table-responsive-lg">
+    <table class="table text-secondary table-striped">
+        <thead>
+          <tr>
+            <th scope="col w-10"></th>
+            <th scope="col w-40"></th>
+            <th scope="col w-10"></th>
+            <th scope="col w-10"></th>
+            <th scope="col w-20"></th>
+            <th scope="col w-10">
+                <button mat-icon-button color="primary"aria-label="Filter icon" class="position-relative" (click)="handleDisplayFilter($event)">
+                    <mat-icon><i class="pi pi-filter"></i></mat-icon>
+                    <span class="position-absolute badge form"> 
+                        <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container position-absolute top-0 start-100" *ngIf="isDisplayFilter">
+                            <h2>Show only</h2>
+                                <div fxLayout="column">
+                                    <mat-form-field appearance="fill" class="full-width-input">
+                                        <mat-label>Find By Tag</mat-label>
+                                        <input matInput type="text" [(ngModel)]='filteredKeyword.searchTag' name="searchTag">
+                                    </mat-form-field>
+                                    <!-- <mat-form-field appearance="fill" class="full-width-input">
+                                        <mat-label>Started from</mat-label>
+                                        <input matInput  [matDatepicker]="picker" [(ngModel)]="filteredKeyword.fromDate" name="fromDate">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field> -->
+                    
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Enter a date range</mat-label>
+                                        <mat-date-range-input [rangePicker]="picker">
+                                          <input matStartDate [(ngModel)]="filteredKeyword.start" name="start" placeholder="Start date">
+                                          <input matEndDate [(ngModel)]="filteredKeyword.end" name="end" placeholder="End date">
+                                        </mat-date-range-input>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-date-range-picker #picker></mat-date-range-picker>
+                                      </mat-form-field>
+                                    <mat-form-field class="full-width-input">
+                                        <mat-grid-list cols="4">
+                                            <mat-select name="updatedDate" [(value)]="filteredKeyword.updatedDate" placeholder = "Last Update">
+                                                <mat-option [value]="7">7 days</mat-option>
+                                                <mat-option [value]="14">14 days</mat-option>
+                                                <mat-option [value]="30">30 days</mat-option>
+                                                <mat-option [value]="60">2 months</mat-option>
+                                                <mat-option [value]="90">3 months</mat-option>
+                                                <mat-option [value]="180">6 months</mat-option>
+                                                <mat-option [value]="365">1 year</mat-option>
+                                            </mat-select>
+                                        </mat-grid-list>
+                                    </mat-form-field>
+                        
 
-<mat-card>
-    <mat-card-content>
-        <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container">
-            <h2>Show only</h2>
-                <div fxLayout="column">
-                    <mat-form-field appearance="fill" class="full-width-input">
-                        <mat-label>Find By Tag</mat-label>
-                        <input matInput type="text" [(ngModel)]='filteredKeyword.searchTag' name="searchTag">
-                    </mat-form-field>
-                    <mat-form-field appearance="fill" class="full-width-input">
-                        <mat-label>Started from</mat-label>
-                        <input matInput  [matDatepicker]="picker" [(ngModel)]="filteredKeyword.fromDate" name="fromDate">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width-input">
-                        <mat-grid-list cols="4">
-                            <mat-select name="updatedDate" [(value)]="filteredKeyword.updatedDate" placeholder = "Last Update">
-                                <mat-option [value]="7">7 days</mat-option>
-                                <mat-option [value]="14">14 days</mat-option>
-                                <mat-option [value]="30">30 days</mat-option>
-                                <mat-option [value]="60">2 months</mat-option>
-                                <mat-option [value]="90">3 months</mat-option>
-                                <mat-option [value]="180">6 months</mat-option>
-                                <mat-option [value]="365">1 year</mat-option>
-                            </mat-select>
-                        </mat-grid-list>
-                    </mat-form-field>
-
-                    <mat-grid-list cols="2" rows="1"class="full-width-input">
-                        <mat-form-field id="sort">
-                            <mat-select name="sortedBy" [(value)]="filteredKeyword.sortedBy" placeholder = "Sorted By">
-                                <mat-option [value]="'titles'">Titles</mat-option>
-                                <mat-option [value]="'comments'">Comments</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                        <mat-form-field id="order">
-                            <mat-label>Order</mat-label>
-                            <mat-select name="order" [(value)]="filteredKeyword.order" placeholder = "Order">
-                                <mat-option [value]="'ascending'">Ascending</mat-option>
-                                <mat-option [value]="'descending'">Descending</mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </mat-grid-list>
-                </div>            
-                <button mat-raised-button>
-                    <mat-icon  style="opacity:.5">search</mat-icon>
-                    <span style="opacity:.5">&nbsp;&nbsp;&nbsp;Filter</span>
+                                    <mat-form-field>
+                                        <mat-select name="sortedBy" [(value)]="filteredKeyword.sortedBy" placeholder = "Sorted By">
+                                            <mat-option [value]="'titles'">Titles</mat-option>
+                                            <mat-option [value]="'comments'">Comments</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <mat-form-field>
+                                        <mat-label>Order</mat-label>
+                                        <mat-select name="order" [(value)]="filteredKeyword.order" placeholder = "Order">
+                                            <mat-option [value]="'ascending'">Ascending</mat-option>
+                                            <mat-option [value]="'descending'">Descending</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    
+                                </div>            
+                                <button mat-raised-button>
+                                    <mat-icon  style="opacity:.5">search</mat-icon>
+                                    <span style="opacity:.5">&nbsp;&nbsp;&nbsp;Filter</span>
+                                </button>
+                        </form>
+                    </span>
                 </button>
-        </form>
-    </mat-card-content>
-</mat-card>
+            </th>
+          </tr>
+        </thead>
 
-<br /><br />
+        <tbody>
+          <tr *ngFor="let p of posts">
+            <td class="w-10">
+                <div class="p-1 trigger">
+                    <img id="authorAvatarUrl" src={{p.author.avatarUrl}} alt="authorAvatar" class="position-relative">
+                    
+                    <span class="position-absolute toolTip">
+                        <div class="card" style="width: 15rem;">
+                            <div class="card-body">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h4>{{p.author.name}}'s Discord:</h4>
+                                    <h4> {{p.author.discord}}</h4>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <div class="d-flex flex-column">
+                                        <h5>Posts</h5>
+                                        <h5>{{p.author.noOfPosts}}</h5>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5>Replies</h5>
+                                        <h5>{{p.author.noOfReplies}}</h5>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5>Join On</h5>
+                                        <h5>{{p.author.joinOn|date}}</h5>
+                                    </div>
+                                </div>            
+                            </div>
+                          </div>
+                    </span>
+
+                </div>
+
+            </td>
+            <td class="w-40">
+                <h3>{{p.title}}</h3>
+                <h5>{{p.author.name}} created on {{p.createOn | date}}</h5>
+            </td>
+            <td class="w-10">
+                <h3>Replies:</h3>
+            </td>
+            <td class="w-10">
+                <h3>{{p.noOfReplies}}</h3>
+            </td>
+            <td class="w-20">
+                <div class="d-flex flex-column align-items-end">
+                    <h3>{{p.lastReplyOn}}</h3>
+                    <h5>Last reply by: {{p.replier.name}}</h5>
+                </div>
+            </td>
+            <td class="w-10">
+                <div class="pt-2 pl-1 trigger">
+                    <img id="replierAvatarUrl" src={{p.replier.avatarUrl}} alt="replierAvatar" class="position-relative">
+                    
+                    <span class="position-absolute toolTip" id="replierCard">
+                        <div class="card" style="width: 15rem;">
+                            <div class="card-body">
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h4>{{p.replier.name}}'s Discord:</h4>
+                                    <h4> {{p.replier.discord}}</h4>
+                                </div>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <div class="d-flex flex-column">
+                                        <h5>Posts</h5>
+                                        <h5>{{p.replier.noOfPosts}}</h5>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5>Replies</h5>
+                                        <h5>{{p.replier.noOfReplies}}</h5>
+                                    </div>
+                                    <div class="d-flex flex-column">
+                                        <h5>Join On</h5>
+                                        <h5>{{p.replier.joinOn|date}}</h5>
+                                    </div>
+                                </div>            
+                            </div>
+                          </div>
+                    </span>
+                    
+                </div>
+
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <mat-paginator 
+    (page)="handlePageEvent($event)"
+    [length]="length"
+    [pageSize]="pageSize"
+    [showFirstLastButtons]="showFirstLastButtons"
+    [pageSizeOptions]="pageSizeOptions"
+    [pageIndex]="pageIndex">
+</mat-paginator>
 
 
