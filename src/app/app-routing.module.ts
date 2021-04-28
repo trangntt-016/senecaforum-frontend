@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForumComponent } from './forum/forum.component';
 
 const routes: Routes = [
-  {path:'forum',component:ForumComponent}
+  {path:'forum/topics/:id/posts',component:ForumComponent}
 ];
 
 @NgModule({
