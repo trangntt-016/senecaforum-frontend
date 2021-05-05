@@ -41,13 +41,18 @@
           </mat-form-field>
         </div>
 
-        <div *ngFor="let s of sidebars">
-          <a mat-list-item >
-             <p mat-line [routerLink]= [(s.url)]> {{s.name}} </p>
-          </a>
-  
-        </div>
-
+        <a mat-list-item >
+          <mat-icon mat-list-icon>
+            whatshot
+          </mat-icon>
+          <p mat-line [routerLink]="['/whatshot']"> What's Hot? </p>
+        </a>
+        <a mat-list-item>
+          <mat-icon mat-list-icon>
+            forum
+          </mat-icon>
+          <p mat-line [routerLink]="['/topics/1/posts']" [queryParams]="{ pageIndex: 1,pageSize: 10} "> Forum </p>
+        </a>
 
         <mat-divider></mat-divider>
 

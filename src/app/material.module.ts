@@ -19,7 +19,7 @@ import { MatSelectModule } from '@angular/material/select';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
     imports:[
@@ -42,7 +42,9 @@ import { MatTableModule } from '@angular/material/table';
         MatSelectModule,
         MatGridListModule,
         MatPaginatorModule,
-        MatTableModule
+        MatTableModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule
         
     ],
     exports:[
@@ -68,7 +70,8 @@ import { MatTableModule } from '@angular/material/table';
         MatSelectModule,
         MatGridListModule,
         MatPaginatorModule,
-        MatTableModule
+        MatTableModule,
+        MatAutocompleteModule
 
     ]
 })
