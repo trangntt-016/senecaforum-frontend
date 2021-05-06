@@ -14,7 +14,6 @@ import { Post } from '../model/Post';
 import { DataManagerService } from '../data-manager.service';
 import { TimeConverter } from './Utils/TimeConverter';
 import { Route } from '@angular/compiler/src/core';
-import { Pagination } from './Utils/Pagination';
 
 
 @Component({
@@ -62,8 +61,24 @@ export class ForumComponent implements OnInit, OnDestroy {
     // listen to load post table when url changes
     this.router.events.subscribe((event:any)=>{
       if(event instanceof NavigationStart){
-       
         let id = event.url.split("/")[2];
+        //get size of all posts
+        this.myPagiSub = this.dataService.getPostsSize(parseInt(id)).subscribe(size=>{
+          this.length = size;
+        })
+       if(event.url.split("&").length>2){
+          //load filtered data when url changes         
+          let tokens = event.url.split("&");
+          let tag = (tokens[2].split("="))[1];
+          let start = (tokens[3].split("="))[1];
+          let end=(tokens[4].split("="))[1];
+          let sorted=(tokens[5].split("="))[1];
+          let orderby=(tokens[6].split("="))[1];
+          this.myTableSub = this.dataService.getPostsByTopicIdWithFilter(parseInt(id),this.pageIndex,this.pageSize,tag,start,end,sorted,orderby).subscribe(posts=>{    
+            this.posts = posts;         
+          })
+       };
+        
         //get size of all posts
         this.myPagiSub = this.dataService.getPostsSize(parseInt(id)).subscribe(size=>{
           this.length = size;
@@ -80,6 +95,7 @@ export class ForumComponent implements OnInit, OnDestroy {
 
     // init topicId when page reload
     this.topicID = this.route.snapshot.params['topicId'];
+
     // init to display topics 
     this.items = [];
     this.mySub = this.dataService.getAllTopics().subscribe(topics=>{   
@@ -157,6 +173,18 @@ export class ForumComponent implements OnInit, OnDestroy {
     f.value.start = utils.convertToYYYYMMDD(f.value.start);
     f.value.end = utils.convertToYYYYMMDD(f.value.end);
     console.log(f.value);
+
+    this.router.navigate([`topics/${this.topicID}/posts`],{queryParams:
+      {
+        pageIndex:1,
+        pageSize:10,
+        tag:f.value.searchTag,
+        start:f.value.start,
+        end:f.value.end,
+        sorted:f.value.sortedBy,
+        orderby:f.value.order
+      }})
+
 
   };
 

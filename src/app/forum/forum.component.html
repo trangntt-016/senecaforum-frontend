@@ -46,8 +46,8 @@
                                     <mat-form-field>
                                         <mat-label>Order</mat-label>
                                         <mat-select name="order" [(ngModel)]="filteredKeyword.order" placeholder = "Order">
-                                            <mat-option [value]="'ascending'">Ascending</mat-option>
-                                            <mat-option [value]="'descending'">Descending</mat-option>
+                                            <mat-option [value]="'latest'">Latest</mat-option>
+                                            <mat-option [value]="'oldest'">Oldest</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                     
@@ -135,12 +135,13 @@
           </tr>
         </tbody>
       </table>
-    </div>
-
-
-
-    <mat-paginator [length]="length"
+       <mat-paginator [length]="length"
     [pageSize]="pageSize"
     (page)="pageEvent($event)">
     </mat-paginator>
 
+    </div>
+
+
+
+   
