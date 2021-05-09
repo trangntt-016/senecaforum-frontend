@@ -39,8 +39,8 @@ export class ForumComponent implements OnInit, OnDestroy {
   filteredKeyword:FilterKeywords;
   filteredKeyword = {
     searchTag: '',
-    start: new Date(),
-    end: new Date(),
+    start: new Date("2021-01-01"),
+    end:  new Date(),
     sortedBy:"titles",
     order:"ascending"
   }
@@ -50,8 +50,7 @@ export class ForumComponent implements OnInit, OnDestroy {
   // pagination
   public myPagiSub:Subscription;
   public length:number;
-  public pageIndex:number;
-  public pageSize:number;
+  public p:number;
   
   constructor(
     private dataService:DataManagerService,
@@ -61,6 +60,7 @@ export class ForumComponent implements OnInit, OnDestroy {
     // listen to load post table when url changes
     this.router.events.subscribe((event:any)=>{
       if(event instanceof NavigationStart){
+        this.isDisplayFilter = false;
         let id = event.url.split("/")[2];
         //get size of all posts
         this.myPagiSub = this.dataService.getPostsSize(parseInt(id)).subscribe(size=>{
@@ -74,7 +74,7 @@ export class ForumComponent implements OnInit, OnDestroy {
           let end=(tokens[4].split("="))[1];
           let sorted=(tokens[5].split("="))[1];
           let orderby=(tokens[6].split("="))[1];
-          this.myTableSub = this.dataService.getPostsByTopicIdWithFilter(parseInt(id),this.pageIndex,this.pageSize,tag,start,end,sorted,orderby).subscribe(posts=>{    
+          this.myTableSub = this.dataService.getPostsByTopicIdWithFilter(parseInt(id),this.p,tag,start,end,sorted,orderby).subscribe(posts=>{    
             this.posts = posts;         
           })
        };
@@ -84,7 +84,7 @@ export class ForumComponent implements OnInit, OnDestroy {
           this.length = size;
         })
         //load new data when url changes
-        this.myTableSub = this.dataService.getPostsByTopicId(parseInt(id),this.pageIndex,this.pageSize).subscribe(posts=>{    
+        this.myTableSub = this.dataService.getPostsByTopicId(parseInt(id),this.p).subscribe(posts=>{    
           this.posts = posts;         
         })
       }
@@ -109,12 +109,11 @@ export class ForumComponent implements OnInit, OnDestroy {
 
       // init to get query params from url
       this.route.queryParams.subscribe(params => {
-        this.pageIndex = params['pageIndex'];
-        this.pageSize = params['pageSize'];
+        this.p = params['p'];
       });
 
       // init to display post table
-      this.myTableSub = this.dataService.getPostsByTopicId(this.topicID,this.pageIndex,this.pageSize).subscribe(posts=>{    
+      this.myTableSub = this.dataService.getPostsByTopicId(this.topicID,1).subscribe(posts=>{    
         this.posts = posts;
         console.log(posts);
         // init pagi length
@@ -155,6 +154,9 @@ export class ForumComponent implements OnInit, OnDestroy {
         this.isDisplayFilter = false;
       }      
     }
+    // else if(event.target.classList[0]=="mat-icon"||event.target.classList[0]=="mat-focus-indicator"){
+    //   this.isDisplayFilter = false;
+    // }
   }
 
   doFilter() {
@@ -172,19 +174,17 @@ export class ForumComponent implements OnInit, OnDestroy {
 
     f.value.start = utils.convertToYYYYMMDD(f.value.start);
     f.value.end = utils.convertToYYYYMMDD(f.value.end);
-    console.log(f.value);
+
 
     this.router.navigate([`topics/${this.topicID}/posts`],{queryParams:
       {
-        pageIndex:1,
-        pageSize:10,
+        p:1,
         tag:f.value.searchTag,
         start:f.value.start,
         end:f.value.end,
         sorted:f.value.sortedBy,
         orderby:f.value.order
       }})
-
 
   };
 
@@ -199,9 +199,10 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   pageEvent(event){
     var convertedIdx = event.pageIndex+1;
-    this.pageIndex = convertedIdx;
-    this.router.navigate([`topics/${this.topicID}/posts`],{queryParams:{pageIndex:convertedIdx,pageSize:10}})
-    
+    this.p = convertedIdx;
+    this.isDisplayFilter=false;
+    this.router.navigate([`topics/${this.topicID}/posts`],{queryParams:{p:convertedIdx,pageSize:10}})
+  
   };
 
 

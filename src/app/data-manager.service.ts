@@ -36,12 +36,12 @@ export class DataManagerService {
       return this.http.get<any>(`https://http://localhost:3000/posts?_page=${page}&_limit=${limit}/`);
   }
 
-  getPostsByTopicId(topicId:number, page:Number,limit:Number):Observable<Post[]>{
-    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?pageIndex=${page}&pageSize=${limit}`);
+  getPostsByTopicId(topicId:number, page:Number):Observable<Post[]>{
+    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}`);
   }
 
-  getPostsByTopicIdWithFilter(topicId:number, page:number, limit:number, tag:any,start:string,end:string,sorted:string,orderby:string):Observable<Post[]>{
-    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?pageIndex=${page}&pageSize=${limit}&tag=${tag}&start=${start}&end=${end}&sorted=${sorted}&orderby=${orderby}`);
+  getPostsByTopicIdWithFilter(topicId:number, page:number, tag:any,start:string,end:string,sorted:string,orderby:string):Observable<Post[]>{
+    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}&tag=${tag}&start=${start}&end=${end}&sorted=${sorted}&orderby=${orderby}`);
   }
 
   getPostByPostId(id:string){

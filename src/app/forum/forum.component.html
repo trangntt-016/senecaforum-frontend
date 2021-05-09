@@ -1,134 +1,115 @@
 <p-menubar [model]="items" styleClass="parent" (click)="reload()"></p-menubar>
 
 <br>
+<br>
          
+<div id="handler">
+    <button mat-raised-button color="primary" class="mr-2">
+        <div class="d-flex flex-row">
+            <p class="mr-2" style="color:#C5CAE9">Write a new post</p>                
+            <mat-icon><i class="pi pi-pencil"></i></mat-icon>
+        </div>
+    </button>
+    <button mat-raised-button color="accent"aria-label="Filter icon" class="position-relative pr-0 pl-0" (click)="handleDisplayFilter($event)">
+        <mat-icon class="mb-2"><i class="pi pi-filter"style="font-size: 1.1rem"></i></mat-icon>
+            <div class="position-absolute badge form mat-app-background"> 
+                <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container position-absolute top-0 start-100 search-form" *ngIf="isDisplayFilter">
+                    <h2 id="showonly">Show Only</h2>
+                        <div fxLayout="column">
+                            <mat-form-field appearance="fill" class="full-width-input">
+                                <mat-label>Find By Tag</mat-label>
+                                <input matInput [matAutocomplete]="auto" name="searchTag" #searchTag="ngModel" [(ngModel)]="currentTag" (ngModelChange)="doFilter()">
+                                <mat-autocomplete #auto="matAutocomplete">
+                                    <mat-option *ngFor="let tag of tags | async" [value]="tag.tagName">
+                                    {{tag.tagName}}
+                                    </mat-option>
+                                </mat-autocomplete>
+                            </mat-form-field>
+            
+                            <mat-form-field appearance="fill">
+                                <mat-label>Created from</mat-label>
+                                <mat-date-range-input [rangePicker]="picker">
+                                    <input matStartDate [(ngModel)]="filteredKeyword.start" name="start">
+                                    <input matEndDate [(ngModel)]="filteredKeyword.end" name="end" >
+                                </mat-date-range-input>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-date-range-picker #picker></mat-date-range-picker>
+                                </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Sorted by</mat-label>
+                                <mat-select name="sortedBy" [(ngModel)]="filteredKeyword.sortedBy">
+                                    
+                                    <mat-option [value]="'posts'">Posts </mat-option>
+                                    <mat-option [value]="'comments'">Comments</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Order</mat-label>
+                                <mat-select name="order" [(ngModel)]="filteredKeyword.order" placeholder = "Order">
+                                    <mat-option [value]="'latest'">Latest</mat-option>
+                                    <mat-option [value]="'oldest'">Oldest</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            
+                        </div>            
+                        <button mat-flat-button color="accent">
+                            <mat-icon>search</mat-icon>
+                            <span>&nbsp;&nbsp;&nbsp;Filter</span>
+                        </button>
+                </form>
+            </div>
+    </button>
+</div>
 <div class="table-responsive-sm table-responsive-md table-responsive-lg">
-    <table class="table text-secondary table-striped">
+    <table class="table text-secondary table-striped table-hover">
         <thead>
           <tr>
-            <th scope="col w-10"></th>
-            <th scope="col w-40"></th>
-            <th scope="col w-10"></th>
-            <th scope="col w-10"></th>
-            <th scope="col w-20"></th>
-            <th scope="col w-10">
-                <button mat-icon-button color="primary"aria-label="Filter icon" class="position-relative" (click)="handleDisplayFilter($event)">
-                    <mat-icon><i class="pi pi-filter"></i></mat-icon>
-                    <span class="position-absolute badge form"> 
-                        <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container position-absolute top-0 start-100" *ngIf="isDisplayFilter">
-                            <h2>Show only</h2>
-                                <div fxLayout="column">
-                                    <mat-form-field appearance="fill" class="full-width-input">
-                                        <mat-label>Find By Tag</mat-label>
-                                        <input matInput placeholder="Tag" [matAutocomplete]="auto" name="searchTag" #searchTag="ngModel" [(ngModel)]="currentTag" (ngModelChange)="doFilter()">
-                                        <mat-autocomplete #auto="matAutocomplete">
-                                          <mat-option *ngFor="let tag of tags | async" [value]="tag.tagName">
-                                            {{tag.tagName}}
-                                          </mat-option>
-                                        </mat-autocomplete>
-                                    </mat-form-field>
-                    
-                                    <mat-form-field appearance="fill">
-                                        <mat-label>Enter a date range</mat-label>
-                                        <mat-date-range-input [rangePicker]="picker">
-                                          <input matStartDate [(ngModel)]="filteredKeyword.start" name="start" placeholder="Start date">
-                                          <input matEndDate [(ngModel)]="filteredKeyword.end" name="end" placeholder="End date">
-                                        </mat-date-range-input>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-date-range-picker #picker></mat-date-range-picker>
-                                      </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-select name="sortedBy" [(ngModel)]="filteredKeyword.sortedBy" placeholder = "Sorted By">
-                                            <mat-option [value]="'posts'">Posts </mat-option>
-                                            <mat-option [value]="'comments'">Comments</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    <mat-form-field>
-                                        <mat-label>Order</mat-label>
-                                        <mat-select name="order" [(ngModel)]="filteredKeyword.order" placeholder = "Order">
-                                            <mat-option [value]="'latest'">Latest</mat-option>
-                                            <mat-option [value]="'oldest'">Oldest</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                    
-                                </div>            
-                                <button mat-raised-button>
-                                    <mat-icon  style="opacity:.5">search</mat-icon>
-                                    <span style="opacity:.5">&nbsp;&nbsp;&nbsp;Filter</span>
-                                </button>
-                        </form>
-                    </span>
-                </button>
-            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>
             <tr *ngFor="let p of posts">
                 <td class="w-10">
-                    <div class="p-1 trigger">
-                        <img id="authorAvatarUrl" src="https://github.com/SiddAjmera.png" alt="authorAvatar" class="position-relative">
-                    
-                        <!-- <span class="position-absolute toolTip" *ngIf="p.author.discord">
-                            <div class="card" style="width: 17rem;">
-                                <div class="card-body">
-                                    <div class="d-flex flex-row justify-content-between">
-                                        <h4>Add {{p.author.username}}'s <i class="pi pi-discord"></i>: {{p.author.discord}}</h4>
-                                    </div>          
-                                </div>
-                            </div>
-                        </span> -->
-
+                    <div class="p-1">
+                        <img src="https://github.com/SiddAjmera.png" alt="authorAvatar" class="position-relative">
                     </div>
 
                 </td>
                 <td class="w-40">
-                    <h3>{{p.title}}</h3>
-                    <h5>{{p.author.username}} created on {{p.createdOn | date}}</h5>
+                    <p class="mat-h3 mat-subheading-2"><a href="#">{{p.title}}</a><p>
+                    <p class="mat-body mat-body-1"><a href="#">{{p.author.username}}</a> created on {{p.createdOn | date}}</p>
                 </td>
                 <td class="w-10">
-                    <h3>Comments:</h3>
-                    <h5>Views:  </h5>
+                    <p class="mat-h3 mat-subheading-2">Comments:</p>
+                    <p class="mat-body mat-body-1">views:  </p>
                 </td>
                 <td class="w-10">
-                    <h3>{{p.comments.length}}</h3>
-                    <h5>{{p.views}}</h5>
+                    <p class="mat-h3 mat-subheading-2 text-center">{{p.comments.length}}</p>
+                    <p class="mat-body mat-body-1 text-center">{{p.views}}</p>
                 </td>
                 <td class="w-20">
                     <div class="d-flex flex-column align-items-end" *ngIf="p.comments.length>0">
-                        <h3>{{convertDateLastComment(p.comments[0].createdOn)}}</h3>
-                        <h5>Last comment by: {{p.comments[0].commenter.username}}</h5>
+                        <p class="mat-h3 mat-subheading-2">{{convertDateLastComment(p.comments[0].createdOn)}}</p>
+                        <p class="mat-body mat-body-1">last comment by: <a href="#">{{p.comments[0].commenter.username}}</a></p>
                     </div>
+                    <div class="d-flex flex-column align-items-end" *ngIf="p.comments.length==0">
+                        <p class="mat-h3 mat-subheading-2">{{convertDateLastComment(p.createdOn)}}</p>
+                        <p class="mat-body mat-body-1">created by: <a href="#">{{p.author.username}}</a></p>
+                    </div>
+
                 </td>
                 <td class="w-10">
-                    <div class="pt-2 pl-1 trigger" *ngIf="p.comments.length>0">
-                        <img id="replierAvatarUrl" src="https://github.com/SiddAjmera.png" alt="replierAvatar" class="position-relative">
-                        
-                        <!-- <span class="position-absolute toolTip" id="replierCard">
-                            <div class="card" style="width: 15rem;">
-                                <div class="card-body">
-                                    <div class="d-flex flex-row justify-content-between">
-                                        <h4>{{p.comments[0].commenter.username}}'s Discord:</h4>
-                                        <h4> {{p.comments[0].commenter.discord}}</h4>
-                                    </div> 
-                                    <div class="d-flex flex-row justify-content-between">
-                                        <div class="d-flex flex-column">
-                                            <h5>Posts</h5>
-                                            <h5>{{p.replier.noOfPosts}}</h5>
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <h5>Replies</h5>
-                                            <h5>{{p.replier.noOfReplies}}</h5>
-                                        </div>
-                                        <div class="d-flex flex-column">
-                                            <h5>Join On</h5>
-                                            <h5>{{p.replier.createdOn|date}}</h5>
-                                        </div>
-                                    </div>            
-                                </div>
-                            </div>
-                        </span> -->
-                        
+                    <div class="pt-1" *ngIf="p.comments.length>0">
+                        <img src="https://github.com/SiddAjmera.png" alt="replierAvatar">    
+                    </div>
+                    <div *ngIf="p.comments.length==0">
+                        <img src="https://github.com/SiddAjmera.png" alt="authorAvatar">    
                     </div>
 
                 </td>
@@ -136,7 +117,7 @@
         </tbody>
       </table>
        <mat-paginator [length]="length"
-    [pageSize]="pageSize"
+    [pageSize]="10"
     (page)="pageEvent($event)">
     </mat-paginator>
 
