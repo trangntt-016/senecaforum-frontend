@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/purple-green.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~bootstrap/dist/css/bootstrap.min.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -7,7 +7,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-size: 14px;
+  font-size: 14px
+}
+p{
+  color:#1A237E
 }
 
 .mat-list-item,
@@ -71,9 +74,9 @@ mat-sidenav {
   padding: 40px;
 }
 
-.bottom-spacer{
+/* .bottom-spacer{
   height: 80px;
-}
+} */
   
 @media only screen and (max-width: 600px) {
 

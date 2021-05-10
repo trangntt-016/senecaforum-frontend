@@ -8,7 +8,7 @@
 
     <a class="navbar-brand" matTooltip="Home">
       <h1>
-         Forum
+         Seneca Forum
       </h1>
     </a>
 
@@ -41,13 +41,18 @@
           </mat-form-field>
         </div>
 
-        <div *ngFor="let s of sidebars">
-          <a mat-list-item >
-             <p mat-line [routerLink]= [(s.url)]> {{s.name}} </p>
-          </a>
-  
-        </div>
-
+        <a mat-list-item >
+          <mat-icon mat-list-icon>
+            whatshot
+          </mat-icon>
+          <p mat-line [routerLink]="['/whatshot']"> What's Hot? </p>
+        </a>
+        <a mat-list-item>
+          <mat-icon mat-list-icon>
+            forum
+          </mat-icon>
+          <p mat-line [routerLink]="['/topics/1/posts']" [queryParams]="{ pageIndex: 1,pageSize: 10} "> Forum </p>
+        </a>
 
         <mat-divider></mat-divider>
 
@@ -66,7 +71,9 @@
       <!-- Main content -->
       <router-outlet></router-outlet>
       <!-- ------------ -->
-      <div class="bottom-spacer"></div>
+      <div class="bottom-spacer text-center">
+        © 2021 by Trang Nguyen and Nhat Duy 
+      </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
