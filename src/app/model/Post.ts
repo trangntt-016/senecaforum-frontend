@@ -1,13 +1,8 @@
 import { Topic } from './Topic';
 import { User } from './User';
+import { Comment } from './Comment';
 
-export interface Comment{
-    commentId: number;
-    createdOn: Date;
-    commenter: User;
-    content: string;
-    enabled: boolean;
-}
+
 
 export class Post{
   constructor(topic: Topic, user: User){
