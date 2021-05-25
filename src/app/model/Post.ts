@@ -1,27 +1,34 @@
-import { Topic } from "./Topic";
-
-export interface User{
-    userId:number;
-    username:number;
-    createdOn: Date;
-    discord:string;
-    email:string;
-}
+import { Topic } from './Topic';
+import { User } from './User';
 
 export interface Comment{
     commentId: number;
-    createdOn:Date;
-    commenter:User;
+    createdOn: Date;
+    commenter: User;
+    content: string;
+    enabled: boolean;
 }
 
-export interface Post{
-    postId:number;
-    title:string;
-    topic:Topic;
-    author:User;
+export class Post{
+  constructor(topic: Topic, user: User){
+    this.postId = null;
+    this.title = null;
+    this.comments = null;
+    this.createdOn = new Date();
+    this.views = 0;
+    this.content = null;
+    this.tags = null;
+    this.topic = topic;
+    this.author = user;
+}
+    postId: number;
+    title: string;
+    topic: Topic;
+    author: User;
     createdOn: Date;
-    comments:Comment[];
-    tags:string;
-    views:number
+    comments: Comment[];
+    tags: string;
+    views: number;
+    content: string;
 }
 

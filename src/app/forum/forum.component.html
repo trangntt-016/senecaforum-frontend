@@ -2,17 +2,17 @@
 
 <br>
 <br>
-         
+
 <div id="handler">
     <button mat-raised-button color="primary" class="mr-2">
         <div class="d-flex flex-row">
-            <p class="mr-2" style="color:#C5CAE9">Write a new post</p>                
+            <p class="mr-2" style="color:#C5CAE9">Write a new post</p>
             <mat-icon><i class="pi pi-pencil"></i></mat-icon>
         </div>
     </button>
     <button mat-raised-button color="accent"aria-label="Filter icon" class="position-relative pr-0 pl-0" (click)="handleDisplayFilter($event)">
         <mat-icon class="mb-2"><i class="pi pi-filter"style="font-size: 1.1rem"></i></mat-icon>
-            <div class="position-absolute badge form mat-app-background"> 
+            <div class="position-absolute badge form mat-app-background">
                 <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container position-absolute top-0 start-100 search-form" *ngIf="isDisplayFilter">
                     <h2 id="showonly">Show Only</h2>
                         <div fxLayout="column">
@@ -25,8 +25,9 @@
                                     </mat-option>
                                 </mat-autocomplete>
                             </mat-form-field>
-            
-                            <mat-form-field appearance="fill">
+
+
+                          <mat-form-field appearance="fill">
                                 <mat-label>Created from</mat-label>
                                 <mat-date-range-input [rangePicker]="picker">
                                     <input matStartDate [(ngModel)]="filteredKeyword.start" name="start">
@@ -38,7 +39,7 @@
                             <mat-form-field>
                                 <mat-label>Sorted by</mat-label>
                                 <mat-select name="sortedBy" [(ngModel)]="filteredKeyword.sortedBy">
-                                    
+
                                     <mat-option [value]="'posts'">Posts </mat-option>
                                     <mat-option [value]="'comments'">Comments</mat-option>
                                 </mat-select>
@@ -50,8 +51,8 @@
                                     <mat-option [value]="'oldest'">Oldest</mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            
-                        </div>            
+
+                        </div>
                         <button mat-flat-button color="accent">
                             <mat-icon>search</mat-icon>
                             <span>&nbsp;&nbsp;&nbsp;Filter</span>
@@ -106,10 +107,10 @@
                 </td>
                 <td class="w-10">
                     <div class="pt-1" *ngIf="p.comments.length>0">
-                        <img src="https://github.com/SiddAjmera.png" alt="replierAvatar">    
+                        <img src="https://github.com/SiddAjmera.png" alt="replierAvatar">
                     </div>
                     <div *ngIf="p.comments.length==0">
-                        <img src="https://github.com/SiddAjmera.png" alt="authorAvatar">    
+                        <img src="https://github.com/SiddAjmera.png" alt="authorAvatar">
                     </div>
 
                 </td>
@@ -125,4 +126,4 @@
 
 
 
-   
+

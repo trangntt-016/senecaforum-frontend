@@ -1,4 +1,4 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -12,7 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MenubarModule} from 'primeng/menubar';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
@@ -20,6 +20,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {FieldsetModule} from 'primeng/fieldset';
+import {TextFieldModule} from '@angular/cdk/text-field';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
     imports:[
@@ -44,8 +50,12 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         MatPaginatorModule,
         MatTableModule,
         ReactiveFormsModule,
-        MatAutocompleteModule
-        
+        MatAutocompleteModule,
+        MatProgressSpinnerModule,
+        FieldsetModule,
+        TextFieldModule,
+        MatTabsModule,
+        MatSlideToggleModule
     ],
     exports:[
         MatIconModule,
@@ -71,8 +81,12 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
         MatGridListModule,
         MatPaginatorModule,
         MatTableModule,
-        MatAutocompleteModule
-
+        MatAutocompleteModule,
+        MatProgressSpinnerModule,
+        FieldsetModule,
+        TextFieldModule,
+        MatTabsModule,
+        MatSlideToggleModule
     ]
 })
 export class MaterialModule{}

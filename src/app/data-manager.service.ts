@@ -28,7 +28,7 @@ export class DataManagerService {
   getPostsSize(topicId:number):Observable<number>{
     return this.http.get<number>(`http://localhost:3000/api/topics/${topicId}/posts/size`);
   }
-  
+
   getAllTopics():Observable<Topic[]>{
     return this.http.get<Topic[]>(`http://localhost:3000/api/topics`);
   }
@@ -44,10 +44,16 @@ export class DataManagerService {
     return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}&tag=${tag}&start=${start}&end=${end}&sorted=${sorted}&orderby=${orderby}`);
   }
 
-  getPostByPostId(id:string){
-    return this.http.get<any>(`https://http://localhost:3000/topics/${id}/posts/${id}`);
+  getPostByPostId(postId: number): Observable<Post>{
+    return this.http.get<any>(`http://localhost:3000/api/posts/${postId}`);
   }
 
+  createNewPost(post: Post): Observable<any>{
+    return this.http.post<any>(`http://localhost:3000/api/posts`, post);
+  }
 
-  
+  editAPost(post: Post): Observable<any>{
+    return this.http.put<any>(`http://localhost:3000/api/posts`, post);
+  }
+
 }
