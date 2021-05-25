@@ -1,6 +1,12 @@
-export interface Topic{
-    topicId: number;
-    topicName:string;
-    views:number;
-    post:any[];
+export class Topic{
+  constructor() {
+    this.topicId = null;
+    this.topicName = null;
+    this.views = 0;
+    this.posts = null;
+  }
+    public topicId: number;
+    public topicName: string;
+    public views: number;
+    public posts: any[];
   }

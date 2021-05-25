@@ -1,4 +1,4 @@
-import { Component,OnDestroy,OnInit  } from '@angular/core';
+import { Component, OnDestroy, OnInit  } from '@angular/core';
 import { DataManagerService } from './data-manager.service';
 import { Subscription } from 'rxjs';
 
@@ -10,14 +10,14 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent  implements OnInit{
   title = 'SenecaForum';
-  searchString:string = "";
-  
+  searchString = '';
+
   constructor(
-    private dataService:DataManagerService
+    private dataService: DataManagerService
   ){}
 
-  ngOnInit():void{
-    
+  ngOnInit(): void{
+
   }
 
 
