@@ -17,6 +17,7 @@ import { NavbarComponent } from './forum/navbar/navbar.component';
 import { TableComponent } from './forum/table/table.component';
 import { PaginatorComponent } from './forum/paginator/paginator.component';
 import { FilterComponent } from './forum/filter/filter.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { FilterComponent } from './forum/filter/filter.component';
     NavbarComponent,
     TableComponent,
     PaginatorComponent,
-    FilterComponent
+    FilterComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
