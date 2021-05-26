@@ -25,23 +25,30 @@ export class DataManagerService {
       )
   }
 
-  getPostsSize(topicId:number):Observable<number>{
+  getPostsSize(topicId: number): Observable<number>{
     return this.http.get<number>(`http://localhost:3000/api/topics/${topicId}/posts/size`);
   }
 
-  getAllTopics():Observable<Topic[]>{
+  getAllTopics(): Observable<Topic[]>{
     return this.http.get<Topic[]>(`http://localhost:3000/api/topics`);
   }
-  getHotPosts(page:string,limit:string): any {
+
+  getHotPosts(page: string, limit: string): any {
       return this.http.get<any>(`https://http://localhost:3000/posts?_page=${page}&_limit=${limit}/`);
   }
 
-  getPostsByTopicId(topicId:number, page:Number):Observable<Post[]>{
+  getPostsByTopicId(topicId: number, page:number): Observable<Post[]>{
     return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}`);
   }
 
-  getPostsByTopicIdWithFilter(topicId:number, page:number, tag:any,start:string,end:string,sorted:string,orderby:string):Observable<Post[]>{
-    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}&tag=${tag}&start=${start}&end=${end}&sorted=${sorted}&orderby=${orderby}`);
+  getPostsByTopicIdWithFilter(topicId: number,
+                              p: number,
+                              tags: string,
+                              s: string,
+                              e: string,
+                              sortBy: string,
+                              order: string): Observable<Post[]>{
+    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${p}&tags=${tags}&s=${s}&e=${e}&sortBy=${sortBy}&order=${order}`);
   }
 
   getPostByPostId(postId: number): Observable<Post>{

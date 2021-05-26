@@ -13,6 +13,10 @@ import { TestComponent } from './test/test.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { SinglepostComponent } from './singlepost/singlepost.component';
 import { CommentComponent } from './comment/comment.component';
+import { NavbarComponent } from './forum/navbar/navbar.component';
+import { TableComponent } from './forum/table/table.component';
+import { PaginatorComponent } from './forum/paginator/paginator.component';
+import { FilterComponent } from './forum/filter/filter.component';
 
 
 @NgModule({
@@ -23,7 +27,11 @@ import { CommentComponent } from './comment/comment.component';
     NewpostComponent,
     SinglepostComponent,
     sanitizeHtmlPipe,
-    CommentComponent
+    CommentComponent,
+    NavbarComponent,
+    TableComponent,
+    PaginatorComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,
