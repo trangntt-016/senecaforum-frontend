@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
-import { FilterKeywords } from '../model/FilteredKeywords';
+
 import { Topic } from '../model/Topic';
 import { Post } from '../model/Post';
 import { DataManagerService } from '../data-manager.service';
