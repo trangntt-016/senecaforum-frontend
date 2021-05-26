@@ -1,4 +1,10 @@
-:host ::ng-deep .ck-editor__editable_inline {
-    /* min-height: 300px;
-    min-width:300px; */
+.footer{
+  flex-shrink: 0;
+  flex-grow: 0;
+  background: #eee;
+  padding: 3px 15px;
+}
+.maincontent{
+  margin-bottom:30px;
+  min-height:80vh;
 }

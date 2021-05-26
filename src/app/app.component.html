@@ -65,14 +65,17 @@
       </mat-nav-list>
 
     </mat-sidenav>
-    
+
     <mat-sidenav-content class="mat-drawer-content mat-sidenav-content sidenav-content">
-      
+
       <!-- Main content -->
-      <router-outlet></router-outlet>
+      <div class="maincontent">
+        <router-outlet></router-outlet>
+      </div>
+
       <!-- ------------ -->
       <div class="bottom-spacer text-center">
-        © 2021 by Trang Nguyen and Nhat Duy 
+        © 2021 by Trang Nguyen and Nhat Duy
       </div>
     </mat-sidenav-content>
   </mat-sidenav-container>
