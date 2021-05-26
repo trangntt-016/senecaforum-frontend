@@ -12,7 +12,7 @@ export class Post{
     this.createdOn = new Date();
     this.views = 0;
     this.content = null;
-    this.tags = null;
+    this.tags = '';
     this.topic = topic;
     this.author = user;
 }
