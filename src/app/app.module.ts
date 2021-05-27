@@ -20,6 +20,7 @@ import { FilterComponent } from './forum/filter/filter.component';
 import { FooterComponent } from './footer/footer.component';
 import { WhatshotComponent } from './whatshot/whatshot.component';
 import { HotpostComponent } from './whatshot/hotpost/hotpost.component';
+import { TopicbannerComponent } from './whatshot/topicbanner/topicbanner.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { HotpostComponent } from './whatshot/hotpost/hotpost.component';
     FilterComponent,
     FooterComponent,
     WhatshotComponent,
-    HotpostComponent
+    HotpostComponent,
+    TopicbannerComponent
   ],
   imports: [
     BrowserModule,
