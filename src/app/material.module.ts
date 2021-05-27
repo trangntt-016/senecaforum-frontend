@@ -25,7 +25,7 @@ import {FieldsetModule} from 'primeng/fieldset';
 import {TextFieldModule} from '@angular/cdk/text-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
     imports:[
@@ -57,7 +57,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         MatTabsModule,
         MatSlideToggleModule
     ],
-    exports:[
+    exports: [
         MatIconModule,
         MatSidenavModule,
         MatProgressBarModule,
@@ -86,7 +86,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
         FieldsetModule,
         TextFieldModule,
         MatTabsModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        ClipboardModule
     ]
 })
 export class MaterialModule{}

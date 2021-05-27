@@ -28,7 +28,7 @@ export class CkPostConfig{
         '|',
         'resizeImage'
       ],
-      resizeOptions: [
+       resizeOptions: [
         {
           name: 'resizeImage:original',
           label: 'Original',
@@ -36,13 +36,13 @@ export class CkPostConfig{
         },
         {
           name: 'resizeImage:50',
-          label: '30%',
-          value: '30'
-        },
-        {
-          name: 'resizeImage:75',
           label: '50%',
           value: '50'
+        },
+        {
+          name: 'resizeImage:30',
+          label: '30%',
+          value: '30'
         }
       ],
       styles: ['alignLeft', 'full', 'alignRight']
@@ -85,13 +85,13 @@ export class CkPostConfig{
         },
         {
           name: 'resizeImage:50',
-          label: '30%',
-          value: '30'
-        },
-        {
-          name: 'resizeImage:75',
           label: '50%',
           value: '50'
+        },
+        {
+          name: 'resizeImage:30',
+          label: '30%',
+          value: '30'
         }
       ],
       styles: ['alignLeft', 'full', 'alignRight']

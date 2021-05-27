@@ -33,10 +33,6 @@ export class DataManagerService {
     return this.http.get<Topic[]>(`http://localhost:3000/api/topics`);
   }
 
-  getHotPosts(page: string, limit: string): any {
-      return this.http.get<any>(`https://http://localhost:3000/posts?_page=${page}&_limit=${limit}/`);
-  }
-
   getPostsByTopicId(topicId: number, page:number): Observable<Post[]>{
     return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}`);
   }
@@ -61,6 +57,10 @@ export class DataManagerService {
 
   editAPost(post: Post): Observable<any>{
     return this.http.put<any>(`http://localhost:3000/api/posts`, post);
+  }
+
+  getHotPosts(): Observable<Post[]>{
+    return this.http.get<Post[]>(`http://localhost:3000/api/posts/hot`);
   }
 
 }
