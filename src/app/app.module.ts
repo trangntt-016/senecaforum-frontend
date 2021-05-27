@@ -18,6 +18,8 @@ import { TableComponent } from './forum/table/table.component';
 import { PaginatorComponent } from './forum/paginator/paginator.component';
 import { FilterComponent } from './forum/filter/filter.component';
 import { FooterComponent } from './footer/footer.component';
+import { WhatshotComponent } from './whatshot/whatshot.component';
+import { HotpostComponent } from './whatshot/hotpost/hotpost.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { FooterComponent } from './footer/footer.component';
     TableComponent,
     PaginatorComponent,
     FilterComponent,
-    FooterComponent
+    FooterComponent,
+    WhatshotComponent,
+    HotpostComponent
   ],
   imports: [
     BrowserModule,

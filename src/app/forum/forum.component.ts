@@ -37,6 +37,10 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.posts.length = 0;
   }
 
+  write(): void{
+    this.router.navigate([`posts/new`]);
+  }
+
   ngOnDestroy(): void{
     this.mySub.unsubscribe();
   }
