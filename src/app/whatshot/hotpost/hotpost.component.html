@@ -17,7 +17,7 @@
   <div class="container">
     <h1 style="font-size:2.2em;text-transform: capitalize;"><a href="posts/{{post.postId}}">{{post.title}}</a></h1>
     <mat-chip-list aria-label="Tags">
-      <mat-chip *ngFor="let chip of tags" class="no-wrap" [color]="chip.color" selected>{{chip.name}}</mat-chip>
+      <mat-chip *ngFor="let chip of allChipTags[i]" class="no-wrap" [color]="chip.color" selected>{{chip.name}}</mat-chip>
     </mat-chip-list>
     <br>
     <br>

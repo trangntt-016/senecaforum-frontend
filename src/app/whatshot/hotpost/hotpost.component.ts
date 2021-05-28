@@ -13,10 +13,11 @@ import { TimeConverter } from '../../Utils/TimeConverter';
 export class HotpostComponent implements OnInit {
   private tagUtils = new TagsConverter();
   private contentUtils = new ContentConverter();
+  private tags: ChipColor[];
   public posts: PostViewDto[];
   public content: string;
   public value: string;
-  public tags: ChipColor[];
+  public allChipTags: any;
   public color = 'primary';
 
 
@@ -26,6 +27,7 @@ export class HotpostComponent implements OnInit {
 
   ngOnInit(): void {
     this.posts = [];
+    this.allChipTags = [];
     this.dataService.getHotPosts().subscribe((posts) => {
       this.posts = posts;
       this.posts.forEach(post => {
@@ -44,6 +46,7 @@ export class HotpostComponent implements OnInit {
         }
         this.value = 'http://localhost:4200/posts/' + post.postId;
         this.tags = this.tagUtils.getMatChips(post.tags);
+        this.allChipTags.push(this.tags);
       });
     });
   }
