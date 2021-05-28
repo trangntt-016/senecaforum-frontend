@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Post, PostViewDto } from './model/Post';
-import { Topic } from './model/Topic';
+import { Topic, TopicStats } from './model/Topic';
 
 
 @Injectable({
@@ -61,6 +61,10 @@ export class DataManagerService {
 
   getHotPosts(): Observable<PostViewDto[]>{
     return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/hot`);
+  }
+
+  getTopicStats(): Observable<TopicStats[]>{
+    return this.http.get<TopicStats[]>(`http://localhost:3000/api/topics/stats`);
   }
 
 }
