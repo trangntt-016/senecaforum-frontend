@@ -27,3 +27,16 @@ export class Post{
     content: string;
 }
 
+export class PostViewDto{
+  postId: number;
+  content: string;
+  createdOn: Date;
+  tags: string;
+  title: string;
+  views: number;
+  author: User;
+  topic: Topic;
+  lastComment: Comment;
+  noOfComment: number;
+}
+
