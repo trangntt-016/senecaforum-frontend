@@ -1,1 +1,27 @@
-<div [innerHTML]="img | sanitizeHtml"></div>
+<p-table [value]="topics">
+  <ng-template pTemplate="caption">
+    <div class="d-flex p-ai-center p-jc-between">
+      Products
+      <p-button icon="pi pi-refresh"></p-button>
+    </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Topic</th>
+      <th>Views</th>
+      <th>Comments</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-product>
+    <tr>
+      <td>aa</td>
+      <td>bb</td>
+      <td>cc</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <div class="p-d-flex p-ai-center p-jc-between">
+      In total there are  products.
+    </div>
+  </ng-template>
+</p-table>

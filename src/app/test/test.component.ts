@@ -1,7 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Post } from '../model/Post';
 import { DataManagerService } from '../data-manager.service';
+import { ProductService } from "./productservice";
+import { Topic } from "../model/Topic";
 
+export interface Product {
+  id?:string;
+  code?:string;
+  name?:string;
+  description?:string;
+  price?:number;
+  quantity?:number;
+  inventoryStatus?:string;
+  category?:string;
+  image?:string;
+  rating?:number;
+}
 
 @Component({
   selector: 'app-test',
@@ -11,26 +25,15 @@ import { DataManagerService } from '../data-manager.service';
 
 
 export class TestComponent implements OnInit {
-  private post: Post;
-  public img: any;
-  constructor(
-    private dataService: DataManagerService
-  ){}
+  topics: Topic[];
 
-  ngOnInit(): void {
-    this.dataService.getPostByPostId(5).subscribe((post) => {
-      this.post = post;
-      let content = this.post.content;
-      let startIdx = content.indexOf("<figure");
-      let imgBlock = content.substr(startIdx);
-      let endIdx = imgBlock.indexOf("</figure>");
-      this.img = content.substr(startIdx, endIdx);
+  constructor(private dataService: DataManagerService) { }
+
+  ngOnInit() {
+    this.dataService.getAllTopics().subscribe(topics=>{
+      this.topics = topics;
     })
   }
-
-
-
-
 }
 
 

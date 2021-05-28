@@ -26,6 +26,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import { MatTabsModule } from '@angular/material/tabs';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
     imports:[
@@ -87,7 +88,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
         TextFieldModule,
         MatTabsModule,
         MatSlideToggleModule,
-        ClipboardModule
+        ClipboardModule,
+        TableModule
     ]
 })
 export class MaterialModule{}
