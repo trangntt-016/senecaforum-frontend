@@ -1,8 +1,10 @@
 <p-table [value]="topics">
-  <ng-template pTemplate="caption">
-    <div class="d-flex p-ai-center p-jc-between">
-      Products
-      <p-button icon="pi pi-refresh"></p-button>
+  <ng-template pTemplate="caption" class="m-0">
+    <div class="d-flex p-0 m-0 p-ai-center p-jc-between">
+      <h3 class="pt-2">Products</h3>
+      <button mat-icon-button color="primary">
+        <mat-icon>refresh</mat-icon>
+      </button>
     </div>
   </ng-template>
   <ng-template pTemplate="header">

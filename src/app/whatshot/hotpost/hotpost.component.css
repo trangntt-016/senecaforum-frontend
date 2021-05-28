@@ -1,0 +1,16 @@
+:host ::ng-deep img {
+  max-width: 330%;
+  max-height: 330%;
+}
+:host ::ng-deep .mat-icon{
+  padding-top:5px !important;
+  height:25px !important;
+  width:25px !important;
+}
+a:hover{
+  color: #5C6BC0;
+  text-decoration: none;
+}
+a{
+  color:#1A237E
+}

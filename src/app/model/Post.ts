@@ -37,6 +37,8 @@ export class PostViewDto{
   author: User;
   topic: Topic;
   lastComment: Comment;
-  noOfComment: number;
+  noOfComments: number;
 }
+
+
 

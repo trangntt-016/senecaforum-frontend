@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Post } from '../model/Post';
 import { DataManagerService } from '../data-manager.service';
 import { ProductService } from "./productservice";
@@ -20,7 +20,8 @@ export interface Product {
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 
 
@@ -30,7 +31,7 @@ export class TestComponent implements OnInit {
   constructor(private dataService: DataManagerService) { }
 
   ngOnInit() {
-    this.dataService.getAllTopics().subscribe(topics=>{
+    this.dataService.getAllTopics().subscribe(topics =>{
       this.topics = topics;
     })
   }

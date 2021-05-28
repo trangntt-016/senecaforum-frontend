@@ -1,4 +1,3 @@
-:host ::ng-deep img{
-  height: 100px;
-  width: 200px;
+:host ::ng-deep .mat-icon{
+  margin-bottom: 0px !important;
 }
