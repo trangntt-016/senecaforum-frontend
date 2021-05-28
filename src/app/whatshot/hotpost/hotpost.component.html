@@ -1,0 +1,53 @@
+<div class="rounded border mb-3 pt-3" style="height: fit-content" *ngFor="let post of posts; let i = index">
+  <div class="container d-flex justify-content-between">
+    <div class="container d-flex pl-0 flex-wrap">
+      <mat-icon color="warn" *ngIf="post.topic.topicId==1">live_help</mat-icon>
+      <mat-icon color="primary" *ngIf="post.topic.topicId==2">assignment</mat-icon>
+      <mat-icon color="accent" *ngIf="post.topic.topicId==3">laptop</mat-icon>
+      <mat-icon color="warn" *ngIf="post.topic.topicId==4">work</mat-icon>
+      <mat-icon color="primary" *ngIf="post.topic.topicId==5">people</mat-icon>
+      <mat-icon color="accent" *ngIf="post.topic.topicId==6">developer_mode</mat-icon>
+      <mat-icon color="warn" *ngIf="post.topic.topicId==7">attach_money</mat-icon>
+      <mat-icon color="primary" *ngIf="post.topic.topicId==8">favourite</mat-icon>
+      <h4 style="font-weight: 590;color:#1A237E">&nbsp;{{post.topic.topicName}}</h4>
+      <h5 style="color: #5C6BC0;">&nbsp;&middot;&nbsp;Posted by {{post.author.username}} {{convertDateLastComment(post.createdOn)}}</h5>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1 style="font-size:2.2em;text-transform: capitalize;"><a href="posts/{{post.postId}}">{{post.title}}</a></h1>
+    <mat-chip-list aria-label="Tags">
+      <mat-chip *ngFor="let chip of tags" class="no-wrap" [color]="chip.color" selected>{{chip.name}}</mat-chip>
+    </mat-chip-list>
+    <br>
+    <br>
+    <div [innerHTML]="post.content | sanitizeHtml"></div>
+    <div class="d-flex flex-wrap">
+      <button mat-button>
+        <div class="d-flex">
+          <mat-icon [ngStyle]="{'color':'#C0C0C0'}"> remove_red_eye</mat-icon>
+          <p class="text-secondary ml-1">{{post.views}} views</p>
+        </div>
+      </button>
+      <button mat-button>
+        <div class="d-flex">
+          <mat-icon [ngStyle]="{'color':'#C0C0C0'}"> comment</mat-icon>
+          <p class="text-secondary ml-1">{{post.noOfComments}} comments</p>
+        </div>
+      </button>
+      <button mat-button>
+        <div class="d-flex"[cdkCopyToClipboard]="value" (click)="setValueCopy(i)">
+          <mat-icon [ngStyle]="{'color':'#C0C0C0'}">share</mat-icon>
+          <p class="text-secondary ml-1">Copy Link</p>
+        </div>
+      </button>
+      <button mat-button>
+        <div class="d-flex">
+          <mat-icon [ngStyle]="{'color':'#C0C0C0'}">playlist_add</mat-icon>
+          <p class="text-secondary ml-1">Save</p>
+        </div>
+      </button>
+
+    </div>
+  </div>
+</div>
