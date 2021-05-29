@@ -27,9 +27,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {ClipboardModule} from '@angular/cdk/clipboard';
 import { TableModule } from 'primeng/table';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
-    imports:[
+    imports: [
         MatIconModule,
         MatSidenavModule,
         MatProgressBarModule,
@@ -56,7 +57,7 @@ import { TableModule } from 'primeng/table';
         FieldsetModule,
         TextFieldModule,
         MatTabsModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
     ],
     exports: [
         MatIconModule,
@@ -89,7 +90,8 @@ import { TableModule } from 'primeng/table';
         MatTabsModule,
         MatSlideToggleModule,
         ClipboardModule,
-        TableModule
+        TableModule,
+        MatSnackBarModule
     ]
 })
 export class MaterialModule{}

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataManagerService } from '../../data-manager.service';
 import { ChipColor, TagsConverter } from '../../Utils/TagsConverter';
 import { ContentConverter } from '../../Utils/ContentConverter';
@@ -13,19 +14,23 @@ import { TimeConverter } from '../../Utils/TimeConverter';
 export class HotpostComponent implements OnInit {
   private tagUtils = new TagsConverter();
   private contentUtils = new ContentConverter();
+  private tags: ChipColor[];
+  private snackBar: MatSnackBar;
   public posts: PostViewDto[];
   public content: string;
   public value: string;
-  public tags: ChipColor[];
+  public allChipTags: any;
   public color = 'primary';
 
 
   constructor(
-    private dataService: DataManagerService
+    private dataService: DataManagerService,
+    private _snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
     this.posts = [];
+    this.allChipTags = [];
     this.dataService.getHotPosts().subscribe((posts) => {
       this.posts = posts;
       this.posts.forEach(post => {
@@ -44,6 +49,7 @@ export class HotpostComponent implements OnInit {
         }
         this.value = 'http://localhost:4200/posts/' + post.postId;
         this.tags = this.tagUtils.getMatChips(post.tags);
+        this.allChipTags.push(this.tags);
       });
     });
   }
@@ -58,10 +64,14 @@ export class HotpostComponent implements OnInit {
     return this.tagUtils.getMatChips(tags);
   }
 
-  setValueCopy(index){
-    let post = this.posts[index];
+  setValueCopy(index): void{
+    const post = this.posts[index];
     this.value = 'http://localhost:4200/posts/' + post.postId;
-    console.log(this.value);
+    this._snackBar.open("Double click and...", "Copied", { duration: 1200 });
   }
+
+  openSnackBar(message: string, action: string): void{
+
+    }
 
 }

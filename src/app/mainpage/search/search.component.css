@@ -1,0 +1,7 @@
+:host ::ng-deep .highlight{
+  background-color: yellow;
+}
+:host ::ng-deep p{
+  margin-bottom: 2px;
+  text-align: justify;
+}

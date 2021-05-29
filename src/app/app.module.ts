@@ -18,9 +18,13 @@ import { TableComponent } from './forum/table/table.component';
 import { PaginatorComponent } from './forum/paginator/paginator.component';
 import { FilterComponent } from './forum/filter/filter.component';
 import { FooterComponent } from './footer/footer.component';
-import { WhatshotComponent } from './whatshot/whatshot.component';
-import { HotpostComponent } from './whatshot/hotpost/hotpost.component';
-import { TopicbannerComponent } from './whatshot/topicbanner/topicbanner.component';
+// @ts-ignore
+import { MainpageComponent } from './mainpage/mainpage.component';
+// @ts-ignore
+import { HotpostComponent } from './mainpage/hotpost/hotpost.component';
+// @ts-ignore
+import { TopicbannerComponent } from './mainpage/topicbanner/topicbanner.component';
+import { SearchComponent } from './mainpage/search/search.component';
 
 
 @NgModule({
@@ -37,9 +41,10 @@ import { TopicbannerComponent } from './whatshot/topicbanner/topicbanner.compone
     PaginatorComponent,
     FilterComponent,
     FooterComponent,
-    WhatshotComponent,
+    MainpageComponent,
     HotpostComponent,
-    TopicbannerComponent
+    TopicbannerComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
