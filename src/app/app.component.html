@@ -35,9 +35,9 @@
       <mat-nav-list>
         <div>
           <mat-form-field appearance="fill">
-            <mat-label>Search posts</mat-label>
+            <mat-label>Search posts that contains</mat-label>
             <input matInput type="text" name="searchString" [(ngModel)]='searchString'>
-            <mat-icon matSuffix>search</mat-icon>
+            <mat-icon matSuffix (click)="search()" style = "cursor: pointer">search</mat-icon>
           </mat-form-field>
         </div>
 
@@ -45,7 +45,7 @@
           <mat-icon mat-list-icon>
             whatshot
           </mat-icon>
-          <p mat-line [routerLink]="['/whatshot']"> What's Hot? </p>
+          <p mat-line [routerLink]="['/hot']"> What's Hot? </p>
         </a>
         <a mat-list-item>
           <mat-icon mat-list-icon>

@@ -40,5 +40,11 @@ export class PostViewDto{
   noOfComments: number;
 }
 
+export class PostSearchDto{
+  postId: number;
+  title: string;
+  content: string;
+  idxKeywords: number[];
+}
 
 

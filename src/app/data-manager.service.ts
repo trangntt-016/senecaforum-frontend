@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Post, PostViewDto } from './model/Post';
+import { Post, PostSearchDto, PostViewDto } from './model/Post';
 import { Topic, TopicStats } from './model/Topic';
 
 
@@ -65,6 +65,10 @@ export class DataManagerService {
 
   getTopicStats(): Observable<TopicStats[]>{
     return this.http.get<TopicStats[]>(`http://localhost:3000/api/topics/stats`);
+  }
+
+  searchPostsByContent(keyword: string): Observable<PostSearchDto[]>{
+    return this.http.get<PostSearchDto[]>(`http://localhost:3000/api/posts?content=${keyword}`);
   }
 
 }
