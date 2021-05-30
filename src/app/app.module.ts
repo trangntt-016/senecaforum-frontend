@@ -25,6 +25,8 @@ import { HotpostComponent } from './mainpage/hotpost/hotpost.component';
 // @ts-ignore
 import { TopicbannerComponent } from './mainpage/topicbanner/topicbanner.component';
 import { SearchComponent } from './mainpage/search/search.component';
+import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { SearchComponent } from './mainpage/search/search.component';
     MainpageComponent,
     HotpostComponent,
     TopicbannerComponent,
-    SearchComponent
+    SearchComponent,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

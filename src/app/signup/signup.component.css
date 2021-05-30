@@ -1,0 +1,21 @@
+mat-card {
+  max-width: 400px;
+  margin: 2em auto;
+  text-align: center;
+}
+mat-form-field {
+  display: block;
+}
+.success{
+  text-align: center;
+}
+:host ::ng-deep mat-card-content{
+  margin-bottom: 0;
+}
+#password2{
+  position:absolute;
+  top:356px;
+  left:18px;
+  font-size:x-small;
+  color:red;
+}
