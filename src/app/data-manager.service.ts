@@ -33,8 +33,8 @@ export class DataManagerService {
     return this.http.get<Topic[]>(`http://localhost:3000/api/topics`);
   }
 
-  getPostsByTopicId(topicId: number, page:number): Observable<Post[]>{
-    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}`);
+  getPostsByTopicId(topicId: number, page:number): Observable<PostViewDto[]>{
+    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}`);
   }
 
   getPostsByTopicIdWithFilter(topicId: number,
@@ -43,8 +43,8 @@ export class DataManagerService {
                               s: string,
                               e: string,
                               sortBy: string,
-                              order: string): Observable<Post[]>{
-    return this.http.get<Post[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${p}&tags=${tags}&s=${s}&e=${e}&sortBy=${sortBy}&order=${order}`);
+                              order: string): Observable<PostViewDto[]>{
+    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${p}&tags=${tags}&s=${s}&e=${e}&sortBy=${sortBy}&order=${order}`);
   }
 
   getPostByPostId(postId: number): Observable<Post>{
