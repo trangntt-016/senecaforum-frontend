@@ -23,6 +23,7 @@ export class SearchComponent implements OnInit {
       this.keyword = params.content;
       // reload data when default
       this.dataService.searchPostsByContent(this.keyword).subscribe(posts => {
+        console.log(posts);
         this.posts = posts;
         posts.forEach(p =>{
 

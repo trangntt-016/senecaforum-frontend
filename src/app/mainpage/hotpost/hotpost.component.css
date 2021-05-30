@@ -1,5 +1,5 @@
 :host ::ng-deep img {
-  max-width: 330%;
+  max-width: 320%;
   max-height: 330%;
 }
 :host ::ng-deep .mat-icon{
