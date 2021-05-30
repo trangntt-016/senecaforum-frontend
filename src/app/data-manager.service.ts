@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -14,6 +14,10 @@ export class DataManagerService {
   constructor(
     private http: HttpClient
   ) { }
+
+  httpOptions:{headers: HttpHeaders} = {
+    headers: new HttpHeaders({'Access-Control-Allow-Origin':'*',})
+  }
 
   getAllTags() {
     return this.tags.length ? of(this.tags)
@@ -70,5 +74,4 @@ export class DataManagerService {
   searchPostsByContent(keyword: string): Observable<PostSearchDto[]>{
     return this.http.get<PostSearchDto[]>(`http://localhost:3000/api/posts?content=${keyword}`);
   }
-
 }

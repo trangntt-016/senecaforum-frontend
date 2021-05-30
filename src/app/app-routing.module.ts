@@ -6,10 +6,12 @@ import { SinglepostComponent } from './singlepost/singlepost.component';
 import { CommentComponent } from './comment/comment.component';
 import { TestComponent } from './test/test.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {path: 'forum', component: ForumComponent},
   {path: 'hot', component: MainpageComponent},
+  {path: 'signup', component: SignupComponent},
   {path: 'posts', component: MainpageComponent},
   {path: 'posts/new', component: NewpostComponent},
   {path: 'posts/:postId/edit', component: NewpostComponent},

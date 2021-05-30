@@ -1,0 +1,63 @@
+<mat-card>
+  <mat-card-content>
+    <form #f='ngForm' (ngSubmit)='onSubmit(f)'>
+      <p style="font-size: 25px">Register</p>
+      <mat-error> {{warning}}</mat-error><br />
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" name="email" type="email"
+               [(ngModel)]="registerUser.email"
+               [email]="true"
+               #email="ngModel"
+               minlength="10"
+               maxlength="30"
+               required autofocus>
+        <mat-error *ngIf="userName.errors?.required">Please provide a valid email</mat-error>
+      </mat-form-field><br />
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Username" name="username"
+               [(ngModel)]="registerUser.username"
+               #userName="ngModel"
+               minlength="5"
+               maxlength="8"
+               required autofocus>
+        <mat-error *ngIf="userName.errors?.required">Please provide a valid username</mat-error>
+        <mat-error *ngIf="userName.errors?.minlength">Username must be 5 - 8 characters in length</mat-error>
+        <mat-error *ngIf="userName.errors?.maxlength">Username must be 5 - 8 characters in length</mat-error>
+      </mat-form-field><br />
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="Password" name="password"
+               [(ngModel)]="registerUser.password"
+               #password="ngModel"
+               minlength="5"
+               maxlength="16"
+               required>
+        <mat-error *ngIf="password.errors?.required">Please provide a valid password</mat-error>
+        <mat-error *ngIf="password.errors?.minlength">Password must be 5 - 16 characters in length</mat-error>
+        <mat-error *ngIf="password.errors?.maxlength">Password must be 5 - 16 characters in length</mat-error>
+      </mat-form-field><br />
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="Confirm Password" name="password2"
+               [(ngModel)]="password2"
+               required>
+        <mat-error>Please provide a valid password</mat-error>
+      </mat-form-field><br />
+      <span id="password2"*ngIf="password2&&registerUser.password!=password2">Password does not match</span>
+      <button mat-raised-button color="primary" type="submit" *ngIf="!success &&!loading">
+        <mat-icon>account_box</mat-icon>
+        <span>&nbsp;&nbsp;&nbsp;Register</span>
+      </button>
+
+      <button mat-raised-button color="disabled" [disabled]="isDisabled"*ngIf="loading">
+        <mat-icon  style="opacity:.5">account_box</mat-icon>
+        <span style="opacity:.5">&nbsp;&nbsp;&nbsp;Processing Request</span>
+      </button>
+    </form>
+  </mat-card-content>
+  <p class="success" *ngIf="success" color="primary">Register Successfully. Proceed to<br /><br />
+    <a mat-raised-button color="accent" >
+      <mat-icon>login</mat-icon>&nbsp;&nbsp;&nbsp;Login
+    </a>
+  </p>
+</mat-card>
+f
+
