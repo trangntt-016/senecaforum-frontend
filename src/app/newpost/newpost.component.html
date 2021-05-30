@@ -1,0 +1,40 @@
+<div class="container">
+    <br>
+    <form #f='ngForm' (ngSubmit)='onSubmit(f)'class = "container d-flex flex-column">
+      <mat-form-field>
+          <mat-label>Topic</mat-label>
+          <mat-select name="topicName" [(ngModel)]="model.topicId">
+            <mat-option [value]="topic.topicId" *ngFor="let topic of topics">{{topic.topicName}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill" class="full-width-input title">
+          <mat-label>Title</mat-label>
+          <input matInput name="title" #title="ngModel" [(ngModel)]="model.title"required>
+          <mat-error>Title cannot be null</mat-error>
+      </mat-form-field>
+      <br>
+      <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>HashTags</mat-label>
+          <input matInput name="tags" #tags="ngModel" [(ngModel)]="model.tags">
+          <mat-hint class="mat-error" *ngIf="warning != null">{{warning}}</mat-hint>
+          <mat-hint align ="start" *ngIf="warning === null">*Tags should begin with # and contains alphanumeric characters only. For example: #AssignmentHelp#IPC144</mat-hint>
+      </mat-form-field>
+      <br>
+      <ckeditor class="mt-4" [editor]="Editor" [config] ="ckConfig" [(ngModel)]="model.editorData" name="editorData"></ckeditor>
+      <br>
+      <div class="container text-center">
+          <button mat-flat-button color="accent"*ngIf="!loading">
+              <span>&nbsp;Save Post</span>
+          </button>
+          <div class="basic-container d-flex justify-content-center">
+              <button mat-raised-button color="disabled" *ngIf="loading">
+                  <mat-icon>cloud_upload</mat-icon>
+                  <span style="opacity:.5">&nbsp;Processing Request</span>
+              </button>
+              <mat-spinner strokeWidth="3" [diameter]="30" class="ml-2"*ngIf="loading"></mat-spinner>
+          </div>
+      </div>
+    </form>
+</div>
+

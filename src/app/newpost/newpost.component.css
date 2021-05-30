@@ -1,0 +1,16 @@
+::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #E91E63!important;
+}
+
+::ng-deep .image-style-side{
+    width:30px;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 300px;
+}
+
+::ng-deep .mat-select-value{
+  font-size:15px;
+  color:#C5CAE9
+}

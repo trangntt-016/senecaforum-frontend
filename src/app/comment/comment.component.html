@@ -1,0 +1,11 @@
+<div class="container mt-5">
+  <mat-tab-group (wheel)="scrollTabs($event)"
+                 (selectedIndexChange)= "setPage($event)" #tabGroup>
+    <mat-tab [label]="tab" *ngFor="let tab of tabs">
+      <div class="container mt-3" *ngFor="let cmt of slicingComments">
+        <h5 class="m-0">{{cmt.commenter.username}} &middot;&nbsp;<span style="color:grey">{{convertDateLastComment(cmt.createdOn)}}</span></h5>
+        <div [innerHTML]="cmt.content | sanitizeHtml"></div>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
