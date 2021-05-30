@@ -1,0 +1,80 @@
+:root{
+  --image-style-spacing: 1.5em;
+
+}
+/* ckeditor5-image/theme/imageresize.css */
+.image.image_resized {
+  max-width: 100%;
+  display: block;
+  box-sizing: border-box;
+}
+/* ckeditor5-image/theme/imageresize.css */
+.image.image_resized img {
+  width: 100%;
+}
+/* ckeditor5-image/theme/imageresize.css */
+.image.image_resized > figcaption {
+  display: block;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.image-style-side {
+  float: right;
+  margin-left: var(--image-style-spacing);
+  max-width: 50%;
+}
+/* ckeditor5-image/theme/imagestyl`e.css */
+.image-style-align-left {
+  float: left;
+  margin-right: var(--image-style-spacing);
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.image-style-align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+/* ckeditor5-image/theme/imagestyle.css */
+.image-style-align-right {
+  float: right;
+  margin-left: var(--image-style-spacing);
+}
+/* ckeditor5-image/theme/image.css */
+.image {
+  display: table;
+  clear: both;
+  text-align: center;
+  margin: 1em auto;
+}
+/* ckeditor5-image/theme/image.css */
+.image img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  min-width: 50px;
+}
+/* ckeditor5-image/theme/imagecaption.css */
+.image > figcaption {
+  display: table-caption;
+  caption-side: bottom;
+  word-break: break-word;
+  color: hsl(0, 0%, 20%);
+  background-color: hsl(0, 0%, 97%);
+  padding: .6em;
+  font-size: .75em;
+  outline-offset: -1px;
+}
+
+.text-tiny {
+  font-size: .7em;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.text-small {
+  font-size: .85em;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.text-big {
+  font-size: 1.4em;
+}
+/* ckeditor5-font/theme/fontsize.css */
+.text-huge {
+  font-size: 1.8em;
+}

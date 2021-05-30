@@ -1,0 +1,50 @@
+<button mat-raised-button color="accent"aria-label="Filter icon" class="position-relative pr-0 pl-0" (click)="handleDisplayFilter($event)">
+  <mat-icon class="mb-2"><i class="pi pi-filter"style="font-size: 1.1rem"></i></mat-icon>
+  <div class="position-absolute badge form mat-app-background">
+    <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container position-absolute top-0 start-100 search-form" *ngIf="isDisplayFilter">
+      <h2 id="showonly">Show Only</h2>
+      <div fxLayout="column">
+        <mat-form-field appearance="fill" class="full-width-input">
+          <mat-label>Find By Tag</mat-label>
+          <input matInput [matAutocomplete]="auto" name="searchTag" #searchTag="ngModel" [(ngModel)]="currentTag" (ngModelChange)="doFilter()">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let tag of tags | async" [value]="tag.tagName">
+              {{tag.tagName}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+          <mat-label>Created from</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate [(ngModel)]="filteredKeyword.s" name="start">
+            <input matEndDate [(ngModel)]="filteredKeyword.e" name="end" >
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Sorted by</mat-label>
+          <mat-select name="sortedBy" [(ngModel)]="filteredKeyword.sortBy">
+
+            <mat-option [value]="'posts'">Posts </mat-option>
+            <mat-option [value]="'comments'">Comments</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Order</mat-label>
+          <mat-select name="order" [(ngModel)]="filteredKeyword.order" placeholder = "Order">
+            <mat-option [value]="'desc'">Latest</mat-option>
+            <mat-option [value]="'asc'">Oldest</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+      <button mat-flat-button color="accent">
+        <mat-icon>search</mat-icon>
+        <span>&nbsp;&nbsp;&nbsp;Filter</span>
+      </button>
+    </form>
+  </div>
+</button>

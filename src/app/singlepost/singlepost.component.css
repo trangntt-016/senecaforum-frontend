@@ -1,0 +1,80 @@
+:host ::ng-deep img {
+  max-width: 100%;
+  max-height:100%;
+}
+
+:host ::ng-deep .ck-editor__editable_inline {
+  height:180px;
+}
+
+
+.container.main{
+    background-color: #C5CAE9;
+    border-radius: 5px;
+}
+.container.post{
+    background-color: white;
+    border-radius: 5px;
+}
+
+.container.topic{
+    background-color: white;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    padding:0;
+    min-height: 350px;
+    height:370px;
+
+}
+
+.container.line-topic{
+    width:100%;
+    height:10%;
+    background-color: #E91E63;
+    border-radius: 3px 3px 0px 0px;
+
+}
+
+.active .mat-icon{
+    cursor:pointer
+ }
+
+#loginorsignup{
+  justify-content: space-between;
+}
+
+#loginorsignuph3{
+  width:fit-content;
+}
+
+#loginorsignupbtn{
+  width:fit-content;
+}
+
+
+
+ @media only screen and (max-width: 768px) {
+    .container.topic{
+        order: 1;
+    }
+    .container.post{
+        order:2;
+    }
+    #loginorsignup{
+      justify-content: center;
+    }
+   #notify{
+     justify-content: center;
+   }
+}
+
+@media only screen and (max-width: 280px) {
+    .container.topic{
+        min-height: fit-content;
+        max-height:800px;
+    }
+    .container.post{
+        order:2;
+    }
+}
+

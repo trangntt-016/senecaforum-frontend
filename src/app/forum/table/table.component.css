@@ -1,0 +1,24 @@
+
+table{
+  width: 100%;
+}
+.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+  background-color: #C5CAE9;
+}
+
+th{
+  border-top:none;
+}
+.table thead th{
+  border-bottom:none;
+}
+img{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  cursor:pointer;
+}
+
+p,h3{
+  margin:0;
+}
