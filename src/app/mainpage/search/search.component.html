@@ -1,6 +1,6 @@
 <div class="mb-3 pt-3" style="height: fit-content">
   <h3 class="mb-2">{{posts.length}} result for keyword "{{keyword}}"</h3>
-  <mat-divider class="mb-4"></mat-divider>
+  <mat-divider class="mb-4" *ngIf = "posts.length > 0"></mat-divider>
   <div *ngFor="let post of posts; let i = index" class="container mb-4">
     <h4 class="mb-2"><a href="http://localhost:4200/posts/{{post.postId}}">{{post.title}}</a></h4>
     <div class="rounded border p-2">
