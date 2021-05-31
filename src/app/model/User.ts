@@ -1,5 +1,16 @@
-import { Role } from "./Role";
+import { Role } from './Role';
 
+// tslint:disable-next-line:class-name
+export class pUser {
+  constructor(){
+    this.userId = '';
+    this.username = '';
+    this.email = '';
+  }
+  public userId: string;
+  public username: string;
+  public email: string;
+}
 export class User{
   constructor(){
     this.username = null;
@@ -13,21 +24,35 @@ export class User{
   public email: string;
 }
 
-export class RegisterUser{
-  constructor(){
-    this.userId = null;
-    this.username = '';
-    this.email = '';
+export class AuthUser extends pUser{
+  constructor(code: string){
+    super();
     this.password = '';
-    this.role = new Role("U");
+    this.role = new Role(code);
     this.isRememberMe = false;
-    this.createOn = new Date();
+    this.createdOn = new Date();
   }
-  public userId: string;
-  public username: string;
-  public email: string;
+  public createdOn: Date;
   public password: string;
   public role: Role;
   public isRememberMe: boolean;
-  public createOn: Date;
 }
+
+export class LogInUser extends pUser{
+  constructor(){
+    super();
+    this.password = '';
+    this.role = null;
+    this.isRememberMe = false;
+  }
+  public password: string;
+  public role: Role;
+  public isRememberMe: boolean;
+}
+
+export class payload{
+  public sub: string;
+  public role: string;
+  public exp: number;
+}
+

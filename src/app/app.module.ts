@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { AvatarModule } from "ngx-avatar";
 
 import { sanitizeHtmlPipe } from './safe-html.pipe';
 import { AppRoutingModule } from './app-routing.module';

@@ -8,3 +8,9 @@
   margin-bottom:30px;
   min-height:80vh;
 }
+:host ::ng-deep ngx-avatar{
+  cursor: pointer
+}
+a:hover{
+  color:#C5CAE9;
+}
