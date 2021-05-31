@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RegisterUser } from '../model/User';
+import { AuthUser } from '../model/User';
 import { AuthService } from '../auth.service';
 import { DataManagerService } from "../data-manager.service";
 
@@ -11,7 +11,7 @@ import { DataManagerService } from "../data-manager.service";
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  public registerUser: RegisterUser;
+  public registerUser: AuthUser;
   public warning: string;
   public success: boolean;
   public loading: boolean;
@@ -23,9 +23,9 @@ export class SignupComponent implements OnInit {
     private dataService: DataManagerService) { }
 
   ngOnInit(): void {
-    this.registerUser = new RegisterUser();
+    this.registerUser = new AuthUser('U');
     this.warning = '';
-    this.success = true;
+    this.success = false;
     this.loading = false;
     this.isDisabled = true;
   }

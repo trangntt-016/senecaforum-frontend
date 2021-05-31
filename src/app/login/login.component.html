@@ -1,1 +1,48 @@
-<p>login works!</p>
+<mat-card>
+  <mat-card-content>
+    <form #f='ngForm' (ngSubmit)='onSubmit(f)'>
+      <p style="font-size: 25px" color="primary">Log In</p>
+      <mat-error> {{warning}}</mat-error><br />
+      <mat-form-field class="full-width-input">
+        <input matInput placeholder="Email" name="email"
+               [(ngModel)]="user.email"
+               [email]="true"
+               #email="ngModel"
+               required autofocus>
+        <mat-error *ngIf="email.errors?.required">Please provide a valid email</mat-error>
+      </mat-form-field><br />
+      <mat-form-field class="full-width-input">
+        <input matInput type="password" placeholder="Password" name="password" password="password"
+               [(ngModel)]="user.password"
+               #password="ngModel"
+               required>
+        <mat-error *ngIf="password.errors?.required">Please provide a valid password</mat-error>
+      </mat-form-field><br />
+      <div class="w-100 text-left mb-4">
+        <mat-slide-toggle
+          [(ngModel)]="user.isRememberMe"
+          name="enabled"
+          [color]="color">
+          Remember Me
+        </mat-slide-toggle>
+      </div>
+
+      <div class="container">
+        <button mat-raised-button color="accent" type="submit"*ngIf="!loading" class="mb-2">
+          <mat-icon>login</mat-icon>
+          <span>&nbsp;&nbsp;&nbsp;Login</span>
+        </button>
+        <button mat-raised-button color="disabled" [disabled]="isDisabled"*ngIf="loading">
+          <mat-icon  style="opacity:.5">account_box</mat-icon>
+          <span style="opacity:.5">&nbsp;&nbsp;&nbsp;Processing Request</span>
+        </button>
+        &nbsp;&nbsp;
+        <button mat-raised-button color="primary" [routerLink]="['/register']" *ngIf="!loading">
+          <mat-icon>account_box</mat-icon>
+          <span>&nbsp;&nbsp;&nbsp;Register</span>
+        </button>
+      </div>
+
+    </form>
+  </mat-card-content>
+</mat-card>
