@@ -1,0 +1,8 @@
+:host ::ng-deep ngx-avatar{
+
+}
+
+:host ::ng-deep img{
+  width:30%;
+  height: 30%;
+}

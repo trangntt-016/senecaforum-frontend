@@ -7,6 +7,8 @@ import { TestComponent } from './test/test.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { GuardAuthService } from "./guard-auth.service";
+import { UserDashboardComponent } from "./user-dashboard/user-dashboard.component";
 
 const routes: Routes = [
   {path: 'forum', component: ForumComponent},
@@ -15,9 +17,16 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'posts', component: MainpageComponent},
   {path: 'posts/new', component: NewpostComponent},
-  {path: 'posts/:postId/edit', component: NewpostComponent},
+  {path: 'posts/:postId/edit', component: NewpostComponent, canActivate: [GuardAuthService]
+    ,data: {
+      role: 'ROLE_USER'
+    }},
   {path: 'posts/:postId', component: SinglepostComponent},
   {path: 'topics/:topicId/posts', component: ForumComponent},
+  {path: 'users/:userId/posts', component: UserDashboardComponent, canActivate: [GuardAuthService]
+    ,data: {
+      role: 'ROLE_USER'
+    }},
   {path: 'test', component: TestComponent}
 ];
 

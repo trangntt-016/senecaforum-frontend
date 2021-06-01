@@ -1,0 +1,14 @@
+<mat-card>
+  <mat-card-header>
+    <div mat-card-avatar>
+      <ngx-avatar
+        name={{user.username}}
+        textSizeRatio="2"
+        bgColor={{avaColor}}></ngx-avatar>
+    </div>
+    <mat-card-title>{{user.username}}</mat-card-title>
+    <mat-card-subtitle>
+      <div class="d-flex">{{user.email}}</div>
+    </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>

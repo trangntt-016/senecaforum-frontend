@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Post, PostSearchDto, PostViewDto } from './model/Post';
 import { Topic, TopicStats } from './model/Topic';
+import { ViewUser } from "./model/User";
 
 
 @Injectable({
@@ -73,5 +74,17 @@ export class DataManagerService {
 
   searchPostsByContent(keyword: string): Observable<PostSearchDto[]>{
     return this.http.get<PostSearchDto[]>(`http://localhost:3000/api/posts?content=${keyword}`);
+  }
+
+  getUserByUserId(userId: string): Observable<ViewUser>{
+    return this.http.get<ViewUser>(`http://localhost:3000/api/users/${userId}`);
+  }
+
+  getPostsByUserId(userId: string): Observable<PostViewDto[]>{
+    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/users/${userId}/posts`)
+  }
+
+  deleteAPost(postId: number, userId: string): Observable<any>{
+    return this.http.delete<any>(`http://localhost:3000/api/users/${userId}/posts/${postId}`);
   }
 }

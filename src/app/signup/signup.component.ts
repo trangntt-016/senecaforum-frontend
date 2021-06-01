@@ -42,8 +42,6 @@ export class SignupComponent implements OnInit {
           this.success = false;
           this.warning = null;
           // store the returned token in local storage as 'access_token'
-          //localStorage.setItem('access_token', success.token);
-          // redirect to the "vehicles" route
           this.router.navigate(['/login']);
         },
         (err) => {

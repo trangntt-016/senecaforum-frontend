@@ -1,7 +1,7 @@
 import { Role } from './Role';
 
 // tslint:disable-next-line:class-name
-export class pUser {
+export class User {
   constructor(){
     this.userId = '';
     this.username = '';
@@ -11,20 +11,15 @@ export class pUser {
   public username: string;
   public email: string;
 }
-export class User{
+export class ViewUser extends User{
   constructor(){
-    this.username = null;
-    this.userId = null;
+    super();
     this.createdOn = null;
-    this.email = null;
   }
-  public userId: string;
-  public username: string;
   public createdOn: Date;
-  public email: string;
 }
 
-export class AuthUser extends pUser{
+export class AuthUser extends User{
   constructor(code: string){
     super();
     this.password = '';
@@ -38,7 +33,7 @@ export class AuthUser extends pUser{
   public isRememberMe: boolean;
 }
 
-export class LogInUser extends pUser{
+export class LogInUser extends User{
   constructor(){
     super();
     this.password = '';

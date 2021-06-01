@@ -13,6 +13,7 @@ import * as ClassicEditor from '../../assets/ckeditor5/build/ckeditor';
 
 
 import { CommentServiceService } from './comment-service.service';
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: 'app-singlepost',
@@ -41,7 +42,8 @@ export class SinglepostComponent implements OnInit {
     private dataService: DataManagerService,
     private router: Router,
     private commentService: CommentServiceService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService
   ) { }
   ngOnInit(): void {
     this.ckConfig = new CkPostConfig().ckCommentConfig;
@@ -51,7 +53,7 @@ export class SinglepostComponent implements OnInit {
     });
 
     this.commenter = new User();
-    this.commenter.username = 'pcauhfrr'; // will get this from localStorage later
+    this.commenter.username = this.auth.readToken().sub; // will get this from localStorage later
     this.comment = new Comment();
     this.comment.commenter = this.commenter;
     const utils = new TagsConverter();
@@ -91,5 +93,9 @@ export class SinglepostComponent implements OnInit {
     }
   }
 
-
+  edit(): void{
+    if (this.auth.readToken().sub == this.post.author.username){
+      this.router.navigate(['posts', this.post.postId,'edit']);
+    }
+  }
 }

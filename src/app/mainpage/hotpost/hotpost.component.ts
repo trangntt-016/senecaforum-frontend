@@ -70,8 +70,5 @@ export class HotpostComponent implements OnInit {
     this._snackBar.open("Double click and...", "Copied", { duration: 1200 });
   }
 
-  openSnackBar(message: string, action: string): void{
-
-    }
 
 }

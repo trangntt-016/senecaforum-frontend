@@ -1,0 +1,21 @@
+:host ::ng-deep img {
+  max-width: 30%;
+  max-height: 30%;
+}
+
+:host ::ng-deep .p-panel-icons{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  min-width: 100px;
+}
+
+:host ::ng-deep .mat-icon{
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 280px) {
+  :host ::ng-deep .p-panel-icons{
+    min-width:50px;
+  }
+}

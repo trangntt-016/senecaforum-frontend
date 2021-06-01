@@ -16,8 +16,7 @@
             </div>
 
             <button mat-icon-button aria-label="Eidt the post"
-                    [routerLink]="['/posts',post.postId,'edit']"
-                    routerLinkActive="active"
+                    (click)="edit()"
                     *ngIf="post.author.username==commenter.username"
             >
                 <mat-icon color="warn" class="mb-4">edit</mat-icon>

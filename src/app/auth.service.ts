@@ -45,6 +45,12 @@ export class AuthService {
     return false;
   }
 
+  getRole(): string{
+    return this.readToken().role;
+  }
+
+
+
   public logout(): void{
     localStorage.removeItem('access_token');
     localStorage.clear();

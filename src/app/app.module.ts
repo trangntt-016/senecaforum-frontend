@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { AvatarModule } from "ngx-avatar";
 
 import { sanitizeHtmlPipe } from './safe-html.pipe';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,15 +18,17 @@ import { TableComponent } from './forum/table/table.component';
 import { PaginatorComponent } from './forum/paginator/paginator.component';
 import { FilterComponent } from './forum/filter/filter.component';
 import { FooterComponent } from './footer/footer.component';
-// @ts-ignore
 import { MainpageComponent } from './mainpage/mainpage.component';
-// @ts-ignore
 import { HotpostComponent } from './mainpage/hotpost/hotpost.component';
-// @ts-ignore
 import { TopicbannerComponent } from './mainpage/topicbanner/topicbanner.component';
 import { SearchComponent } from './mainpage/search/search.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
+import { ProfileComponent } from './user-dashboard/profile/profile.component';
+import {
+  DialogElements, MypostsComponent
+} from './user-dashboard/myposts/myposts.component';
 
 
 @NgModule({
@@ -49,7 +50,11 @@ import { LoginComponent } from './login/login.component';
     TopicbannerComponent,
     SearchComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    UserDashboardComponent,
+    ProfileComponent,
+    MypostsComponent,
+    DialogElements
   ],
   imports: [
     BrowserModule,
