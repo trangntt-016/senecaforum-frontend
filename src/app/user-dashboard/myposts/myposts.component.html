@@ -1,18 +1,46 @@
 <div class="mb-5" *ngFor="let post of posts; let i=index">
-  <p-panel header={{post.title}}  [toggleable]="true" [collapsed]="false">
-    <ng-template pTemplate="icons">
-      <button mat-button [matMenuTriggerFor]="configMenu">
-        <mat-icon>settings</mat-icon>
-      </button>
-      <mat-menu #configMenu="matMenu" xPosition="before" yPosition="below" [overlapTrigger]="false">
-        <a mat-menu-item style="text-decoration: none" (click)="navigateEdit(i)">
-          Edit
-        </a>
-        <a mat-menu-item style="text-decoration: none"(click)="openDialog(i)">
-          Delete
-        </a>
-      </mat-menu>
-    </ng-template>
-    <p  [innerHTML]="post.content | sanitizeHtml"></p>
-  </p-panel>
+  <mat-accordion>
+    <mat-expansion-panel #mep="matExpansionPanel">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="m-2 mt-3 matcard">
+            <p class="m-0">{{post.title}}</p>
+            <div class="d-flex flex-wrap">
+              <h5 class="m-2">Created on: {{convertDateLastComment(post.createdOn)}}</h5>
+              <div class="d-flex ml-2">
+                <div style="padding-top:10px">
+                  <div class="acceptBtn"></div>
+                </div>
+                <h5 class="m-2">Accepted</h5>
+              </div>
+            </div>
+
+          </div>
+          <button
+            mat-button
+            [matMenuTriggerFor]="configMenu"
+            (click)="mep.toggle()"
+          >
+            <mat-icon>settings</mat-icon>
+          </button>
+          <mat-menu
+            #configMenu="matMenu"
+            xPosition="before"
+            yPosition="below"
+            [overlapTrigger]="false"
+          >
+            <a mat-menu-item style="text-decoration: none"(click)="navigateEdit(i)">
+              Edit
+            </a>
+            <a mat-menu-item style="text-decoration: none"(click)="openDialog(i)">
+              Delete
+            </a>
+          </mat-menu>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <mat-card>
+        <p  [innerHTML]="post.content | sanitizeHtml"></p>
+      </mat-card>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

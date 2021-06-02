@@ -29,8 +29,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
 import { TableModule } from 'primeng/table';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AvatarModule } from 'ngx-avatar';
-import {PanelModule} from 'primeng/panel';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 
 
@@ -65,7 +65,6 @@ import {MatDialogModule} from '@angular/material/dialog';
         MatTabsModule,
         MatSlideToggleModule,
         AvatarModule,
-        PanelModule,
         MatDialogModule
     ],
     exports: [
@@ -102,8 +101,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         TableModule,
         MatSnackBarModule,
         AvatarModule,
-        PanelModule,
-        MatDialogModule
+        MatDialogModule,
+        MatExpansionModule
     ]
 })
 export class MaterialModule{}

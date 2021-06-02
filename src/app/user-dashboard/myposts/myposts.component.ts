@@ -4,6 +4,7 @@ import { DataManagerService } from '../../data-manager.service';
 import { PostViewDto } from '../../model/Post';
 import { ViewUser } from '../../model/User';
 import { Router } from '@angular/router';
+import { TimeConverter } from "../../Utils/TimeConverter";
 
 
 @Component({
@@ -41,6 +42,12 @@ export class MypostsComponent implements OnInit{
 
   navigateEdit(index): void{
     this.router.navigate([`/posts/${this.posts[index].postId}/edit`]);
+  }
+
+  // handle post table
+  convertDateLastComment(convertedDate: Date): string{
+    const utils = new TimeConverter();
+    return utils.convertDateComment(convertedDate);
   }
 
 }
