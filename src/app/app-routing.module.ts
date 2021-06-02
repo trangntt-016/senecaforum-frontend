@@ -9,6 +9,7 @@ import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { GuardAuthService } from "./guard-auth.service";
 import { UserDashboardComponent } from "./user-dashboard/user-dashboard.component";
+import { AdminDashboardComponent } from "./admin-dashboard/admin-dashboard.component";
 
 const routes: Routes = [
   {path: 'forum', component: ForumComponent},
@@ -26,6 +27,10 @@ const routes: Routes = [
   {path: 'users/:userId/posts', component: UserDashboardComponent, canActivate: [GuardAuthService]
     ,data: {
       role: 'ROLE_USER'
+    }},
+  {path: 'users/:userId/admin', component: AdminDashboardComponent, canActivate: [GuardAuthService]
+    ,data: {
+      role: 'ROLE_ADMIN'
     }},
   {path: 'test', component: TestComponent}
 ];

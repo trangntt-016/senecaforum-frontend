@@ -87,4 +87,12 @@ export class DataManagerService {
   deleteAPost(postId: number, userId: string): Observable<any>{
     return this.http.delete<any>(`http://localhost:3000/api/users/${userId}/posts/${postId}`);
   }
+
+  getAllPostsOrderByStatus(): Observable<PostViewDto[]>{
+    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/all`);
+  }
+
+  updateStatusPosts(selectedPostIds: number[], status: string): Observable<PostViewDto[]>{
+    return this.http.put<PostViewDto[]>(`http://localhost:3000/api/posts/status?status=${status}`, selectedPostIds);
+  }
 }

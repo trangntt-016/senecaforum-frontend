@@ -10,6 +10,7 @@ import { User } from '../model/User';
 import { Topic } from '../model/Topic';
 
 import { DataManagerService } from '../data-manager.service';
+import { AuthService } from "../auth.service";
 
 export class EditorPost{
   constructor() {
@@ -47,14 +48,15 @@ export class NewpostComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private dataService: DataManagerService
+    private dataService: DataManagerService,
+    private auth: AuthService
   ){}
 
   ngOnInit(): void {
     this.model = new EditorPost();
     this.user = new User();
     // will get this from local storage later
-    this.user.username = 'ahxmrhku';
+    this.user.username = this.auth.readToken().sub;
     this.topic = new Topic();
     this.post = new Post(this.topic, this.user);
 
@@ -92,7 +94,6 @@ export class NewpostComponent implements OnInit {
 
   public onChange( { editor }: ChangeEvent ) {
     const data = editor.getData();
-    let abc = "";
   }
 
   onSubmit(f: NgForm): void {

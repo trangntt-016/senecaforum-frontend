@@ -1,6 +1,6 @@
 <div class="mb-5" *ngFor="let post of posts; let i=index">
   <mat-accordion>
-    <mat-expansion-panel #mep="matExpansionPanel">
+    <mat-expansion-panel #mep="matExpansionPanel" [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <div class="m-2 mt-3 matcard">

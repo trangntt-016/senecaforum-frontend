@@ -38,6 +38,7 @@ export class PostViewDto{
   topic: Topic;
   lastComment: Comment;
   noOfComments: number;
+  status: string;
 }
 
 export class PostSearchDto{

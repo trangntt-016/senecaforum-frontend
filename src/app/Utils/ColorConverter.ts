@@ -31,10 +31,11 @@ export class ColorConverter{
   ]
   public setColor(username: string):string{
     let color = "";
-    for(var i = 0; i < 25; i++){
-      if((username.toUpperCase().charCodeAt(0)-65)==i){
+    for(let i = 0; i < 25; i++){
+      if ((username.toUpperCase().charCodeAt(0)-65)==i){
         color = this.colors[i];
         i = 25;
+        console.log(color);
       }
     }
     return color;

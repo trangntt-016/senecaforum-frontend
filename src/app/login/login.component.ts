@@ -37,9 +37,14 @@ export class LoginComponent implements OnInit {
           this.warning = null;
           // store the returned token in local storage as 'access_token'
           localStorage.setItem('access_token', jwt);
-          let username = this.auth.readToken().sub;
-          // emit username changes to the parent component via auth service
-          this.auth.sendUsername(username);
+          // emit user<ViewUser> changes to the parent component via auth service
+          let payload = {
+            sub: this.auth.readToken().sub,
+            exp: this.auth.readToken().exp,
+            userId: this.auth.readToken().userId,
+            role: this.auth.readToken().role
+          }
+          this.auth.sendPayload(payload);
           this.router.navigate(['hot']);
         },
         (err) => {

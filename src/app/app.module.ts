@@ -29,6 +29,10 @@ import { ProfileComponent } from './user-dashboard/profile/profile.component';
 import {
   DialogElements, MypostsComponent
 } from './user-dashboard/myposts/myposts.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminProfileComponent } from './admin-dashboard/admin-profile/admin-profile.component';
+import { UserPostsComponent } from './admin-dashboard/user-posts/user-posts.component';
+import { MatCheckboxModule } from "@angular/material/checkbox";
 
 
 @NgModule({
@@ -54,16 +58,20 @@ import {
     UserDashboardComponent,
     ProfileComponent,
     MypostsComponent,
-    DialogElements
+    DialogElements,
+    AdminDashboardComponent,
+    AdminProfileComponent,
+    UserPostsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MaterialModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    CKEditorModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MaterialModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        CKEditorModule,
+        MatCheckboxModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

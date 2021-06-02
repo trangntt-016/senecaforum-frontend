@@ -45,8 +45,9 @@ export class LogInUser extends User{
   public isRememberMe: boolean;
 }
 
-export class payload{
+export class Payload{
   public sub: string;
+  public userId: string;
   public role: string;
   public exp: number;
 }
