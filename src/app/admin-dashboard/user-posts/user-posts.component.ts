@@ -1,19 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ViewUser } from '../../model/User';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Payload, ViewUser } from '../../model/User';
 import { PostViewDto } from '../../model/Post';
 import { MatDialog } from '@angular/material/dialog';
 import { DataManagerService } from '../../data-manager.service';
 import { Router } from '@angular/router';
 import { TimeConverter } from '../../Utils/TimeConverter';
 import { PageEvent } from '@angular/material/paginator';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-user-posts',
   templateUrl: './user-posts.component.html',
   styleUrls: ['./user-posts.component.css']
 })
-export class UserPostsComponent implements OnInit {
+export class UserPostsComponent implements OnInit, OnDestroy {
+  private dataSub: Subscription;
   @Input()admin: ViewUser;
+  @Output() noOfPendingPosts: EventEmitter<number> = new EventEmitter();
   public posts: PostViewDto[];
   public selectedPostIds: number[];
   public length: number;
@@ -30,12 +33,17 @@ export class UserPostsComponent implements OnInit {
     this.pageSize = 5;
     this.pageIndex = 0;
     this.selectedPostIds = [];
-    this.dataService.getAllPostsOrderByStatus().subscribe(p=>{
+    this.dataSub = this.dataService.getAllPostsOrderByStatus().subscribe(p=>{
       this.posts = p;
       this.length = p.length;
       this.slicingPosts = this.posts.slice(this.pageSize*this.pageIndex,this.pageSize*this.pageIndex+this.pageSize);
+      const noOfPending = p.filter(po => po.status == 'pending').length;
+      this.noOfPendingPosts.emit(noOfPending);
     })
+  }
 
+   ngOnDestroy(): void {
+    this.dataSub.unsubscribe();
   }
 
   // handle post table
@@ -52,7 +60,6 @@ export class UserPostsComponent implements OnInit {
     else{
       this.selectedPostIds.push(id);
     }
-    console.log(this.selectedPostIds);
   }
 
   handlePageEvent(event: PageEvent): void{
@@ -63,10 +70,21 @@ export class UserPostsComponent implements OnInit {
     this.selectedPostIds = [];
   }
 
-  acceptAll(): void{
+  acceptSelected(): void{
     this.dataService.updateStatusPosts(this.selectedPostIds,'accepted').subscribe(p => {
       this.posts = p;
       this.slicingPosts = this.posts.slice(this.pageSize*this.pageIndex,this.pageSize*this.pageIndex+this.pageSize);
+      const noOfPending = p.filter(po => po.status == 'pending').length;
+      this.noOfPendingPosts.emit(noOfPending);
+    })
+  }
+
+  declineSelected(): void{
+    this.dataService.updateStatusPosts(this.selectedPostIds,'declined').subscribe(p => {
+      this.posts = p;
+      this.slicingPosts = this.posts.slice(this.pageSize*this.pageIndex,this.pageSize*this.pageIndex+this.pageSize);
+      const noOfPending = p.filter(po => po.status == 'pending').length;
+      this.noOfPendingPosts.emit(noOfPending);
     })
   }
 

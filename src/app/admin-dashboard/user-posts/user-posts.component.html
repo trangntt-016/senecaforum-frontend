@@ -9,11 +9,11 @@
       yPosition="below"
       [overlapTrigger]="false"
     >
-      <a mat-menu-item style="text-decoration: none" (click)="acceptAll()">
-        Accept all
+      <a mat-menu-item style="text-decoration: none" (click)="acceptSelected()">
+        Accept selected posts
       </a>
-      <a mat-menu-item style="text-decoration: none">
-        Decline all
+      <a mat-menu-item style="text-decoration: none" (click)="declineSelected()">
+        Decline selected posts
       </a>
     </mat-menu>
     <mat-paginator
@@ -22,14 +22,14 @@
       [pageSize]="pageSize"
       [pageSizeOptions]="[5, 10]"
       [pageIndex]="pageIndex"
-      class="mb-5"
+      class="mb-3"
     >
     </mat-paginator>
   </div>
 
-  <div class="mb-5" *ngFor="let post of slicingPosts">
+  <div class="mb-4" *ngFor="let post of slicingPosts">
     <mat-accordion>
-      <mat-expansion-panel #mep="matExpansionPanel" >
+      <mat-expansion-panel #mep="matExpansionPanel" [expanded]="true">
         <mat-expansion-panel-header>
           <mat-panel-title>
             <div class="m-2 mt-3 matcard">

@@ -9,9 +9,11 @@
               <h5 class="m-2">Created on: {{convertDateLastComment(post.createdOn)}}</h5>
               <div class="d-flex ml-2">
                 <div style="padding-top:10px">
-                  <div class="acceptBtn"></div>
+                  <div class="statusBtn acceptBtn" *ngIf="post.status==='accepted'"></div>
+                  <div class="statusBtn pendingBtn" *ngIf="post.status==='pending'"></div>
+                  <div class="statusBtn declinedBtn" *ngIf="post.status==='declined'"></div>
                 </div>
-                <h5 class="m-2">Accepted</h5>
+                <h5 class="m-2">{{post.status | titlecase}}</h5>
               </div>
             </div>
 

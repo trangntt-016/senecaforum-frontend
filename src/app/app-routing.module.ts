@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'posts', component: MainpageComponent},
   {path: 'posts/new', component: NewpostComponent},
-  {path: 'posts/:postId/edit', component: NewpostComponent, canActivate: [GuardAuthService]
+  {path: 'users/:userId/posts/:postId/edit', component: NewpostComponent, canActivate: [GuardAuthService]
     ,data: {
       role: 'ROLE_USER'
     }},

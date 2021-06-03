@@ -13,7 +13,8 @@ import * as ClassicEditor from '../../assets/ckeditor5/build/ckeditor';
 
 
 import { CommentServiceService } from './comment-service.service';
-import { AuthService } from "../auth.service";
+import { AuthService } from '../auth.service';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-singlepost',
@@ -23,6 +24,9 @@ import { AuthService } from "../auth.service";
 })
 export class SinglepostComponent implements OnInit {
   private postId: number;
+  private dataSub: Subscription;
+  private routeSub: Subscription;
+  private postSub: Subscription;
   public post: Post;
   public noOfPosts: number;
   public commenter: User;
@@ -48,7 +52,7 @@ export class SinglepostComponent implements OnInit {
   ngOnInit(): void {
     this.ckConfig = new CkPostConfig().ckCommentConfig;
 
-    this.activatedRoute.params.subscribe(params => {
+    this.routeSub = this.activatedRoute.params.subscribe(params => {
       this.postId = +params.postId;
     });
 
@@ -58,16 +62,22 @@ export class SinglepostComponent implements OnInit {
     this.comment.commenter = this.commenter;
     const utils = new TagsConverter();
 
-    this.dataService.getPostByPostId(this.postId).subscribe((data) => {
+    this.postSub = this.dataService.getPostByPostId(this.postId).subscribe((data) => {
       this.post = data;
       this.comments = data.comments;
-      if(data.tags!=''&&data.tags!=undefined){
+      if(data.tags !=''&&data.tags !=undefined){
         this.tags = utils.getMatChips(data.tags);
       }
-      this.dataService.getPostsSize(this.post.topic.topicId).subscribe(size => {
+      this.dataSub = this.dataService.getPostsSize(this.post.topic.topicId).subscribe(size => {
         this.noOfPosts = size;
       });
     });
+  }
+
+  ngOnDestroy():void{
+    this.postSub.unsubscribe();
+    this.dataSub.unsubscribe();
+    this.routeSub.unsubscribe();
   }
 
   // handle post table

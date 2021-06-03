@@ -1,15 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ViewUser } from '../model/User';
 import { DataManagerService } from "../data-manager.service";
 import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-user-dashboard',
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
-export class UserDashboardComponent implements OnInit {
+export class UserDashboardComponent implements OnInit, OnDestroy {
   public user: ViewUser;
+  public noOfPendingPosts: number;
+  private userId: string;
+  private routeSub: Subscription;
+  private dataSub: Subscription;
 
   constructor(
     private dataService: DataManagerService,
@@ -17,10 +22,22 @@ export class UserDashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    const userId = this.activatedRoute.snapshot.params['userId'];
-    this.dataService.getUserByUserId(userId).subscribe(u=>{
+    this.routeSub = this.activatedRoute.params.subscribe(params => {
+      this.userId = params['userId'];
+    });
+    this.dataSub = this.dataService.getUserByUserId(this.userId).subscribe(u => {
       this.user = u;
     })
   }
+
+  ngOnDestroy():void{
+    this.routeSub.unsubscribe();
+    this.dataSub.unsubscribe();
+  }
+
+  handlePendingPosts(pending: number): void{
+    this.noOfPendingPosts = pending;
+  }
+
 
 }

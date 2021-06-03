@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { DataManagerService } from '../../data-manager.service';
 import { PostViewDto } from '../../model/Post';
 import { ViewUser } from '../../model/User';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TimeConverter } from "../../Utils/TimeConverter";
+import { Subscription } from "rxjs";
 
 
 @Component({
@@ -12,19 +13,41 @@ import { TimeConverter } from "../../Utils/TimeConverter";
   templateUrl: './myposts.component.html',
   styleUrls: ['./myposts.component.css']
 })
-export class MypostsComponent implements OnInit{
+export class MypostsComponent implements OnInit, OnChanges{
+  private dataSub: Subscription;
   @Input()user: ViewUser;
+  @Output()noOfPendingPosts: EventEmitter<number> = new EventEmitter();
   public posts: PostViewDto[];
   constructor(
     public dialog: MatDialog,
     private dataService: DataManagerService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void{
-    this.dataService.getPostsByUserId(this.user.userId).subscribe(p => {
-      this.posts = p;
-    });
+    if(this.user != null){
+      this.dataSub = this.dataService.getPostsByUserId(this.user.userId).subscribe(p => {
+        this.posts = p;
+        let noOfPending = p.filter(po => po.status == 'pending').length;
+        this.noOfPendingPosts.emit(noOfPending);
+      });
+    }
+
+  }
+  ngOnChanges(): void{
+    if(this.user != null){
+      this.dataSub = this.dataService.getPostsByUserId(this.user.userId).subscribe(p => {
+        this.posts = p;
+        let noOfPending = p.filter(po => po.status == 'pending').length;
+        this.noOfPendingPosts.emit(noOfPending);
+      });
+    }
+
+  }
+
+  ngOnDestroy():void{
+    this.dataSub.unsubscribe();
   }
 
   openDialog(index): void{
@@ -41,7 +64,7 @@ export class MypostsComponent implements OnInit{
   }
 
   navigateEdit(index): void{
-    this.router.navigate([`/posts/${this.posts[index].postId}/edit`]);
+    this.router.navigate([`users/${this.user.userId}/posts/${this.posts[index].postId}/edit`]);
   }
 
   // handle post table

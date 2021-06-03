@@ -14,3 +14,7 @@
   font-size:15px;
   color:#C5CAE9
 }
+
+:host ::ng-deep .mat-select-min-line, .mat-input-element{
+  color:#303F9F;
+}

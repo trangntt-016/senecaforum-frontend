@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ViewUser } from "../../model/User";
-import { ColorConverter } from "../../Utils/ColorConverter";
+import { ViewUser } from '../../model/User';
+import { ColorConverter } from '../../Utils/ColorConverter';
 
 @Component({
   selector: 'app-profile',
@@ -8,14 +8,17 @@ import { ColorConverter } from "../../Utils/ColorConverter";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  @Input()user: ViewUser;
+  @Input()noOfPendingPosts: number;
   public avaColor: string;
   public colorUtils;
-  @Input()user: ViewUser;
   constructor() { }
 
   ngOnInit(): void {
     this.colorUtils = new ColorConverter();
-    this.avaColor = this.colorUtils.setColor(this.user.username);
+    if(this.user != null){
+      this.avaColor = this.colorUtils.setColor(this.user.username);
+    }
 
   }
 

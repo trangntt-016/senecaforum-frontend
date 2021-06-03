@@ -31,6 +31,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AvatarModule } from 'ngx-avatar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
+
 
 
 
@@ -64,7 +66,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatTabsModule,
         MatSlideToggleModule,
         AvatarModule,
-        MatDialogModule
+        MatDialogModule,
+        MatBadgeModule
     ],
     exports: [
         MatIconModule,
@@ -101,7 +104,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
         MatSnackBarModule,
         AvatarModule,
         MatDialogModule,
-        MatExpansionModule
+        MatExpansionModule,
+        MatBadgeModule
     ]
 })
 export class MaterialModule{}
