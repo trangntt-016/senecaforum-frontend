@@ -6,6 +6,7 @@ import { ViewUser } from '../../model/User';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TimeConverter } from "../../Utils/TimeConverter";
 import { Subscription } from "rxjs";
+import { AuthService } from "../../auth.service";
 
 
 @Component({
@@ -22,7 +23,8 @@ export class MypostsComponent implements OnInit, OnChanges{
     public dialog: MatDialog,
     private dataService: DataManagerService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService
   ) {}
 
   ngOnInit(): void{

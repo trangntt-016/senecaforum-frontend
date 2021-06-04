@@ -22,7 +22,7 @@ const routes: Routes = [
     ,data: {
       role: 'ROLE_USER'
     }},
-  {path: 'posts/:postId', component: SinglepostComponent},
+  {path: 'topics/:topicId/posts/:postId', component: SinglepostComponent},
   {path: 'topics/:topicId/posts', component: ForumComponent},
   {path: 'users/:userId/posts', component: UserDashboardComponent, canActivate: [GuardAuthService]
     ,data: {

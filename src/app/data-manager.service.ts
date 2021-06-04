@@ -20,7 +20,7 @@ export class DataManagerService {
     headers: new HttpHeaders({'Access-Control-Allow-Origin':'*',})
   }
 
-  getAllTags() {
+  getAllTags(): Observable<any> {
     return this.tags.length ? of(this.tags)
       : this.http.get<any>('http://localhost:3000/api/tags').pipe(
         map((data) => {
@@ -30,7 +30,7 @@ export class DataManagerService {
       )
   }
 
-  getPostsSize(topicId: number): Observable<number>{
+  getPostsSize(topicId: string): Observable<number>{
     return this.http.get<number>(`http://localhost:3000/api/topics/${topicId}/posts/size`);
   }
 
@@ -38,11 +38,11 @@ export class DataManagerService {
     return this.http.get<Topic[]>(`http://localhost:3000/api/topics`);
   }
 
-  getPostsByTopicId(topicId: number, page:number): Observable<PostViewDto[]>{
+  getPostsByTopicId(topicId: string, page:number): Observable<PostViewDto[]>{
     return this.http.get<PostViewDto[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}`);
   }
 
-  getPostsByTopicIdWithFilter(topicId: number,
+  getPostsByTopicIdWithFilter(topicId: string,
                               p: number,
                               tags: string,
                               s: string,

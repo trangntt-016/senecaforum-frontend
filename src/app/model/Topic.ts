@@ -5,16 +5,18 @@ export class Topic{
     this.views = 0;
     this.posts = null;
   }
-    public topicId: number;
+    public topicId: string;
     public topicName: string;
     public views: number;
     public posts: any[];
   }
 
-export class TopicStats{
-  public topicId: number;
-  public topicName: string;
-  public views: number;
+export class TopicStats extends  Topic{
+  constructor() {
+    super();
+    this.noOfPosts = 0;
+    this.noOfComments = 0;
+  }
   public noOfPosts: number;
   public noOfComments;
 }

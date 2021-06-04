@@ -33,9 +33,7 @@ export class ColorConverter{
     let color = "";
     for(let i = 0; i < 25; i++){
       if ((username.toUpperCase().charCodeAt(0)-65)==i){
-        color = this.colors[i];
         i = 25;
-        console.log(color);
       }
     }
     return color;

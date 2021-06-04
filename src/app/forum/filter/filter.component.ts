@@ -40,6 +40,7 @@ export class FilterComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(params => {
       this.topicID = params.topicId;
+      this.isDisplayFilter = false;
     });
   }
 

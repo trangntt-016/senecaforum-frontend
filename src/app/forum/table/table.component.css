@@ -3,7 +3,7 @@ table{
   width: 100%;
 }
 .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-  background-color: #C5CAE9;
+  background-color: #E8EAF6;
 }
 
 th{

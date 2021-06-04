@@ -35,16 +35,22 @@ export class LoginComponent implements OnInit {
           let jwt = success.headers.get("Authorization").substring("Bearer ".length);
           this.loading = false;
           this.warning = null;
-          // store the returned token in local storage as 'access_token'
-          localStorage.setItem('access_token', jwt);
-          // emit user<ViewUser> changes to the parent component via auth service
+          if (success.body.isRememberMe){
+            localStorage.setItem('access_token', jwt);
+          }
+          else{
+            sessionStorage.setItem('access_token', jwt);
+          }
           let payload = {
             sub: this.auth.readToken().sub,
             exp: this.auth.readToken().exp,
             userId: this.auth.readToken().userId,
             role: this.auth.readToken().role
-          }
+          };
+          // emit user<ViewUser> changes to the parent component via auth service
+
           this.auth.sendPayload(payload);
+
           this.router.navigate(['hot']);
         },
         (err) => {

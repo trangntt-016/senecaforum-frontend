@@ -6,7 +6,7 @@ import { DataManagerService } from '../../data-manager.service';
 import { Router } from '@angular/router';
 import { TimeConverter } from '../../Utils/TimeConverter';
 import { PageEvent } from '@angular/material/paginator';
-import { Subscription } from "rxjs";
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-posts',

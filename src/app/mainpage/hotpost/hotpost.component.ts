@@ -5,6 +5,7 @@ import { ChipColor, TagsConverter } from '../../Utils/TagsConverter';
 import { ContentConverter } from '../../Utils/ContentConverter';
 import { PostViewDto } from '../../model/Post';
 import { TimeConverter } from '../../Utils/TimeConverter';
+import { MainpageService } from "../mainpage.service";
 
 @Component({
   selector: 'app-hotpost',
@@ -25,7 +26,8 @@ export class HotpostComponent implements OnInit {
 
   constructor(
     private dataService: DataManagerService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private mainPageService: MainpageService
   ) { }
 
   ngOnInit(): void {
@@ -68,6 +70,10 @@ export class HotpostComponent implements OnInit {
     const post = this.posts[index];
     this.value = 'http://localhost:4200/posts/' + post.postId;
     this._snackBar.open("Double click and...", "Copied", { duration: 1200 });
+  }
+
+  updateViews(postId: number): void{
+    this.mainPageService.updateViews(postId);
   }
 
 

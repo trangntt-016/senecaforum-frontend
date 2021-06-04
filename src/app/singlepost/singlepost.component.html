@@ -3,15 +3,17 @@
     <div class="container col-md-8 pt-4 pb-3 post">
         <div class="container d-flex justify-content-between">
             <div class="container d-flex pl-0">
-                <mat-icon color="warn" *ngIf="post.topic.topicId==1">live_help</mat-icon>
-                <mat-icon color="primary" *ngIf="post.topic.topicId==2">assignment</mat-icon>
-                <mat-icon color="accent" *ngIf="post.topic.topicId==3">laptop</mat-icon>
-                <mat-icon color="warn" *ngIf="post.topic.topicId==4">work</mat-icon>
-                <mat-icon color="primary" *ngIf="post.topic.topicId==5">people</mat-icon>
-                <mat-icon color="accent" *ngIf="post.topic.topicId==6">developer_mode</mat-icon>
-                <mat-icon color="warn" *ngIf="post.topic.topicId==7">attach_money</mat-icon>
-                <mat-icon color="primary" *ngIf="post.topic.topicId==8">favourite</mat-icon>
-                <h4 style="font-weight: 590;color:#1A237E">&nbsp;{{post.topic.topicName}}</h4>
+                <mat-icon color="warn" *ngIf="post.topic.topicId=='Assignment_Help'">live_help</mat-icon>
+                <mat-icon color="primary" *ngIf="post.topic.topicId=='Coding_Challenges'">assignment</mat-icon>
+                <mat-icon color="accent" *ngIf="post.topic.topicId=='Coop/ Internship'">laptop</mat-icon>
+                <mat-icon color="warn" *ngIf="post.topic.topicId=='Exam_Prep'">work</mat-icon>
+                <mat-icon color="primary" *ngIf="post.topic.topicId=='Jobs'">people</mat-icon>
+                <mat-icon color="accent" *ngIf="post.topic.topicId=='Side_Projects'">developer_mode</mat-icon>
+                <mat-icon color="warn" *ngIf="post.topic.topicId=='Side_Projects'">attach_money</mat-icon>
+                <mat-icon color="primary" *ngIf="post.topic.topicId=='Volunteer'">favourite</mat-icon>
+                <h4 style="font-weight: 590;color:#1A237E; margin-left:4px">
+                  <a [routerLink]="['/topics',post.topic.topicId,'posts']" [queryParams]="{p: '1'}">{{post.topic.topicName}}</a>
+                </h4>
                 <h5 style="color: #5C6BC0;padding-top:2px;">&nbsp;&middot;&nbsp;Posted by {{post.author.username}} {{convertDateLastComment(post.createdOn)}}</h5>
             </div>
 
@@ -23,12 +25,12 @@
             </button>
         </div>
         <div class="container">
-            <h1 style="color:#1A237E;font-size:2.2em;text-transform: capitalize;">{{post.title}}</h1>
+            <h1 style="color:#1A237E;text-transform: capitalize;">{{post.title}}</h1>
             <mat-chip-list aria-label="Tags">
                 <mat-chip *ngFor="let chip of tags" class="no-wrap" [color]="chip.color" selected>{{chip.name}}</mat-chip>
             </mat-chip-list>
             <br>
-            <br>
+
             <div [innerHTML]="post.content | sanitizeHtml"></div>
         </div>
 
@@ -67,14 +69,14 @@
         <div color="accent" class="container line-topic"></div>
         <br>
         <div class="container d-flex">
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="warn" *ngIf="post.topic.topicId==1">live_help</mat-icon>
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="primary" *ngIf="post.topic.topicId==2">assignment</mat-icon>
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="accent" *ngIf="post.topic.topicId==3">laptop</mat-icon>
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="warn" *ngIf="post.topic.topicId==4">work</mat-icon>
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="primary" *ngIf="post.topic.topicId==5">people</mat-icon>
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="accent" *ngIf="post.topic.topicId==6">developer_mode</mat-icon>
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="warn" *ngIf="post.topic.topicId==7">attach_money</mat-icon>
-            <mat-icon style="font-size: 35px;margin-right:15px;" color="primary" *ngIf="post.topic.topicId==8">favourite</mat-icon>
+          <mat-icon color="warn" *ngIf="post.topic.topicId=='Assignment_Help'">live_help</mat-icon>
+          <mat-icon color="primary" *ngIf="post.topic.topicId=='Coding_Challenges'">assignment</mat-icon>
+          <mat-icon color="accent" *ngIf="post.topic.topicId=='Coop/ Internship'">laptop</mat-icon>
+          <mat-icon color="warn" *ngIf="post.topic.topicId=='Exam_Prep'">work</mat-icon>
+          <mat-icon color="primary" *ngIf="post.topic.topicId=='Jobs'">people</mat-icon>
+          <mat-icon color="accent" *ngIf="post.topic.topicId=='Side_Projects'">developer_mode</mat-icon>
+          <mat-icon color="warn" *ngIf="post.topic.topicId=='Side_Projects'">attach_money</mat-icon>
+          <mat-icon color="primary" *ngIf="post.topic.topicId=='Volunteer'">favourite</mat-icon>
             <h4 style="font-weight: 590;color:#1A237E;font-size:25px;padding-top:6px">{{post.topic.topicName}}</h4>
         </div>
         <div class="container">

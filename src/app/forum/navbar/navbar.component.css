@@ -7,6 +7,10 @@
   color:red
 }
 
+:host >>> .active {
+  background-color: #b8ebf5;
+}
+
 @media only screen and (max-width: 768px) {
   ::ng-deep .parent{
     display:flex;

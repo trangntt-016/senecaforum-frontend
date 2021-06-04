@@ -30,17 +30,23 @@ export class GuardAuthService  implements CanActivate{
       this.router.navigate(['/']);
       return false;
     }
+    // check if their token is expired
+    let exp = this.auth.readToken().exp;
+    if (exp < new Date().getTime()){
+      this.router.navigate(['/login']);
+      return false;
+    }
     // check if they have permission to visit that route
     const role = this.auth.getRole();
     if(route.data.role != role){
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
       return false;
     }
     // check if their credentials matches, they cannot visit other's dashboards
     const userId = this.auth.readToken().userId;
     const urlUserId = route.params.userId;
     if (userId !== urlUserId){
-      this.router.navigate(['/']);
+      this.router.navigate(['/login']);
       return false;
     }
     return true;

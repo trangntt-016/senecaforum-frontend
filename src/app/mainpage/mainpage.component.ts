@@ -5,6 +5,7 @@ import { TimeConverter } from '../Utils/TimeConverter';
 import { ChipColor, TagsConverter } from '../Utils/TagsConverter';
 import { ContentConverter } from '../Utils/ContentConverter';
 import { ActivatedRoute } from "@angular/router";
+import { MainpageService } from "./mainpage.service";
 
 @Component({
   selector: 'app-mainpage',

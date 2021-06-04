@@ -1,8 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Topic } from '../model/Topic';
 import { DataManagerService } from '../data-manager.service';
+import { AuthService } from "../auth.service";
 
 
 @Component({
@@ -13,18 +14,28 @@ import { DataManagerService } from '../data-manager.service';
 
 
 export class ForumComponent implements OnInit, OnDestroy {
+  public posts: any[] = null;
+  public shouldDisplayPagi: boolean;
+  private mySub: Subscription;
   @Output() topics: Topic[];
   @Output() p: number; // pageIdx
-  private posts: any[] = null;
-  private mySub: Subscription;
+  public username: string;
 
   constructor(
     private dataService: DataManagerService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthService
   ){}
 
   ngOnInit(): void {
+    if(this.auth.readToken()){
+      this.username = this.auth.readToken().sub;
+    }
+    else{
+      this.username = null;
+    }
+
     // get pageIdx from url changes
     this.mySub = this.route.queryParams.subscribe(params => {
       this.p = params['p'];
@@ -37,8 +48,18 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.posts.length = 0;
   }
 
+
   write(): void{
     this.router.navigate([`posts/new`]);
+  }
+
+  displayPagination(noOfPosts: number): void{
+   if(noOfPosts >0){
+     this.shouldDisplayPagi = true;
+   }
+   else{
+     this.shouldDisplayPagi = false;
+   }
   }
 
   ngOnDestroy(): void{

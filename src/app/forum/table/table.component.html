@@ -1,4 +1,7 @@
-<table class="table text-secondary table-striped table-hover">
+<div *ngIf="posts==null && isSearching == true" class="container text-center">
+  <h3>No results match your keywords!</h3>
+</div>
+<table class="table text-secondary table-striped table-hover mt-3" *ngIf="posts">
   <thead>
   <tr>
     <th></th>
@@ -13,14 +16,18 @@
   <tbody>
   <tr *ngFor="let p of posts">
     <td class="w-10">
-      <div class="p-1">
-        <img src="https://github.com/SiddAjmera.png" alt="authorAvatar" class="position-relative">
+      <div class="pl-1 pr-1 pb-1">
+        <ngx-avatar
+          name={{p.author.username}}
+          size="40"
+          textSizeRatio="2"
+          bgColor={{setColor(p.author.username)}}></ngx-avatar>
       </div>
 
     </td>
     <td class="w-40">
-      <p class="mat-h3 mat-subheading-2"><a href="#">{{p.title}}</a><p>
-      <p class="mat-body mat-body-1"><a href="#">{{p.author.username}}</a> created on {{p.createdOn | date}}</p>
+      <p class="mat-h3 mat-subheading-2"><a routerLink="{{p.postId}}" style="color: #283593">{{p.title}}</a><p>
+      <p class="mat-body mat-body-1"><a style="color: #448AFF">{{p.author.username}}</a> created on {{p.createdOn | date}}</p>
     </td>
     <td class="w-10">
       <p class="mat-h3 mat-subheading-2">Comments:</p>
@@ -43,10 +50,18 @@
     </td>
     <td class="w-10">
       <div class="pt-1" *ngIf="p.noOfComments > 0">
-        <img src="https://github.com/SiddAjmera.png" alt="replierAvatar">
+        <ngx-avatar
+          name={{p.commenter.username}}
+          size="40"
+          textSizeRatio="2"
+          bgColor={{setColor(p.commenter.username)}}></ngx-avatar>
       </div>
       <div *ngIf="p.noOfComments == 0">
-        <img src="https://github.com/SiddAjmera.png" alt="authorAvatar">
+        <ngx-avatar
+          name={{p.author.username}}
+          size="40"
+          textSizeRatio="2"
+          bgColor={{setColor(p.author.username)}}></ngx-avatar>
       </div>
     </td>
   </tr>

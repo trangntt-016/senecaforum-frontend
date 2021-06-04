@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { DataManagerService } from "../../data-manager.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnChanges, OnInit } from '@angular/core';
+import { DataManagerService } from '../../data-manager.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-paginator',
@@ -8,7 +8,7 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ['./paginator.component.css']
 })
 export class PaginatorComponent implements OnInit, OnChanges {
-  private topicId: number;
+  private topicId: string;
   public length: number;
 
   constructor(

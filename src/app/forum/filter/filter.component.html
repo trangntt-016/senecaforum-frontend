@@ -1,5 +1,5 @@
-<button mat-raised-button color="accent"aria-label="Filter icon" class="position-relative pr-0 pl-0" (click)="handleDisplayFilter($event)">
-  <mat-icon class="mb-2"><i class="pi pi-filter"style="font-size: 1.1rem"></i></mat-icon>
+<button mat-icon-button color="accent"aria-label="Filter icon" class="position-relative pr-0 pl-0" (click)="handleDisplayFilter($event)">
+  <mat-icon class="mb-2" style="color:#283593;"><i class="pi pi-filter"style="font-size: 1.1rem"></i></mat-icon>
   <div class="position-absolute badge form mat-app-background">
     <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container position-absolute top-0 start-100 search-form" *ngIf="isDisplayFilter">
       <h2 id="showonly">Show Only</h2>
@@ -43,7 +43,7 @@
       </div>
       <button mat-flat-button color="accent">
         <mat-icon>search</mat-icon>
-        <span>&nbsp;&nbsp;&nbsp;Filter</span>
+        <span style="color:white">&nbsp;&nbsp;&nbsp;Filter</span>
       </button>
     </form>
   </div>

@@ -65,7 +65,7 @@ export class SinglepostComponent implements OnInit {
     this.postSub = this.dataService.getPostByPostId(this.postId).subscribe((data) => {
       this.post = data;
       this.comments = data.comments;
-      if(data.tags !=''&&data.tags !=undefined){
+      if(data.tags != '' &&data.tags != undefined){
         this.tags = utils.getMatChips(data.tags);
       }
       this.dataSub = this.dataService.getPostsSize(this.post.topic.topicId).subscribe(size => {

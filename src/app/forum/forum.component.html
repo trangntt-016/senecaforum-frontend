@@ -3,18 +3,23 @@
 <br>
 <br>
 <div id="handler">
-    <button mat-raised-button color="primary" class="mr-2">
+    <button mat-raised-button color="primary" class="mr-2" *ngIf="username">
         <div class="d-flex flex-row">
-            <p class="mr-2" style="color:#C5CAE9" (click)="write()">Write a new post</p>
+            <p class="mr-2" style="color:white" (click)="write()">Write a new post</p>
             <mat-icon><i class="pi pi-pencil"></i></mat-icon>
         </div>
     </button>
+  <button mat-raised-button color="primary" class="mr-2" *ngIf="username==null">
+    <div class="d-flex flex-row">
+      <a class="mr-2" style="color:white;text-decoration: none" routerLink="/login">Login to write a post</a>
+    </div>
+  </button>
     <app-filter></app-filter>
 </div>
 <div class="table-responsive-sm table-responsive-md table-responsive-lg">
-  <app-table></app-table>
+  <app-table (noOfPosts)="displayPagination($event)"></app-table>
   <!--  emit pageId changes-->
-  <app-paginator></app-paginator>
+  <app-paginator *ngIf="shouldDisplayPagi"></app-paginator>
 </div>
 
 

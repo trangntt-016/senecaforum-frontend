@@ -17,7 +17,7 @@ p,h3{
   width:100%;
 }
 #showonly{
-  color:#C5CAE9
+  color:white
 }
 
 .container{
@@ -34,21 +34,21 @@ p,h3{
   margin-bottom:15px;
 }
 ::ng-deep .mat-icon-button .mat-button-base{
-  color:#C5CAE9
+  color:white
 }
 ::ng-deep .mat-select-arrow{
-  color:#C5CAE9
+  color:white
 }
 ::ng-deep .mat-form-field-flex > .mat-form-field-infix {
   padding-top: 1.3em !important;
 }
 
 ::ng-deep .mat-form-field .mat-input-element {
-  color:  #C5CAE9;
+  color:  white;
   font-size:15px;
 }
 ::ng-deep .mat-form-field .mat-form-field-label {
-  color: #C5CAE9!important;
+  color: white!important;
   font-size:15px;
   margin-bottom: 4px;
 }
@@ -60,21 +60,21 @@ p,h3{
   background-color: #C5CAE9;
 }
 ::ng-deep .mat-form-field .mat-form-field-required-marker {
-  color: #C5CAE9;
+  color: white;
 }
 ::ng-deep .mat-select{
   padding-bottom:5px;
 }
 ::ng-deep .mat-select-value{
   font-size:15px;
-  color:#C5CAE9
+  color:white
 }
 ::ng-deep .mat-date-range-input {
-  color: #C5CAE9;
+  color: white;
   font-size:15px
 }
 ::ng-deep  .mat-date-range-input-separator {
-  color: #C5CAE9;
+  color: white;
 }
 ::ng-deep .mat-option-text{
   font-size:15px;
@@ -83,17 +83,17 @@ p,h3{
   background-color: #C5CAE9;
 }
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-  color: #E91E63!important;
+  color: white!important;
 }
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-ripple {
   background-color: #E91E63;
 }
 ::ng-deep .mat-form-field.mat-focused .mat-form-field-required-marker {
-  color: #E91E63;
+  color: white;
   font-size:15px;
 }
 ::ng-deep .mat-form-field.mat-focused .mat-input-element {
-  color: #E91E63;
+  color: color;
 }
 
 ::ng-deep mat-icon, span{

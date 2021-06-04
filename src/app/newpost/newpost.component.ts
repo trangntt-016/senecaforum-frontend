@@ -10,16 +10,16 @@ import { User } from '../model/User';
 import { Topic } from '../model/Topic';
 
 import { DataManagerService } from '../data-manager.service';
-import { AuthService } from "../auth.service";
+import { AuthService } from '../auth.service';
 
 export class EditorPost{
   constructor() {
-    this.topicId = NaN;
+    this.topicId = '';
     this.title = null;
     this.tags = null;
     this.editorData = null;
   }
-  topicId: number;
+  topicId: string;
   title: string;
   tags: string;
   editorData: string;
@@ -37,7 +37,6 @@ export class NewpostComponent implements OnInit {
   private topic: Topic;
   public topics: Topic[];
   private post: Post;
-
   public Editor = ClassicEditor;
   public ckConfig;
   public model: EditorPost;
@@ -92,6 +91,8 @@ export class NewpostComponent implements OnInit {
     }
   }
 
+
+
   public onChange( { editor }: ChangeEvent ) {
     const data = editor.getData();
   }
@@ -116,7 +117,7 @@ export class NewpostComponent implements OnInit {
             this.loading = false;
             this.success = true;
             this.warning = null;
-            this.router.navigate(['posts', success.postId]);
+            this.router.navigate(['topics',success.topic.topicId,'posts', success.postId]);
           },
           (err) => {
             this.success = false;
@@ -168,7 +169,7 @@ export class NewPostUtils{
   }
 
 
-  getTopicFromTopicId(id: number, topics: Topic[]){
+  getTopicFromTopicId(id: string, topics: Topic[]): Topic{
     return topics.filter(t => t.topicId === id)[0];
   }
 }

@@ -6,10 +6,12 @@ export class User {
     this.userId = '';
     this.username = '';
     this.email = '';
+    this.isRememberMe = false;
   }
   public userId: string;
   public username: string;
   public email: string;
+  public isRememberMe: boolean;
 }
 export class ViewUser extends User{
   constructor(){

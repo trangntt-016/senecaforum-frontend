@@ -30,7 +30,10 @@ export class AuthService {
   }
 
   getToken(): string{
-    return localStorage.getItem('access_token');
+    if(localStorage.getItem('access_token')){
+      return localStorage.getItem('access_token');
+    }
+    return sessionStorage.getItem('access_token');
   }
 
   readToken(): Payload{
@@ -55,6 +58,8 @@ export class AuthService {
   public logout(): void{
     localStorage.removeItem('access_token');
     localStorage.clear();
+    sessionStorage.removeItem('access_token');
+    sessionStorage.clear();
   }
 
 
