@@ -1,29 +1,27 @@
-<p-table [value]="topics">
-  <ng-template pTemplate="caption" class="m-0">
-    <div class="d-flex p-0 m-0 p-ai-center p-jc-between">
-      <h3 class="pt-2">Products</h3>
-      <button mat-icon-button color="primary">
-        <mat-icon>refresh</mat-icon>
-      </button>
+<div (click)="update()">Online Users</div>
+<div *ngFor="let user of onlUsers">
+  <p (click)="selectUser(user.username)">{{user.username}}</p>
+</div>
+
+<div *ngIf="selectedUser"> Chat with {{selectedUser}}</div>
+<div style="text-align:center">
+  <h1>
+    Welcome to {{title}}!
+  </h1>
+  <div class="chat-container">
+    <div class="container" *ngFor="let mes of messages">
+      <div class="message">{{mes}}</div>
     </div>
-  </ng-template>
-  <ng-template pTemplate="header">
-    <tr>
-      <th>Topic</th>
-      <th>Views</th>
-      <th>Comments</th>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="body" let-product>
-    <tr>
-      <td>aa</td>
-      <td>bb</td>
-      <td>cc</td>
-    </tr>
-  </ng-template>
-  <ng-template pTemplate="summary">
-    <div class="p-d-flex p-ai-center p-jc-between">
-      In total there are  products.
-    </div>
-  </ng-template>
-</p-table>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="send-button">
+    <mat-icon (click)="sendMessage(username, message)">send</mat-icon>
+    <input  id="input" type="text" [(ngModel)]="message">
+  </div>
+
+</div>
+
+
+

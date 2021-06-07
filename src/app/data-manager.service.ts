@@ -95,4 +95,5 @@ export class DataManagerService {
   updateStatusPosts(selectedPostIds: number[], status: string): Observable<PostViewDto[]>{
     return this.http.put<PostViewDto[]>(`http://localhost:3000/api/posts/status?status=${status}`, selectedPostIds);
   }
+
 }
