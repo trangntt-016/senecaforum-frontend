@@ -1,23 +1,24 @@
-<div (click)="update()">Online Users</div>
+<div>Online Users</div>
 <div *ngFor="let user of onlUsers">
   <p (click)="selectUser(user.username)">{{user.username}}</p>
+  <p>{{user.noOfNewMessages}} new Messages!</p>
 </div>
 
-<div *ngIf="selectedUser"> Chat with {{selectedUser}}</div>
+<div *ngIf="selectedUser"> Chat with {{selectedUser.username}}</div>
 <div style="text-align:center">
   <h1>
     Welcome to {{title}}!
   </h1>
   <div class="chat-container">
     <div class="container" *ngFor="let mes of messages">
-      <div class="message">{{mes}}</div>
+      <div class="message">{{mes.content}}</div>
     </div>
   </div>
 </div>
 
 <div class="footer">
   <div class="send-button">
-    <mat-icon (click)="sendMessage(username, message)">send</mat-icon>
+    <mat-icon (click)="sendMessage(currentUser.username, message)">send</mat-icon>
     <input  id="input" type="text" [(ngModel)]="message">
   </div>
 

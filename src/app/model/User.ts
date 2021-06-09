@@ -54,3 +54,16 @@ export class Payload{
   public exp: number;
 }
 
+export class OnlineUserDto {
+  constructor(userId: string, username: string){
+    this.userId = userId;
+    this.username = username;
+    this.sessionId = null;
+    this.noOfNewMessages = 0;
+  }
+  public userId: string;
+  public sessionId: string;
+  public username: string;
+  public noOfNewMessages: number;
+}
+

@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit  } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 import { ColorConverter } from './Utils/ColorConverter';
-import { Payload, ViewUser } from './model/User';
 
 
 @Component({
