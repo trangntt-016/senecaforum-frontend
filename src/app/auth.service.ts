@@ -27,7 +27,7 @@ export class AuthService {
   }
 
   login(loginUser: LogInUser): Observable<any>{
-    return this.http.post<ViewUser>(`http://localhost:3000/api/users/login`, loginUser, { observe: 'response' });
+    return this.http.post<ViewUser>(`http://localhost:3000/api/auth`, loginUser, { observe: 'response' });
   }
 
   getToken(): string{

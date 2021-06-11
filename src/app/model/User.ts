@@ -48,7 +48,7 @@ export class LogInUser extends User{
 }
 
 export class Payload{
-  public sub: string;
+  public username: string;
   public userId: string;
   public role: string;
   public exp: number;

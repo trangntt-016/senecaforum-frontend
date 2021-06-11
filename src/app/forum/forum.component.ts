@@ -30,7 +30,7 @@ export class ForumComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     if(this.auth.readToken()){
-      this.username = this.auth.readToken().sub;
+      this.username = this.auth.readToken().username;
     }
     else{
       this.username = null;

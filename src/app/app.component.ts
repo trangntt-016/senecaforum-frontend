@@ -30,7 +30,7 @@ export class AppComponent  implements OnInit{
 
     // listen to emission from login
     this.auth.payload.subscribe(p => {
-      this.username = p.sub;
+      this.username = p.username;
       switch (this.auth.readToken().role){
         case "ROLE_USER":
           this.isUser = true;
@@ -68,7 +68,7 @@ export class AppComponent  implements OnInit{
         this.isUser = false;
     }
 
-    this.username = this.auth.readToken().sub;
+    this.username = this.auth.readToken().username;
     this.avaColor = this.colorUtils.setColor(this.username);
 
   }

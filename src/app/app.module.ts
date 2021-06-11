@@ -33,6 +33,8 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminProfileComponent } from './admin-dashboard/admin-profile/admin-profile.component';
 import { UserPostsComponent } from './admin-dashboard/user-posts/user-posts.component';
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { ChatboxComponent } from './chatbox/chatbox.component';
+import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     DialogElements,
     AdminDashboardComponent,
     AdminProfileComponent,
-    UserPostsComponent
+    UserPostsComponent,
+    ChatboxComponent,
+    ChatpanelComponent
   ],
     imports: [
         BrowserModule,

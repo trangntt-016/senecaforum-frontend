@@ -1,6 +1,7 @@
 :host ::ng-deep .mat-accordion {
   position: absolute;
   bottom: 1px;
+  right: 20px;
 }
 
 :host ::ng-deep .mat-expansion-panel-header{
@@ -15,9 +16,13 @@
 :host ::ng-deep .mat-expansion-panel-body{
   padding-right:10px;
 }
-
+.accordion-wrapper{
+  display:flex;
+  position: absolute;
+  bottom: 1px;
+}
 #chatbox-area{
-  width: 215px;
+  width: 250px;
   height: 300px;
 }
 
@@ -91,85 +96,4 @@
   -moz-box-shadow: none;
   box-shadow: none;
   resize: none;
-}
-
-/* chat panel list */
-
-.chat-panel-wrapper{
-  background-color: pink;
-  height:70vh;
-  width:30%;
-  position: fixed;
-  top: 4;
-  right:0;
-}
-
-.btn-chat-toggle{
-  background-color: purple;
-  width:fit-content;
-  margin-left:auto
-}
-
-
-.chatpanel-container{
-  display:flex;
-  flex-direction: column;
-  overflow: hidden !important;
-}
-
-.chat-sidenav{
-  width: 100%;
-}
-
-:host ::ng-deep .mat-card{
-  box-shadow:none !important;
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.myprofile /deep/{
-  margin: auto;
-}
-
-.status{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  display:inline-block;
-  margin-right:7px;
-}
-.green{
-  background-color:#58b666;
-}
-.orange{
-  background-color:#ff725d;
-}
-
-:host ::ng-deep .mat-list-item:hover{
-  background-color:lightgray;
-  cursor: pointer;
-}
-
-@media only screen and (max-width: 768px) {
-  .chat-panel-wrapper{
-    width: 40%;
-  }
-}
-
-@media only screen and (max-width: 540px) {
-  .chat-panel-wrapper{
-    width: 50%;
-  }
-}
-
-@media only screen and (max-width: 415px) {
-  .chat-panel-wrapper{
-    width: 70%;
-  }
-}
-@media only screen and (max-width: 320px) {
-  .chat-panel-wrapper{
-    width: 100%;
-  }
 }

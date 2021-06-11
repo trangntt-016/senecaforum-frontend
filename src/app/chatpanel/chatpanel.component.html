@@ -1,0 +1,50 @@
+<div class="chat-panel-wrapper">
+  <div class="btn-chat-toggle">
+    <button type="button" mat-button (click)="drawer.toggle()">
+      Toggle sidenav
+    </button>
+  </div>
+  <mat-drawer-container class="chatpanel-container" autosize>
+
+    <mat-drawer class="chat-sidenav" #drawer opened = "true" mode="side" position="end">
+      <mat-card class="border-0 pb-0">
+        <ngx-avatar
+          class="myprofile"
+          name={{currentUser.username}}
+          size="40"
+          textSizeRatio="2"
+          bgColor={{setColor(currentUser.username)}}>
+        </ngx-avatar>
+        <h2 style="text-align: center">{{currentUser.username | uppercase}}</h2>
+      </mat-card>
+      <mat-card>
+        <mat-list>
+          <mat-list-item *ngFor="let user of onlUsers" class="mb-3 pt-1 pb-1" (click)="openChatBox(user)">
+            <div fxLayout fxLayoutAlign="space-between" style="width:100%">
+              <div fxLayout>
+                <ngx-avatar
+                  name={{user.username}}
+                  [size]="35"
+                  textSizeRatio="2"
+                  bgColor={{setColor(user.username)}}>
+                </ngx-avatar>
+                <div fxLayout="column" class="ml-2">
+                  <h4 class="m-0">{{user.username}}</h4>
+                  <h5 class="m-0" *ngIf="user.noOfNewMessages > 0">{{user.noOfNewMessages}} new messages</h5>
+                </div>
+              </div>
+              <h5>
+                <span class="status green"></span>
+                online
+              </h5>
+            </div>
+
+
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </mat-drawer>
+
+  </mat-drawer-container>
+
+</div>

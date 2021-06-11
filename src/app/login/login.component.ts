@@ -42,11 +42,12 @@ export class LoginComponent implements OnInit {
             sessionStorage.setItem('access_token', jwt);
           }
           let payload = {
-            sub: this.auth.readToken().sub,
+            username: this.auth.readToken().username,
             exp: this.auth.readToken().exp,
             userId: this.auth.readToken().userId,
             role: this.auth.readToken().role
           };
+
           // emit user<ViewUser> changes to the parent component via auth service
 
           this.auth.sendPayload(payload);

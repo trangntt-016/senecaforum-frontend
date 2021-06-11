@@ -1,0 +1,56 @@
+
+<mat-accordion hideToggle #panel>
+  <mat-expansion-panel [expanded]="false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div fxFlex="100" fxLayout="row" fxLayoutAlign="space-between">
+          <h3 class="m-0" style="color:white">
+            {{selectedUser.username}}
+            <span class="status green ml-2"></span>
+          </h3>
+          <mat-icon
+            style="color:#FFFFFF; font-size: 20px;padding-top:3px; padding-left:20px;"
+            (click)="closeChatBox()">close</mat-icon>
+        </div>
+
+
+      </mat-panel-title>
+
+    </mat-expansion-panel-header>
+    <div id="chatbox-area">
+      <div class="card-content chat-content" *ngIf="messages.length>0">
+        <div class="content" *ngFor="let mes of messages">
+          <div class="chat-message-group" *ngIf="mes.senderName!=currentUser.username">
+            <div class="chat-thumb">
+              <ngx-avatar
+                name={{mes.senderName}}
+                size="25"
+                textSizeRatio="2"
+                bgColor={{setColor(mes.senderName)}}>
+              </ngx-avatar>
+            </div>
+
+            <div class="chat-messages">
+              <div class="message">
+                {{mes.content}}
+              </div>
+              <div class="from">{{convertTime(mes.createdOn)}}</div>
+            </div>
+          </div>
+
+          <div class="chat-message-group writer-user" *ngIf="mes.senderName==currentUser.username">
+            <div class="chat-messages">
+              <div class="message">{{mes.content}}</div>
+              <div class="from">{{convertTime(mes.createdOn)}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pt-3 d-flex">
+      <textarea style="width: 85%; border-color: lightgray; border-radius: 5px"></textarea>
+      <button mat-button color="primary" class="mb-2">send</button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+

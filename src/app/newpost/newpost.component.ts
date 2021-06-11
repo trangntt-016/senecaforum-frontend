@@ -55,7 +55,7 @@ export class NewpostComponent implements OnInit {
     this.model = new EditorPost();
     this.user = new User();
     // will get this from local storage later
-    this.user.username = this.auth.readToken().sub;
+    this.user.username = this.auth.readToken().username;
     this.topic = new Topic();
     this.post = new Post(this.topic, this.user);
 

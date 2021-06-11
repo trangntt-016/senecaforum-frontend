@@ -57,7 +57,7 @@ export class SinglepostComponent implements OnInit {
     });
 
     this.commenter = new User();
-    this.commenter.username = this.auth.readToken().sub; // will get this from localStorage later
+    this.commenter.username = this.auth.readToken().username; // will get this from localStorage later
     this.comment = new Comment();
     this.comment.commenter = this.commenter;
     const utils = new TagsConverter();
@@ -104,7 +104,7 @@ export class SinglepostComponent implements OnInit {
   }
 
   edit(): void{
-    if (this.auth.readToken().sub == this.post.author.username){
+    if (this.auth.readToken().username == this.post.author.username){
       this.router.navigate(['posts', this.post.postId,'edit']);
     }
   }
