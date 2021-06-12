@@ -32,11 +32,12 @@ import {
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { AdminProfileComponent } from './admin-dashboard/admin-profile/admin-profile.component';
 import { UserPostsComponent } from './admin-dashboard/user-posts/user-posts.component';
-import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 import { TopNavbarComponent } from './frame/top-navbar/top-navbar.component';
-import { SidenavComponent } from './frame/sidenav/sidenav.component';
+// @ts-ignore
+import { NavlistComponent } from './frame/navlist/navlist.component';
 
 
 @NgModule({
@@ -69,7 +70,7 @@ import { SidenavComponent } from './frame/sidenav/sidenav.component';
     ChatboxComponent,
     ChatpanelComponent,
     TopNavbarComponent,
-    SidenavComponent
+    NavlistComponent
   ],
     imports: [
         BrowserModule,

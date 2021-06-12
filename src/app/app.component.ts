@@ -1,8 +1,8 @@
-import { Component, OnDestroy, OnInit  } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
-import { ColorConverter } from './Utils/ColorConverter';
-import { MatSidenav } from "@angular/material/sidenav";
+import { OnlineUserDto } from "./model/User";
+import { Message } from "./model/Message";
 
 
 @Component({
@@ -17,17 +17,22 @@ export class AppComponent  implements OnInit{
   public isUser: boolean;
   public isGuest: boolean = true;
   public isAdmin: boolean;
-  public avaColor: string;
   public open:boolean;
 
+  @Input()selectedUser: OnlineUserDto;
+  @Input()sentMessage: Message;
+  @Output() onlUsers = new EventEmitter();
+  public isCloseChatBox: boolean;
+  public messages: Message[] = [];
+
   constructor(
-    private router: Router,
-    private auth: AuthService
+    private router: Router
   ){}
 
 
   ngOnInit(): void{
     this.open = false;
+    this.isCloseChatBox = true;
   }
   public search(): void{
     this.router.navigate(['posts'], {queryParams:
@@ -37,11 +42,26 @@ export class AppComponent  implements OnInit{
     });
   }
 
-  handleToggleTopNavbar(event){
+  handleToggleTopNavbar(event): void{
     this.open = event;
   }
 
+  handleSelectedUser(event): void{
+    this.isCloseChatBox = false;
+    this.selectedUser = event;
+  }
 
+  handleCloseChatBox(event): void{
+    this.isCloseChatBox = event;
+  }
+
+  handleMessages(event): void{
+    this.messages = event;
+  }
+
+  handleSentMessage(event): void{
+    this.sentMessage = event;
+  }
 
 
 }

@@ -4,19 +4,38 @@
   <app-top-navbar (toggleEvt)="handleToggleTopNavbar($event)"></app-top-navbar>
 
   <mat-sidenav-container>
-    <app-sidenav [open]="open"></app-sidenav>
+    <mat-sidenav [opened]="open" [mode]="'side'" [fixedInViewport]="true" fixedTopGap="56">
+      <app-navlist></app-navlist>
+    </mat-sidenav>
 
     <mat-sidenav-content class="mat-drawer-content mat-sidenav-content sidenav-content">
 
       <!-- Main content -->
       <div class="maincontent">
-        <router-outlet></router-outlet>
+        <div class="d-flex">
+          <router-outlet></router-outlet>
+          <app-chatpanel
+            (selectedUsrEvt)="handleSelectedUser($event)"
+            (messagesEvt)="handleMessages($event)"
+            [sentMessage]="sentMessage">
+          </app-chatpanel>
+        </div>
+
       </div>
 
       <!-- ------------ -->
       <div class="bottom-spacer text-center">
-        © 2021 by Trang Nguyen and Nhat Duy
+        <app-chatbox
+          *ngIf="!isCloseChatBox"
+          [selectedUser]="selectedUser"
+          [messages]="messages"
+          (isCloseChatBoxEvt)="handleCloseChatBox($event)"
+          (sentMessageEvt)="handleSentMessage($event)">
+        </app-chatbox>
       </div>
     </mat-sidenav-content>
+
   </mat-sidenav-container>
 </div>
+
+
