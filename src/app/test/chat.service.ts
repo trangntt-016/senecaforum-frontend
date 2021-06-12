@@ -14,11 +14,11 @@ export class ChatService {
   ) { }
 
   getOnlineUsers(currentUserId: string): Observable<OnlineUserDto[]>{
-    return this.http.get<OnlineUserDto[]>(`http://localhost:3000/api/messages/onlines/${currentUserId}`);
+    return this.http.get<OnlineUserDto[]>(`http://localhost:3000/api/ws/users/${currentUserId}`);
   }
 
   getChatMessages(senderId: string, recipientId: string): Observable<Message[]>{
-    return this.http.get<Message[]>(`http://localhost:3000/api/messages/${senderId}/${recipientId}`);
+    return this.http.get<Message[]>(`http://localhost:3000/api/ws/messages/${senderId}/${recipientId}`);
   }
 
 }

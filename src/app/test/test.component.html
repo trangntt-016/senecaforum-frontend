@@ -1,17 +1,20 @@
 <div class="d-flex justify-content-between">
   <div>
-    <div style="background-color: yellow; position:relative; height: 300px; display: flex">
+    <div style="background-color: yellow; position:relative; height: 3000px; display: flex">
       <div>fds</div>
       <app-chatpanel
-        (selectedUsr)="handleSelectedUser($event)"
-        (messagesOfSelected)="handleMessages($event)"></app-chatpanel>
+        (selectedUsrEvt)="handleSelectedUser($event)"
+        (messagesEvt)="handleMessages($event)"
+        [sentMessage]="sentMessage"></app-chatpanel>
     </div>
     <app-chatbox
-      [selectedUser]="selectedUser"
-      [currentUser]="currentUser"
       *ngIf="!isCloseChatBox"
-      (isCloseChatBox)="handleCloseChatBox($event)"
-      [messages]="messages"></app-chatbox>
+      [selectedUser]="selectedUser"
+      [messages]="messages"
+      (isCloseChatBoxEvt)="handleCloseChatBox($event)"
+      (sentMessageEvt)="handleSentMessage($event)">
+
+    </app-chatbox>
   </div>
 </div>
 

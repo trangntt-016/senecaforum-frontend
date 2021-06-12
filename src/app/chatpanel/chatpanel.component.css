@@ -1,14 +1,13 @@
 .chat-panel-wrapper{
-  background-color: pink;
-  height:70vh;
-  width:27%;
+  height:50vh;
+  width:20%;
   position: fixed;
   top: 4;
-  right:0;
+  right:35px;
+  border-radius: 5px;
 }
 
 .btn-chat-toggle{
-  background-color: purple;
   width:fit-content;
   margin-left:auto
 }
@@ -21,6 +20,7 @@
 }
 
 .chat-sidenav{
+  border-radius:5px;
   width: 100%;
 }
 

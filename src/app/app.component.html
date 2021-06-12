@@ -1,106 +1,10 @@
 <div class="navbar-container">
 
   <!-- Top navbar -->
-  <mat-toolbar class="navbar" color="primary">
-    <button mat-icon-button (click)="snav.toggle()">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <h1>
-      <a class="navbar-brand" matTooltip="Home" style="text-decoration: none;cursor: pointer;">
-        Seneca Forum
-      </a>
-    </h1>
-
-
-    <span class="navbar-spacer"></span>
-
-    <button mat-stroked-button class="border-0" *ngIf="isUser">
-        <ngx-avatar
-          name={{username}}
-          size="28"
-          textSizeRatio="2"
-          bgColor={{avaColor}}
-          [matMenuTriggerFor]="userMenu"></ngx-avatar>
-    </button>
-    <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-      <a mat-menu-item style="text-decoration: none; color: black" (click)="navigateDashboard()">
-        Manage my posts
-      </a>
-      <a mat-menu-item style="text-decoration: none; color: black" (click)="logout()">
-        Logout
-      </a>
-    </mat-menu>
-    <button mat-button [matMenuTriggerFor]="guestMenu" *ngIf="isGuest">
-      <mat-icon>person</mat-icon>
-    </button>
-    <mat-menu #guestMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-      <a mat-menu-item style="text-decoration: none" href="http://localhost:4200/login">
-        Login
-      </a>
-      <a mat-menu-item style="text-decoration: none; color: black" href="http://localhost:4200/register">
-        Register
-      </a>
-    </mat-menu>
-
-    <button mat-stroked-button class="border-0"
-            *ngIf="isAdmin">
-      <ngx-avatar
-        name={{username}}
-        size="28"
-        textSizeRatio="2"
-        bgColor={{avaColor}}
-        [matMenuTriggerFor]="adminMenu"></ngx-avatar>
-    </button>
-    <mat-menu #adminMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-      <a mat-menu-item style="text-decoration: none; color: black"
-         (click)="navigateDashboard()">
-        Manage all posts
-      </a>
-      <a mat-menu-item style="text-decoration: none; color: black" (click)="logout()">
-        Logout
-      </a>
-    </mat-menu>
-
-
-  </mat-toolbar>
+  <app-top-navbar (toggleEvt)="handleToggleTopNavbar($event)"></app-top-navbar>
 
   <mat-sidenav-container>
-    <!-- Side nav -->
-    <mat-sidenav #snav [opened]="false" [mode]="'side'" [fixedInViewport]="true" fixedTopGap="56">
-      <mat-nav-list>
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Search posts that contains</mat-label>
-            <input matInput type="text" name="searchString" [(ngModel)]='searchString'>
-            <mat-icon matSuffix (click)="search()" style = "cursor: pointer">search</mat-icon>
-          </mat-form-field>
-        </div>
-
-        <a mat-list-item >
-          <mat-icon mat-list-icon>
-            whatshot
-          </mat-icon>
-          <p mat-line [routerLink]="['/hot']"> What's Hot? </p>
-        </a>
-        <a mat-list-item>
-          <mat-icon mat-list-icon>
-            forum
-          </mat-icon>
-          <p mat-line [routerLink]="['/topics/1/posts']" [queryParams]="{ pageIndex: 1,pageSize: 10} "> Forum </p>
-        </a>
-
-        <mat-divider></mat-divider>
-
-        <a id="push-bottom" mat-list-item >
-          <mat-icon mat-list-icon>
-            info_outline
-          </mat-icon>
-          <p mat-line [routerLink]="['/about']"> About </p>
-        </a>
-      </mat-nav-list>
-
-    </mat-sidenav>
+    <app-sidenav [open]="open"></app-sidenav>
 
     <mat-sidenav-content class="mat-drawer-content mat-sidenav-content sidenav-content">
 

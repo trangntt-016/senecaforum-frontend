@@ -1,7 +1,19 @@
 <div class="chat-panel-wrapper">
   <div class="btn-chat-toggle">
-    <button type="button" mat-button (click)="drawer.toggle()">
-      Toggle sidenav
+    <button
+      mat-mini-fab color="warn"
+      (click)="drawer.toggle()"
+      class="mb-3"
+      matBadge={{noOfUsersHavingNewMsgs}}
+      matBadgePosition="before"
+      *ngIf="noOfUsersHavingNewMsgs>0">
+      <mat-icon> comment</mat-icon>
+    </button>
+    <button
+      mat-mini-fab color="warn"
+      (click)="drawer.toggle()"
+      class="mr-4 mb-3" *ngIf="noOfUsersHavingNewMsgs==0">
+      <mat-icon> comment</mat-icon>
     </button>
   </div>
   <mat-drawer-container class="chatpanel-container" autosize>
@@ -33,9 +45,13 @@
                   <h5 class="m-0" *ngIf="user.noOfNewMessages > 0">{{user.noOfNewMessages}} new messages</h5>
                 </div>
               </div>
-              <h5>
+              <h5 *ngIf="user.status=='ONLINE'">
                 <span class="status green"></span>
                 online
+              </h5>
+              <h5 *ngIf="user.status=='OFFLINE'">
+                <span class="status orange"></span>
+                offline
               </h5>
             </div>
 

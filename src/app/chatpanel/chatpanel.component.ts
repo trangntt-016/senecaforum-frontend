@@ -1,12 +1,12 @@
-import { Component, OnInit, Output,EventEmitter } from '@angular/core';
-import { Message } from "../model/Message";
-import { OnlineUserDto } from "../model/User";
-import { interval, Subscription } from "rxjs";
-import { AuthService } from "../auth.service";
-import { ChatService } from "../test/chat.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { ColorConverter } from "../Utils/ColorConverter";
-import { startWith, switchMap } from "rxjs/operators";
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Message } from '../model/Message';
+import { OnlineUserDto } from '../model/User';
+import { interval, Subscription } from 'rxjs';
+import { AuthService } from '../auth.service';
+import { ChatService } from '../test/chat.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ColorConverter } from '../Utils/ColorConverter';
+import { startWith, switchMap } from 'rxjs/operators';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 
@@ -16,20 +16,20 @@ import * as SockJS from 'sockjs-client';
   templateUrl: './chatpanel.component.html',
   styleUrls: ['./chatpanel.component.css']
 })
-export class ChatpanelComponent implements OnInit {
-  @Output()selectedUsr = new EventEmitter();
-  @Output()messagesOfSelected = new EventEmitter();
+export class ChatpanelComponent implements OnInit, OnChanges {
   private serverUrl = 'http://localhost:3000/ws';
-  public title = 'WebSockets chat';
   private stompClient;
+  @Input()sentMessage: Message;
+  @Output()selectedUsrEvt = new EventEmitter();
+  @Output()messagesEvt = new EventEmitter();
   public messages: Message[] = [];
+  public noOfUsersHavingNewMsgs: number;
   public currentUser: OnlineUserDto;
   public selectedUser: OnlineUserDto;
   public message: string;
   public onlUsers: OnlineUserDto[] = [];
   public timeInterval: Subscription;
   public colorUtils;
-  public timeUtils;
 
   constructor(
     private auth: AuthService,
@@ -40,21 +40,28 @@ export class ChatpanelComponent implements OnInit {
 
   ngOnInit(): void {
     this.colorUtils = new ColorConverter();
-    const that = this;
+    this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
 
-    that.currentUser = new OnlineUserDto(that.auth.readToken().userId, that.auth.readToken().username);
+    const that = this;
     this.timeInterval = interval(3000)
       .pipe(
         startWith(0),
         switchMap(() => that.chatService.getOnlineUsers(that.currentUser.userId))).subscribe(users => {
+          this.noOfUsersHavingNewMsgs = 0;
         const onlineUsrs = [];
         users.forEach((u) => {
+          // remove currentUser from online list and recheck non duplicate value from backend
           if (onlineUsrs.filter(o => o.username === u.username).length === 0 && u.username !== this.currentUser.username) {
             onlineUsrs.push(u);
           }
+          if (u.noOfNewMessages > 0 && u.noOfNewMessages != null){
+            console.log(u.noOfNewMessages);
+            console.log(u.username);
+            this.noOfUsersHavingNewMsgs += 1;
+          }
         });
+
         that.onlUsers = onlineUsrs;
-        console.log(that.onlUsers);
       });
 
 
@@ -62,9 +69,15 @@ export class ChatpanelComponent implements OnInit {
 
   }
 
+  ngOnChanges(): void{
+    if (this.sentMessage != null){
+      this.stompClient.send(`/app/chat`, {}, this.sentMessage);
+    }
+    this.sentMessage = null;
+  }
+
   ngOnDestroy(): void {
     this.timeInterval.unsubscribe();
-
   }
 
   initializeWebSocketConnection(): void {
@@ -74,46 +87,17 @@ export class ChatpanelComponent implements OnInit {
     const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     const that = this;
-    this.stompClient.connect({username: that.currentUser.username}, function (frame) {
+    this.stompClient.connect({username: that.currentUser.username}, function(frame) {
       that.stompClient.subscribe('/user/' + that.currentUser.username + '/queue/messages', (noti) => {
         const senderName = noti.body.split(',')[1].split(':')[1].replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
         if (that.selectedUser == null || senderName !== that.selectedUser.username) {
           that._snackBar.open('Receive new message from ' + senderName, 'Got it!');
         } else {
           that.chatService.getChatMessages(that.selectedUser.userId, that.currentUser.userId).subscribe(mes => {
-            //that.messages = mes;
-            that.messagesOfSelected.emit(mes);
+            that.messagesEvt.emit(mes);
           });
         }
       }, {username: that.currentUser.username});
-    });
-
-  }
-
-  sendMessage(username: string, message: string): void {
-    const mes = new Message();
-    mes.senderId = this.currentUser.userId;
-    mes.senderName = this.currentUser.username;
-    mes.recipientId = this.selectedUser.userId;
-    mes.recipientName = this.selectedUser.username;
-    mes.content = message;
-    const converted = JSON.stringify(mes);
-    this.stompClient.send(`/app/chat`, {}, converted);
-    this.message = null;
-    const tempMes = new Message();
-    tempMes.content = message;
-    this.messages.push(tempMes);
-    this.messagesOfSelected.emit(this.messages);
-  }
-
-
-  selectUser(username: string): void {
-    this.selectedUser = this.onlUsers.filter(u => u.username === username)[0];
-    console.log(this.selectedUser);
-    this.chatService.getChatMessages(this.selectedUser.userId, this.currentUser.userId).subscribe(mes => {
-      this.messages = mes;
-      this.messagesOfSelected.emit(mes);
-      console.log(this.messages);
     });
   }
 
@@ -121,12 +105,12 @@ export class ChatpanelComponent implements OnInit {
     return this.colorUtils.setColor(username);
   }
 
-  public openChatBox(user: OnlineUserDto){
-    this.selectedUsr.emit(user);
+  public openChatBox(user: OnlineUserDto): void{
+    this.selectedUser = user;
+    this.selectedUsrEvt.emit(user);
     this.chatService.getChatMessages(user.userId, this.currentUser.userId).subscribe(mes => {
       this.messages = mes;
-      this.messagesOfSelected.emit(mes);
-      console.log(this.messages);
+      this.messagesEvt.emit(mes);
     });
   }
 }

@@ -1,0 +1,63 @@
+<mat-toolbar class="navbar" color="primary">
+  <button mat-icon-button (click)="toggleSideNav()">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <h1>
+    <a class="navbar-brand" matTooltip="Home" style="text-decoration: none;cursor: pointer;">
+      Seneca Forum
+    </a>
+  </h1>
+
+
+  <span class="navbar-spacer"></span>
+
+  <button mat-stroked-button class="border-0" *ngIf="isUser">
+    <ngx-avatar
+      name={{username}}
+      size="28"
+      textSizeRatio="2"
+      bgColor={{avaColor}}
+      [matMenuTriggerFor]="userMenu"></ngx-avatar>
+  </button>
+  <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+    <a mat-menu-item style="text-decoration: none; color: black" (click)="navigateDashboard()">
+      Manage my posts
+    </a>
+    <a mat-menu-item style="text-decoration: none; color: black" (click)="logout()">
+      Logout
+    </a>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="guestMenu" *ngIf="isGuest">
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #guestMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+    <a mat-menu-item style="text-decoration: none" href="http://localhost:4200/login">
+      Login
+    </a>
+    <a mat-menu-item style="text-decoration: none; color: black" href="http://localhost:4200/register">
+      Register
+    </a>
+  </mat-menu>
+
+  <button mat-stroked-button class="border-0"
+          *ngIf="isAdmin">
+    <ngx-avatar
+      name={{username}}
+      size="28"
+      textSizeRatio="2"
+      bgColor={{avaColor}}
+      [matMenuTriggerFor]="adminMenu"></ngx-avatar>
+  </button>
+  <mat-menu #adminMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
+    <a mat-menu-item style="text-decoration: none; color: black"
+       (click)="navigateDashboard()">
+      Manage all posts
+    </a>
+    <a mat-menu-item style="text-decoration: none; color: black" (click)="logout()">
+      Logout
+    </a>
+  </mat-menu>
+
+
+</mat-toolbar>

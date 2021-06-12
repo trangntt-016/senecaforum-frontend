@@ -35,6 +35,8 @@ import { UserPostsComponent } from './admin-dashboard/user-posts/user-posts.comp
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatpanelComponent } from './chatpanel/chatpanel.component';
+import { TopNavbarComponent } from './frame/top-navbar/top-navbar.component';
+import { SidenavComponent } from './frame/sidenav/sidenav.component';
 
 
 @NgModule({
@@ -65,7 +67,9 @@ import { ChatpanelComponent } from './chatpanel/chatpanel.component';
     AdminProfileComponent,
     UserPostsComponent,
     ChatboxComponent,
-    ChatpanelComponent
+    ChatpanelComponent,
+    TopNavbarComponent,
+    SidenavComponent
   ],
     imports: [
         BrowserModule,

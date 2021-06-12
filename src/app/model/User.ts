@@ -60,10 +60,12 @@ export class OnlineUserDto {
     this.username = username;
     this.sessionId = null;
     this.noOfNewMessages = 0;
+    this.status = "OFFLINE";
   }
   public userId: string;
   public sessionId: string;
   public username: string;
   public noOfNewMessages: number;
+  public status: string;
 }
 
