@@ -12,18 +12,14 @@
 
       <!-- Main content -->
       <div class="maincontent">
-        <div class="d-flex">
-          <router-outlet></router-outlet>
-          <app-chatpanel
-            (selectedUsrEvt)="handleSelectedUser($event)"
-            (messagesEvt)="handleMessages($event)"
-            [sentMessage]="sentMessage">
-          </app-chatpanel>
-        </div>
-
+        <router-outlet></router-outlet>
+        <app-chatpanel
+          (selectedUsrEvt)="handleSelectedUser($event)"
+          (messagesEvt)="handleMessages($event)"
+          [sentMessage]="sentMessage">
+        </app-chatpanel>
       </div>
-
-      <!-- ------------ -->
+      
       <div class="bottom-spacer text-center">
         <app-chatbox
           *ngIf="!isCloseChatBox"

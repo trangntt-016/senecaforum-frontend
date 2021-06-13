@@ -1,12 +1,20 @@
+.fixed-container{
+  position: absolute;
+  top:0;
+  right:0;
+  background-color: transparent;
+  width:100%;
+  height:100%;
+}
 .chat-panel-wrapper{
   height:50vh;
   width:20%;
   position: fixed;
-  top: 4;
+  margin-top:25px;
   right:35px;
   border-radius: 5px;
+  z-index: 1;
 }
-
 .btn-chat-toggle{
   width:fit-content;
   margin-left:auto
