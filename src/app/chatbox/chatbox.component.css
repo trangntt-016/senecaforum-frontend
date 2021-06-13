@@ -10,7 +10,7 @@
   bottom: 0;
   position:fixed;
   right: 30px;
-  z-index: 1;
+  z-index:100;
 }
 
 :host ::ng-deep .mat-expansion-panel-header{

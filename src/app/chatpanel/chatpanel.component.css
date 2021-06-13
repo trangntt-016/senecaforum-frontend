@@ -5,7 +5,7 @@
   background-color: transparent;
   width:100%;
   height:100%;
-  z-index: -1;
+
 }
 .chat-panel-wrapper{
   height:50vh;
@@ -14,7 +14,7 @@
   margin-top:25px;
   right:35px;
   border-radius: 5px;
-  z-index: 1;
+  z-index: 50;
 }
 .btn-chat-toggle{
   width:fit-content;
