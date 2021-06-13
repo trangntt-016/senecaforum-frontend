@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { sanitizeHtmlPipe } from './safe-html.pipe';
@@ -38,6 +38,7 @@ import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 import { TopNavbarComponent } from './frame/top-navbar/top-navbar.component';
 // @ts-ignore
 import { NavlistComponent } from './frame/navlist/navlist.component';
+import { InterceptTokenService } from "./intercept-token.service";
 
 
 @NgModule({
@@ -81,7 +82,13 @@ import { NavlistComponent } from './frame/navlist/navlist.component';
         CKEditorModule,
         MatCheckboxModule
     ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptTokenService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
