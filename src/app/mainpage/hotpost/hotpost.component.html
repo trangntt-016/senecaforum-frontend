@@ -1,4 +1,4 @@
-<div class="rounded border mb-4 pt-3" style="height: fit-content;" *ngFor="let post of posts; let i = index">
+<div class="rounded border mb-4 pt-3" style="height: fit-content; position: relative; z-index: 5" *ngFor="let post of posts; let i = index">
   <div class="container d-flex justify-content-between">
     <div class="container d-flex pl-0 flex-wrap">
       <mat-icon color="warn" *ngIf="post.topic.topicId==1">live_help</mat-icon>

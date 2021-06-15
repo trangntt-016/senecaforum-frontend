@@ -57,9 +57,13 @@ export class SinglepostComponent implements OnInit {
     });
 
     this.commenter = new User();
-    this.commenter.username = this.auth.readToken().username; // will get this from localStorage later
-    this.comment = new Comment();
-    this.comment.commenter = this.commenter;
+    if(this.auth.readToken()!=null){
+      this.commenter.username = this.auth.readToken().username;
+    }
+    else{
+      console.log(this.commenter);
+    }
+
     const utils = new TagsConverter();
 
     this.postSub = this.dataService.getPostByPostId(this.postId).subscribe((data) => {

@@ -18,11 +18,11 @@
                [(ngModel)]="registerUser.username"
                #userName="ngModel"
                minlength="5"
-               maxlength="8"
+               maxlength="12"
                required autofocus>
         <mat-error *ngIf="userName.errors?.required">Please provide a valid username</mat-error>
-        <mat-error *ngIf="userName.errors?.minlength">Username must be 5 - 8 characters in length</mat-error>
-        <mat-error *ngIf="userName.errors?.maxlength">Username must be 5 - 8 characters in length</mat-error>
+        <mat-error *ngIf="userName.errors?.minlength">Username must be 5 - 12 characters in length</mat-error>
+        <mat-error *ngIf="userName.errors?.maxlength">Username must be 5 - 12 characters in length</mat-error>
       </mat-form-field><br />
       <mat-form-field class="full-width-input">
         <input matInput type="password" placeholder="Password" name="password"

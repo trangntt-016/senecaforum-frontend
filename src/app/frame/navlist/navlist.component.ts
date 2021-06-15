@@ -13,8 +13,7 @@ export class NavlistComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   public search(): void{
     this.router.navigate(['posts'], {queryParams:
@@ -22,6 +21,7 @@ export class NavlistComponent implements OnInit {
           content: this.searchString
         }
     });
+    this.searchString = '';
   }
 
 

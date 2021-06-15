@@ -6,6 +6,8 @@ import { ContentConverter } from '../../Utils/ContentConverter';
 import { PostViewDto } from '../../model/Post';
 import { TimeConverter } from '../../Utils/TimeConverter';
 import { MainpageService } from "../mainpage.service";
+import { Router } from "@angular/router";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: 'app-hotpost',
@@ -29,16 +31,24 @@ export class HotpostComponent implements OnInit {
   constructor(
     private dataService: DataManagerService,
     private _snackBar: MatSnackBar,
-    private mainPageService: MainpageService
+    private mainPageService: MainpageService,
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
     this.noOfLoads = 1;
     this.posts = [];
     this.allChipTags = [];
-    this.dataService.getNoOfAllPosts().subscribe((size)=>{
+    this.dataService.getNoOfAllPosts().subscribe((size) => {
       this.noOfAllPosts = size;
-    });
+    }, (error => {
+      if (error.status === 403){
+        this._snackBar.open('Your login session has expired!','Got it!');
+        this.auth.logout();
+        this.router.navigate(['login']);
+      }
+    }));
     this.dataService.getHotPosts(this.noOfLoads).subscribe((posts) => {
       this.posts = posts;
       this.posts.forEach(post => {
@@ -59,7 +69,13 @@ export class HotpostComponent implements OnInit {
         this.tags = this.tagUtils.getMatChips(post.tags);
         this.allChipTags.push(this.tags);
       });
-    });
+    }, (error => {
+      if (error.status === 403){
+        this._snackBar.open('Your login session has expired!','Got it!');
+        this.auth.logout();
+        this.router.navigate(['login']);
+      }
+    }));
   }
 
   // handle post table

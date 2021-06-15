@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { GuardAuthService } from './guard-auth.service';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
-import { ChatboxComponent } from "./chatbox/chatbox.component";
+import { ChatboxComponent } from './chatbox/chatbox.component';
 
 const routes: Routes = [
   {path: 'forum', component: ForumComponent},

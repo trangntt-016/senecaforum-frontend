@@ -11,35 +11,20 @@ import { Message } from "./model/Message";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  implements OnInit{
-  public title = 'SenecaForum';
-  public searchString = '';
-  public username: string;
-  public isUser: boolean;
-  public isGuest: boolean = true;
-  public isAdmin: boolean;
-  public open:boolean;
-
   @Input()selectedUser: OnlineUserDto;
   @Input()sentMessage: Message;
   @Output() onlUsers = new EventEmitter();
+  public title = 'SenecaForum';
+  public username: string;
+  public open: boolean;
   public isCloseChatBox: boolean;
   public messages: Message[] = [];
 
-  constructor(
-    private router: Router
-  ){}
-
+  constructor(){}
 
   ngOnInit(): void{
     this.open = false;
     this.isCloseChatBox = true;
-  }
-  public search(): void{
-    this.router.navigate(['posts'], {queryParams:
-        {
-          content: this.searchString
-        }
-    });
   }
 
   handleToggleTopNavbar(event): void{
@@ -62,6 +47,5 @@ export class AppComponent  implements OnInit{
   handleSentMessage(event): void{
     this.sentMessage = event;
   }
-
 
 }

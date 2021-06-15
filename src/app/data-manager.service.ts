@@ -97,7 +97,7 @@ export class DataManagerService {
   }
 
   getNoOfAllPosts(): Observable<number>{
-    return this.http.get<number>(`http://localhost:3000/api/posts/noOfAllPosts`);
+    return this.http.get<number>(`http://localhost:3000/api/posts/size`);
   }
 
 }

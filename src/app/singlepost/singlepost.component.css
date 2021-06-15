@@ -7,6 +7,10 @@
   height:180px;
 }
 
+:host ::ng-deep button{
+  height: 35px;
+}
+
 
 .container.main{
     background-color: #C5CAE9;

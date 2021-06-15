@@ -31,30 +31,23 @@
             </mat-chip-list>
             <br>
 
-            <div [innerHTML]="post.content | sanitizeHtml"></div>
+            <div [innerHTML]="post.content | sanitizeHtml" style="text-align: justify"></div>
         </div>
 
-        <div class="container mt-5" *ngIf="commenter.username!=null">
+        <div class="container mt-5" *ngIf="commenter.username!=''">
           <h5>Comment as <span style="color:#304FFE">{{commenter.username}}</span></h5>
           <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="d-flex flex-column">
             <ckeditor [editor]="Editor" [config] ="ckConfig" [(ngModel)]="model.editorData" name="editorData"></ckeditor>
             <div class="container d-flex" id="notify">
               <div class="container text-right mt-2">
-<!--                <mat-slide-toggle-->
-<!--                  [(ngModel)]="model.enabled"-->
-<!--                  name="enabled"-->
-<!--                  [color]="color">-->
-<!--                  Email me when there's a new comment-->
-<!--                </mat-slide-toggle>-->
-
                 <button mat-raised-button class="mr-2 ml-2">Comment</button>
               </div>
             </div>
           </form>
         </div>
-        <div class="container border rounded d-flex pt-2 pb-2 pr-0 flex-wrap" id="loginorsignup"*ngIf="commenter.username===null">
-          <h3 id="loginorsignuph3">Log in or sign up to leave a comment</h3>
-          <div class="container text-right m-0 d-flex justify-content-end" id="loginorsignupbtn">
+        <div class="container border rounded d-flex pt-2 pb-2 mt-5 flex-wrap" id="loginorsignup"*ngIf="commenter.username===''">
+          <h4 id="loginorsignuph3">Log in or sign up to leave a comment</h4>
+          <div class="container text-right p-0 m-0 d-flex justify-content-end" id="loginorsignupbtn">
             <button mat-raised-button class="mr-2">Log In</button>
             <button mat-raised-button color="primary">Sign Up</button>
           </div>

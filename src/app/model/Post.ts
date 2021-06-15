@@ -46,6 +46,7 @@ export class PostSearchDto{
   title: string;
   content: string;
   idxKeywords: number[];
+  topic: Topic;
 }
 
 
