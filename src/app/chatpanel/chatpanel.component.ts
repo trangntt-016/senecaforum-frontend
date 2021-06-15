@@ -50,6 +50,7 @@ export class ChatpanelComponent implements OnInit, OnChanges {
     this.auth.payload.subscribe(p => {
       console.log(" ");
       this.isLogIn = (this.auth.readToken()!=null)?true:false;
+      this.currentUser.username = this.auth.readToken().username;
     });
 
     if(this.auth.readToken()!=null){
@@ -75,7 +76,13 @@ export class ChatpanelComponent implements OnInit, OnChanges {
           });
 
           that.onlUsers = onlineUsrs;
-        });
+        },(error => {
+          console.log(error);
+          if (error.status === 403){
+            this._snackBar.open('Your login session has expired!', 'Got it!');
+            this.auth.logout();
+            this.router.navigate(['login']);
+          }}));
 
       this.initializeWebSocketConnection();
     }

@@ -21,7 +21,7 @@
     </div>
     <mat-drawer-container class="chatpanel-container" autosize>
 
-      <mat-drawer class="chat-sidenav" #drawer opened = "false" mode="side" position="end" *ngIf="isLogIn">
+      <mat-drawer class="chat-sidenav" #drawer opened = "false" mode="side" position="end" *ngIf="auth.readToken()!=null">
         <mat-card class="border-0 pb-0">
           <ngx-avatar
             class="myprofile"

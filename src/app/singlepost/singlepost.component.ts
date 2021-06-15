@@ -15,6 +15,7 @@ import * as ClassicEditor from '../../assets/ckeditor5/build/ckeditor';
 import { CommentServiceService } from './comment-service.service';
 import { AuthService } from '../auth.service';
 import { Subscription } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-singlepost',
@@ -47,7 +48,8 @@ export class SinglepostComponent implements OnInit {
     private router: Router,
     private commentService: CommentServiceService,
     private activatedRoute: ActivatedRoute,
-    private auth: AuthService
+    private auth: AuthService,
+    private _snackBar: MatSnackBar
   ) { }
   ngOnInit(): void {
     this.ckConfig = new CkPostConfig().ckCommentConfig;
@@ -69,13 +71,18 @@ export class SinglepostComponent implements OnInit {
     this.postSub = this.dataService.getPostByPostId(this.postId).subscribe((data) => {
       this.post = data;
       this.comments = data.comments;
-      if(data.tags != '' &&data.tags != undefined){
+      if (data.tags != '' &&data.tags != undefined){
         this.tags = utils.getMatChips(data.tags);
       }
       this.dataSub = this.dataService.getPostsSize(this.post.topic.topicId).subscribe(size => {
         this.noOfPosts = size;
       });
-    });
+    }, (error => {
+      if (error.status === 403){
+        this._snackBar.open('Your login session has expired!', 'Got it!');
+        this.auth.logout();
+        this.router.navigate(['login']);
+      }}));
   }
 
   ngOnDestroy():void{

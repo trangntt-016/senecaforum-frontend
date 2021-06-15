@@ -48,8 +48,8 @@
         <div class="container border rounded d-flex pt-2 pb-2 mt-5 flex-wrap" id="loginorsignup"*ngIf="commenter.username===''">
           <h4 id="loginorsignuph3">Log in or sign up to leave a comment</h4>
           <div class="container text-right p-0 m-0 d-flex justify-content-end" id="loginorsignupbtn">
-            <button mat-raised-button class="mr-2">Log In</button>
-            <button mat-raised-button color="primary">Sign Up</button>
+            <button mat-raised-button class="mr-2" [routerLink]="['/login']" >Log In</button>
+            <button mat-raised-button color="primary" [routerLink]="['/register']">Sign Up</button>
           </div>
         </div>
       <div>
