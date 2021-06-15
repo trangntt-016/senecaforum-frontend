@@ -22,6 +22,8 @@ export class HotpostComponent implements OnInit {
   public value: string;
   public allChipTags: any;
   public color = 'primary';
+  public noOfLoads: number;
+  public noOfAllPosts: number;
 
 
   constructor(
@@ -31,9 +33,13 @@ export class HotpostComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.noOfLoads = 1;
     this.posts = [];
     this.allChipTags = [];
-    this.dataService.getHotPosts().subscribe((posts) => {
+    this.dataService.getNoOfAllPosts().subscribe((size)=>{
+      this.noOfAllPosts = size;
+    });
+    this.dataService.getHotPosts(this.noOfLoads).subscribe((posts) => {
       this.posts = posts;
       this.posts.forEach(post => {
         if (post.content.indexOf('figure') >= 0){
@@ -74,6 +80,18 @@ export class HotpostComponent implements OnInit {
 
   updateViews(postId: number): void{
     this.mainPageService.updateViews(postId);
+  }
+
+  loadmore(): void{
+    if((this.noOfLoads-1) *10+10 < this.noOfAllPosts){
+      this.noOfLoads += 1;
+      this.dataService.getHotPosts(this.noOfLoads).subscribe((loaded) => {
+        let temp = new Array(this.posts.length + loaded.length);
+        temp = [...this.posts, ...loaded];
+        this.posts = new Array(temp.length);
+        this.posts = temp;
+      });
+    };
   }
 
 

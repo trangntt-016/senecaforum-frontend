@@ -1,9 +1,10 @@
-<!--emit topicId changes-->
-<app-navbar [topics]="topics"></app-navbar>
+<app-navbar></app-navbar>
+
+<!--<app-navbar [topics]="topics"></app-navbar>-->
 <br>
 <br>
 <div id="handler">
-    <button mat-raised-button color="primary" class="mr-2" *ngIf="username">
+    <button mat-raised-button color="primary" *ngIf="username">
         <div class="d-flex flex-row">
             <p class="mr-2" style="color:white" (click)="write()">Write a new post</p>
             <mat-icon><i class="pi pi-pencil"></i></mat-icon>
@@ -16,8 +17,8 @@
   </button>
     <app-filter></app-filter>
 </div>
-<div class="table-responsive-sm table-responsive-md table-responsive-lg">
-  <app-table (noOfPosts)="displayPagination($event)"></app-table>
+<div class="table-responsive-sm table-responsive-md table-responsive-lg" style="z-index: 5;">
+  <app-table (noOfPostsEvt)="handleNoOfPosts($event)"></app-table>
   <!--  emit pageId changes-->
   <app-paginator *ngIf="shouldDisplayPagi"></app-paginator>
 </div>

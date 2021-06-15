@@ -1,10 +1,14 @@
-<button mat-icon-button color="accent"aria-label="Filter icon" class="position-relative pr-0 pl-0" (click)="handleDisplayFilter($event)">
+<button mat-icon-button
+        color="accent"
+        class="pr-0 pl-0"
+        style="position:relative; z-index: 55"
+        (click)="handleDisplayFilter($event)">
   <mat-icon class="mb-2" style="color:#283593;"><i class="pi pi-filter"style="font-size: 1.1rem"></i></mat-icon>
   <div class="position-absolute badge form mat-app-background">
     <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="container position-absolute top-0 start-100 search-form" *ngIf="isDisplayFilter">
       <h2 id="showonly">Show Only</h2>
       <div fxLayout="column">
-        <mat-form-field appearance="fill" class="full-width-input">
+        <mat-form-field appearance="fill" class="full-width-input showonly">
           <mat-label>Find By Tag</mat-label>
           <input matInput [matAutocomplete]="auto" name="searchTag" #searchTag="ngModel" [(ngModel)]="currentTag" (ngModelChange)="doFilter()">
           <mat-autocomplete #auto="matAutocomplete">

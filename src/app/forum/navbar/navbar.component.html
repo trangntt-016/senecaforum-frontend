@@ -1,1 +1,24 @@
-<p-menubar [model]="items" (click) = "activeMenu($event)"></p-menubar>
+<!--<p-menubar [model]="items" (click) = "activeMenu($event)"></p-menubar>-->
+<div style="position: relative; z-index: 5; display:flex; justify-content: center; flex-wrap: wrap" *ngIf="!isMobile">
+  <div *ngFor="let t of topics">
+    <button mat-button
+            [routerLink]="['/topics/'+t.topicId+'/posts']" [queryParams]="{ p: 1}"
+            routerLinkActive="mat-accent"
+            [routerLinkActiveOptions]="{ exact: true}"
+            >{{t.topicName}}</button>
+
+  </div>
+</div>
+
+<mat-nav-list style="position: relative; z-index: 5;" *ngIf="isMobile">
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Topics
+    </mat-expansion-panel-header>
+    <a mat-list-item routerLink *ngFor="let t of topics" [routerLink]="['/topics/'+t.topicId+'/posts']" [queryParams]="{ p: 1}" >
+      <span style="width: 100%"><button mat-button>{{t.topicName}}</button></span>
+    </a>
+  </mat-expansion-panel>
+</mat-nav-list>
+
+

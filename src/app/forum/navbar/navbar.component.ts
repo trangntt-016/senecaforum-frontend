@@ -1,7 +1,10 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { MenuItem } from 'primeng/api';
-import { DataManagerService } from "../../data-manager.service";
-import { Topic } from "../../model/Topic";
+import { DataManagerService } from '../../data-manager.service';
+import { Topic } from '../../model/Topic';
+import { Subscription } from 'rxjs';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -9,47 +12,34 @@ import { Topic } from "../../model/Topic";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  @Input() topics: Topic[];
+  public topics: Topic[];
   public items: MenuItem[];
+  public isMobile: boolean;
+  private mySub: Subscription;
 
   posts: any[] = null;
-  constructor(){}
+  constructor(
+    private dataService: DataManagerService,
+    public bpObserve: BreakpointObserver,
+    private router: Router
+  ){}
 
 
   ngOnInit(): void {
-    this.items = [];
-    for (let i = 0; i < this.topics.length; i++){
-      var obj = {};
-      if(i == 0){
-        obj = {
-          label: this.topics[i].topicName,
-          styleClass : 'active',
-          routerLink: [`/topics/${this.topics[i].topicId}/posts`], queryParams: {p: 1}
-        };
+    this.isMobile = false;
+    this.bpObserve.observe([
+      '(max-width: 415px)'
+    ]).subscribe(result => {
+      if (result.matches) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
       }
-      else{
-        obj = {
-          label: this.topics[i].topicName,
-          routerLink: [`/topics/${this.topics[i].topicId}/posts`], queryParams: {p: 1}
-        };
-      }
-      this.items.push(obj);
-    }
+    });
+
+    this.mySub = this.dataService.getAllTopics().subscribe(topics =>{
+      this.topics = topics;
+    });
   }
-  activeMenu(event) {
-    console.log(event.target.className);
-    let node;
-    if (event.target.className === "p-menuitem-text ng-star-inserted") {
-      node = event.target.parentNode;
-    } else {
-      console.log("huhu");
-      node = event.target.parentNode;
-    }
-    let menuitem = document.getElementsByClassName("p-menuitem-link p-ripple ng-star-inserted");
-    console.log(menuitem);
-    for (let i = 0; i < menuitem.length; i++) {
-      menuitem[i].classList.remove("active");
-    }
-    node.classList.add("active")}
 
 }

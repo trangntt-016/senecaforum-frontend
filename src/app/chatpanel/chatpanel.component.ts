@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, ViewChild } from '@angular/core';
 import { Message } from '../model/Message';
 import { OnlineUserDto } from '../model/User';
 import { interval, Subscription } from 'rxjs';
@@ -9,6 +9,8 @@ import { ColorConverter } from '../Utils/ColorConverter';
 import { startWith, switchMap } from 'rxjs/operators';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { MatDrawer, MatSidenavModule } from "@angular/material/sidenav";
+import { Router } from "@angular/router";
 
 
 @Component({
@@ -17,6 +19,7 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./chatpanel.component.css']
 })
 export class ChatpanelComponent implements OnInit, OnChanges {
+  @ViewChild('drawer') drawer: MatDrawer;
   private serverUrl = 'http://localhost:3000/ws';
   private stompClient;
   @Input()sentMessage: Message;
@@ -30,43 +33,52 @@ export class ChatpanelComponent implements OnInit, OnChanges {
   public onlUsers: OnlineUserDto[] = [];
   public timeInterval: Subscription;
   public colorUtils;
+  public isLogIn: boolean;
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private chatService: ChatService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {
   }
 
   ngOnInit(): void {
-    this.colorUtils = new ColorConverter();
-    this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
+    this.noOfUsersHavingNewMsgs = 0;
 
-    const that = this;
-    this.timeInterval = interval(3000)
-      .pipe(
-        startWith(0),
-        switchMap(() => that.chatService.getOnlineUsers(that.currentUser.userId))).subscribe(users => {
+    // catch payload from login
+    this.auth.payload.subscribe(p => {
+      console.log(" ");
+      this.isLogIn = (this.auth.readToken()!=null)?true:false;
+    });
+
+    if(this.auth.readToken()!=null){
+      this.isLogIn = (this.auth.readToken()!=null)?true:false;
+      this.colorUtils = new ColorConverter();
+      this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
+
+      const that = this;
+      this.timeInterval = interval(3000)
+        .pipe(
+          startWith(0),
+          switchMap(() => that.chatService.getOnlineUsers(that.currentUser.userId))).subscribe(users => {
           this.noOfUsersHavingNewMsgs = 0;
-        const onlineUsrs = [];
-        users.forEach((u) => {
-          // remove currentUser from online list and recheck non duplicate value from backend
-          if (onlineUsrs.filter(o => o.username === u.username).length === 0 && u.username !== this.currentUser.username) {
-            onlineUsrs.push(u);
-          }
-          if (u.noOfNewMessages > 0 && u.noOfNewMessages != null){
-            console.log(u.noOfNewMessages);
-            console.log(u.username);
-            this.noOfUsersHavingNewMsgs += 1;
-          }
+          const onlineUsrs = [];
+          users.forEach((u) => {
+            // remove currentUser from online list and recheck non duplicate value from backend
+            if (onlineUsrs.filter(o => o.username === u.username).length === 0 && u.username !== this.currentUser.username) {
+              onlineUsrs.push(u);
+            }
+            if (u.noOfNewMessages > 0 && u.noOfNewMessages != null){
+              this.noOfUsersHavingNewMsgs += 1;
+            }
+          });
+
+          that.onlUsers = onlineUsrs;
         });
 
-        that.onlUsers = onlineUsrs;
-      });
-
-
-    this.initializeWebSocketConnection();
-
+      this.initializeWebSocketConnection();
+    }
   }
 
   ngOnChanges(): void{
@@ -112,5 +124,16 @@ export class ChatpanelComponent implements OnInit, OnChanges {
       this.messages = mes;
       this.messagesEvt.emit(mes);
     });
+  }
+
+  public openDrawer():void{
+    if(this.auth.readToken()!=null){
+      this.drawer.toggle();
+    }
+    else{
+      this._snackBar.open('Please login to chat with others', 'Login', { duration: 5000})
+        .onAction()
+        .subscribe(() => this.router.navigateByUrl('/login'));
+    }
   }
 }

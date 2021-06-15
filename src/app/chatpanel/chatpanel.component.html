@@ -3,7 +3,7 @@
     <div class="btn-chat-toggle">
       <button
         mat-mini-fab color="warn"
-        (click)="drawer.toggle()"
+        (click)="openDrawer()"
         class="mr-4 mb-3"
         matBadge={{noOfUsersHavingNewMsgs}}
         matBadgePosition="before"
@@ -13,7 +13,7 @@
       </button>
       <button
         mat-mini-fab color="warn"
-        (click)="drawer.toggle()"
+        (click)="openDrawer()"
         class="mr-4 mb-3" *ngIf="noOfUsersHavingNewMsgs==0"
         style="z-index: 10;">
         <mat-icon> comment</mat-icon>
@@ -21,14 +21,15 @@
     </div>
     <mat-drawer-container class="chatpanel-container" autosize>
 
-      <mat-drawer class="chat-sidenav" #drawer opened = "false" mode="side" position="end">
+      <mat-drawer class="chat-sidenav" #drawer opened = "false" mode="side" position="end" *ngIf="isLogIn">
         <mat-card class="border-0 pb-0">
           <ngx-avatar
             class="myprofile"
             name={{currentUser.username}}
             size="40"
             textSizeRatio="2"
-            bgColor={{setColor(currentUser.username)}}>
+            bgColor={{setColor(currentUser.username)}}
+          >
           </ngx-avatar>
           <h2 style="text-align: center">{{currentUser.username | uppercase}}</h2>
         </mat-card>

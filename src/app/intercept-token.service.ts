@@ -13,20 +13,20 @@ export class InterceptTokenService   implements HttpInterceptor{
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.auth.getToken()==null) {
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer `
-        }
-      });
-    }
-    else{
-      req = req.clone({
-        setHeaders: {
-          Authorization: `Bearer ${this.auth.getToken()}`
-        }
-      });
-      }
+    // if (this.auth.getToken()==null) {
+    //   req = req.clone({
+    //     setHeaders: {
+    //       Authorization: `Bearer `
+    //     }
+    //   });
+    // }
+    // else{
+    //   req = req.clone({
+    //     setHeaders: {
+    //       Authorization: `Bearer ${this.auth.getToken()}`
+    //     }
+    //   });
+    //   }
     // Pass the request on to the next handler
     return next.handle(req);
   }

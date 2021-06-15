@@ -1,19 +1,11 @@
-::ng-deep .parent{
-  display:flex;
-  flex-direction: column;
+:host ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content, .mat-list-base .mat-list-option .mat-list-item-content{
+  padding-left: 0;
+  padding-right: 0;
 }
-
-::ng-deep .parent ul li{
-  color:red
+:host ::ng-deep .mat-button{
+  width: 100%;
+  text-align: left;
 }
-
-:host >>> .active {
-  background-color: #b8ebf5;
-}
-
-@media only screen and (max-width: 768px) {
-  ::ng-deep .parent{
-    display:flex;
-    flex-direction: row;
-  }
+:host ::ng-deep .mat-button-wrapper{
+  font-size:16px;
 }

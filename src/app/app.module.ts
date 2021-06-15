@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { environment } from '../environments/environment';
 
 import { sanitizeHtmlPipe } from './safe-html.pipe';
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +21,6 @@ import { FilterComponent } from './forum/filter/filter.component';
 import { FooterComponent } from './footer/footer.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { HotpostComponent } from './mainpage/hotpost/hotpost.component';
-import { TopicbannerComponent } from './mainpage/topicbanner/topicbanner.component';
 import { SearchComponent } from './mainpage/search/search.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
@@ -36,7 +36,6 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 import { TopNavbarComponent } from './frame/top-navbar/top-navbar.component';
-// @ts-ignore
 import { NavlistComponent } from './frame/navlist/navlist.component';
 import { InterceptTokenService } from "./intercept-token.service";
 
@@ -57,7 +56,6 @@ import { InterceptTokenService } from "./intercept-token.service";
     FooterComponent,
     MainpageComponent,
     HotpostComponent,
-    TopicbannerComponent,
     SearchComponent,
     SignupComponent,
     LoginComponent,

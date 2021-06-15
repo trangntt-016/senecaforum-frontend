@@ -16,10 +16,7 @@ export class TableComponent implements OnInit {
   private colorUtils;
   public posts: PostViewDto[] = null;
   public isSearching: boolean;
-  @Output() noOfPosts: EventEmitter<number> = new EventEmitter();
-  public sendNoOfPosts(num: number): void{
-    this.noOfPosts.emit(num);
-  }
+  @Output() noOfPostsEvt = new EventEmitter();
 
   constructor(
     private dataService: DataManagerService,
@@ -31,16 +28,15 @@ export class TableComponent implements OnInit {
     this.colorUtils = new ColorConverter();
     this.route.params.subscribe(params => {
       this.topicID = params.topicId;
-      // reload data when default
+      //reload data when default
       this.dataService.getPostsByTopicId(this.topicID, 1).subscribe(posts => {
         this.posts = posts;
-        if(posts!=null){
-          this.sendNoOfPosts(posts.length);
+        if (this.posts != null){
+          this.noOfPostsEvt.emit(posts.length);
         }
         else{
-          this.sendNoOfPosts(0);
+          this.noOfPostsEvt.emit(0);
         }
-
       });
     });
     this.route.queryParams.subscribe(params => {
@@ -57,11 +53,11 @@ export class TableComponent implements OnInit {
         this.dataService.getPostsByTopicIdWithFilter(this.topicID, this.p, tags, start, convertedEnd, sortBy, order)
           .subscribe(posts => {
             this.posts = posts;
-            if(posts!=null){
-              this.sendNoOfPosts(posts.length);
+            if (this.posts != null){
+              this.noOfPostsEvt.emit(posts.length);
             }
             else{
-              this.sendNoOfPosts(0);
+              this.noOfPostsEvt.emit(0);
             }
           })
       }
@@ -70,11 +66,11 @@ export class TableComponent implements OnInit {
         this.isSearching = false;
         this.dataService.getPostsByTopicId(this.topicID,this.p).subscribe(posts => {
           this.posts = posts;
-          if(posts!=null){
-            this.sendNoOfPosts(posts.length);
+          if (this.posts != null){
+            this.noOfPostsEvt.emit(posts.length);
           }
           else{
-            this.sendNoOfPosts(0);
+            this.noOfPostsEvt.emit(0);
           }
         });
       }

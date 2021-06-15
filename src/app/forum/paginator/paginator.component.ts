@@ -24,7 +24,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
       this.dataService.getPostsSize(this.topicId).subscribe(size => {
         this.length = size;
       });
-      this.router.navigate([`topics/${this.topicId}/posts`], {queryParams: {p: 1}});
+      // this.router.navigate([`topics/${this.topicId}/posts`], {queryParams: {p: 1}});
     });
 
   }
@@ -33,6 +33,7 @@ export class PaginatorComponent implements OnInit, OnChanges {
   }
 
   pageEvent(event): void{
+    console.log(event);
     const pageIdx = event.pageIndex + 1;
     this.router.navigate([`topics/${this.topicId}/posts`], {queryParams: {p: pageIdx}});
   }

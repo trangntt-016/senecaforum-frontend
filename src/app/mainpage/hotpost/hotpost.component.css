@@ -2,6 +2,7 @@
   max-width: 320%;
   max-height: 330%;
 }
+
 :host ::ng-deep .mat-icon{
   padding-top:5px !important;
   height:25px !important;

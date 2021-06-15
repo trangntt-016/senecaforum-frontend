@@ -48,24 +48,29 @@ export class TopNavbarComponent implements OnInit {
     });
 
     //by default (reload, start new page)
-    switch (this.auth.readToken().role){
-      case "ROLE_USER":
-        this.isUser = true;
-        this.isAdmin = false;
-        this.isGuest = false;
-        break;
-      case "ROLE_ADMIN":
-        this.isAdmin = true;
-        this.isGuest = false;
-        this.isUser = false;
-        break;
-      default:
-        this.isGuest = true;
-        this.isAdmin = false;
-        this.isUser = false;
+    if(this.auth.readToken()!=null){
+      let role = this.auth.readToken().role;
+      switch (role){
+        case "ROLE_USER":
+          this.isUser = true;
+          this.isAdmin = false;
+          this.isGuest = false;
+          break;
+        case "ROLE_ADMIN":
+          this.isAdmin = true;
+          this.isGuest = false;
+          this.isUser = false;
+          break;
+        default:
+          this.isGuest = true;
+          this.isAdmin = false;
+          this.isUser = false;
+      }
+      this.username = this.auth.readToken().username;
     }
 
-    this.username = this.auth.readToken().username;
+
+
 
   }
 

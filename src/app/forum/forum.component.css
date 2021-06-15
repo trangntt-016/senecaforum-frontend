@@ -4,5 +4,10 @@ p,h3{
 #handler{
     width:100%;
     display:flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+}
+
+:host ::ng-deep #handler button{
+  margin-right: 10px;
+  z-index: 5;
 }

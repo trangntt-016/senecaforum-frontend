@@ -33,6 +33,7 @@ export class ChatboxComponent implements OnInit, OnChanges {
   public colorUtils;
   public timeUtils;
 
+
   constructor(
     private auth: AuthService
   ) { }

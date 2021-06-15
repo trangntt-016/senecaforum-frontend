@@ -1,14 +1,18 @@
 
 table{
+  position:relative;
   width: 100%;
-}
-.table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
-  background-color: #E8EAF6;
+  z-index: 5;
 }
 
-th{
-  border-top:none;
+td{
+  border-top:0 !important;
 }
+
+td:hover{
+  cursor: pointer;
+}
+
 .table thead th{
   border-bottom:none;
 }

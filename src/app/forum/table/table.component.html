@@ -1,18 +1,7 @@
 <div *ngIf="posts==null && isSearching == true" class="container text-center">
   <h3>No results match your keywords!</h3>
 </div>
-<table class="table text-secondary table-striped table-hover mt-3" *ngIf="posts">
-  <thead>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-
+<table class="table table-hover mt-3">
   <tbody>
   <tr *ngFor="let p of posts">
     <td class="w-10">
@@ -49,14 +38,14 @@
 
     </td>
     <td class="w-10">
-      <div class="pt-1" *ngIf="p.noOfComments > 0">
+      <div class="pt-1" *ngIf="p.lastComment!=null">
         <ngx-avatar
-          name={{p.commenter.username}}
+          name={{p.lastComment.commenter.username}}
           size="40"
           textSizeRatio="2"
-          bgColor={{setColor(p.commenter.username)}}></ngx-avatar>
+          bgColor={{setColor(p.lastComment.commenter.username)}}></ngx-avatar>
       </div>
-      <div *ngIf="p.noOfComments == 0">
+      <div *ngIf="p.lastComment==null">
         <ngx-avatar
           name={{p.author.username}}
           size="40"

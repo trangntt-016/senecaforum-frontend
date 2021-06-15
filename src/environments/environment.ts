@@ -3,7 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase:{
+    apiKey: "AIzaSyChP7c-AfdgcL8VZSIhbp02AtYznN0V4k0",
+    authDomain: "senecaforum.firebaseapp.com",
+    databaseURL: "https://senecaforum-default-rtdb.firebaseio.com",
+    projectId: "senecaforum",
+    storageBucket: "senecaforum.appspot.com",
+    messagingSenderId: "173135042889",
+    appId: "1:173135042889:web:84b7282bd49d70347da298",
+    measurementId: "G-WED94S18T4"
+  }
 };
 
 /*

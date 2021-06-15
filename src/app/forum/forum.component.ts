@@ -14,11 +14,10 @@ import { AuthService } from "../auth.service";
 
 
 export class ForumComponent implements OnInit, OnDestroy {
+  @Output() p: number; // pageIdx
   public posts: any[] = null;
   public shouldDisplayPagi: boolean;
   private mySub: Subscription;
-  @Output() topics: Topic[];
-  @Output() p: number; // pageIdx
   public username: string;
 
   constructor(
@@ -40,12 +39,7 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.mySub = this.route.queryParams.subscribe(params => {
       this.p = params['p'];
     });
-    this.mySub = this.dataService.getAllTopics().subscribe(topics =>{
-      this.topics = topics;
-    });
 
-    // no ideas but needs this line so that topics can be displayed
-    this.posts.length = 0;
   }
 
 
@@ -53,8 +47,8 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.router.navigate([`posts/new`]);
   }
 
-  displayPagination(noOfPosts: number): void{
-   if(noOfPosts >0){
+  handleNoOfPosts(event): void{
+   if(event > 0){
      this.shouldDisplayPagi = true;
    }
    else{

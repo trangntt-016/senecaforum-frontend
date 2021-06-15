@@ -64,8 +64,8 @@ export class DataManagerService {
     return this.http.put<any>(`http://localhost:3000/api/posts`, post);
   }
 
-  getHotPosts(): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/hot`);
+  getHotPosts(page: number): Observable<PostViewDto[]>{
+    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/hot?page=${page}`);
   }
 
   getTopicStats(): Observable<TopicStats[]>{
@@ -94,6 +94,10 @@ export class DataManagerService {
 
   updateStatusPosts(selectedPostIds: number[], status: string): Observable<PostViewDto[]>{
     return this.http.put<PostViewDto[]>(`http://localhost:3000/api/posts/status?status=${status}`, selectedPostIds);
+  }
+
+  getNoOfAllPosts(): Observable<number>{
+    return this.http.get<number>(`http://localhost:3000/api/posts/noOfAllPosts`);
   }
 
 }
