@@ -23,7 +23,7 @@ export class AuthService {
   }
 
   register(registerUser: AuthUser): Observable<any>{
-    return this.http.post<AuthUser>(`http://localhost:3000/api/users/new`, registerUser, this.httpOptions);
+    return this.http.post<AuthUser>(`http://localhost:3000/api/users`, registerUser, this.httpOptions);
   }
 
   login(loginUser: LogInUser): Observable<any>{
