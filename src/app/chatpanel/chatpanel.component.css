@@ -63,6 +63,12 @@
   background-color:lightgray;
   cursor: pointer;
 }
+@media only screen and (max-width: 1024px) {
+  .chat-panel-wrapper{
+    width: 25%;
+    height: 30vh
+  }
+}
 
 @media only screen and (max-width: 768px) {
   .chat-panel-wrapper{
@@ -79,10 +85,12 @@
 @media only screen and (max-width: 415px) {
   .chat-panel-wrapper{
     width: 70%;
+    height: 40vh
   }
 }
 @media only screen and (max-width: 320px) {
   .chat-panel-wrapper{
-    width: 100%;
+    width: 70%;
   }
 }
+

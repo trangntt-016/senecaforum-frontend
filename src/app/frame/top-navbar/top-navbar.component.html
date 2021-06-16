@@ -4,7 +4,7 @@
   </button>
 
   <h1>
-    <a class="navbar-brand" matTooltip="Home" style="text-decoration: none;cursor: pointer;">
+    <a class="navbar-brand" matTooltip="Home" [routerLink]="['/hot']">
       Seneca Forum
     </a>
   </h1>
@@ -52,7 +52,7 @@
   <mat-menu #adminMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
     <a mat-menu-item style="text-decoration: none; color: black"
        (click)="navigateDashboard()">
-      Manage all posts
+      Manage all users' posts
     </a>
     <a mat-menu-item style="text-decoration: none; color: black" (click)="logout()">
       Logout

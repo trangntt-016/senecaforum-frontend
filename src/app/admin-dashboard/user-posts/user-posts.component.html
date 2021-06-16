@@ -15,6 +15,9 @@
       <a mat-menu-item style="text-decoration: none" (click)="declineSelected()">
         Decline selected posts
       </a>
+      <a mat-menu-item style="text-decoration: none" (click)="pendingSelected()">
+        Pending selected posts
+      </a>
     </mat-menu>
     <mat-paginator
       (page)="handlePageEvent($event)"
@@ -36,15 +39,15 @@
               <div class="d-flex">
                 <mat-checkbox
                   (change)="onChange(post.postId)"(click)="mep.toggle()"></mat-checkbox>
-                <p class="m-0">{{post.title}}</p>
+                <a [routerLink]="['/topics',post.topic.topicId,'posts',post.postId]" class="m-0">{{post.title}}</a>
               </div>
               <div class="d-flex flex-wrap">
                 <h5 class="m-2">Created on: {{convertDateLastComment(post.createdOn)}}</h5>
                 <div class="d-flex ml-2">
                   <div style="padding-top:10px">
-                    <div class="statusBtn acceptBtn" *ngIf="post.status==='accepted'"></div>
-                    <div class="statusBtn pendingBtn" *ngIf="post.status==='pending'"></div>
-                    <div class="statusBtn declinedBtn" *ngIf="post.status==='declined'"></div>
+                    <div class="statusBtn acceptBtn" *ngIf="post.status==='ACCEPTED'"></div>
+                    <div class="statusBtn pendingBtn" *ngIf="post.status==='PENDING'"></div>
+                    <div class="statusBtn declinedBtn" *ngIf="post.status==='DECLINE'"></div>
                   </div>
                   <h5 class="m-2">{{post.status | titlecase}}</h5>
                 </div>

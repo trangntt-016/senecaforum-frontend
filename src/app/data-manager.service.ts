@@ -68,8 +68,8 @@ export class DataManagerService {
     return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/hot?page=${page}`);
   }
 
-  getTopicStats(): Observable<TopicStats[]>{
-    return this.http.get<TopicStats[]>(`http://localhost:3000/api/topics/stats`);
+  getTopicStats(topicId: string): Observable<TopicStats>{
+    return this.http.get<TopicStats>(`http://localhost:3000/api/topics/${topicId}/stats`);
   }
 
   searchPostsByContent(keyword: string): Observable<PostSearchDto[]>{
@@ -81,11 +81,11 @@ export class DataManagerService {
   }
 
   getPostsByUserId(userId: string): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/users/${userId}/posts`)
+    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/user/${userId}`);
   }
 
   deleteAPost(postId: number, userId: string): Observable<any>{
-    return this.http.delete<any>(`http://localhost:3000/api/users/${userId}/posts/${postId}`);
+    return this.http.delete<any>(`http://localhost:3000/api/posts/${postId}`);
   }
 
   getAllPostsOrderByStatus(): Observable<PostViewDto[]>{

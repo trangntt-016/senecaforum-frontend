@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForumComponent } from './forum/forum.component';
 import { NewpostComponent } from './newpost/newpost.component';
 import { SinglepostComponent } from './singlepost/singlepost.component';
-import { TestComponent } from './test/test.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
@@ -34,7 +33,7 @@ const routes: Routes = [
     , data: {
       role: 'ROLE_ADMIN'
     }},
-  {path: 'test', component: TestComponent}
+  {path: '**', redirectTo: 'hot', pathMatch: 'full'}
 ];
 
 @NgModule({

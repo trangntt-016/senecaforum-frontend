@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ViewUser } from '../model/User';
 import { DataManagerService } from "../data-manager.service";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { Subscription } from "rxjs";
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -18,7 +20,10 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataService: DataManagerService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private _snackBar: MatSnackBar,
+    private auth: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +32,13 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
     });
     this.dataSub = this.dataService.getUserByUserId(this.userId).subscribe(u => {
       this.user = u;
-    })
+    }, (error => {
+      if (error.status === 403){
+        this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+        this.auth.logout();
+        this.router.navigate(['login']);
+      }
+    }));
   }
 
   ngOnDestroy():void{

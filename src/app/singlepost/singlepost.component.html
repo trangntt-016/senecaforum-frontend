@@ -17,7 +17,7 @@
                 <h5 style="color: #5C6BC0;padding-top:2px;">&nbsp;&middot;&nbsp;Posted by {{post.author.username}} {{convertDateLastComment(post.createdOn)}}</h5>
             </div>
 
-            <button mat-icon-button aria-label="Eidt the post"
+            <button mat-icon-button aria-label = "Edit the post"
                     (click)="edit()"
                     *ngIf="post.author.username==commenter.username"
             >
@@ -30,7 +30,6 @@
                 <mat-chip *ngFor="let chip of tags" class="no-wrap" [color]="chip.color" selected>{{chip.name}}</mat-chip>
             </mat-chip-list>
             <br>
-
             <div [innerHTML]="post.content | sanitizeHtml" style="text-align: justify"></div>
         </div>
 
@@ -38,10 +37,8 @@
           <h5>Comment as <span style="color:#304FFE">{{commenter.username}}</span></h5>
           <form #f='ngForm' (ngSubmit)='onSubmit(f)' class="d-flex flex-column">
             <ckeditor [editor]="Editor" [config] ="ckConfig" [(ngModel)]="model.editorData" name="editorData"></ckeditor>
-            <div class="container d-flex" id="notify">
-              <div class="container text-right mt-2">
-                <button mat-raised-button class="mr-2 ml-2">Comment</button>
-              </div>
+            <div class="container" id="notify">
+              <button mat-raised-button>Comment</button>
             </div>
           </form>
         </div>
@@ -78,11 +75,11 @@
         <hr style="width: 90%;border-color:#abc9fa">
         <div class="container d-flex justify-content-between p-0">
             <div class="container">
-                <h4 class="m-0 text-center">{{post.topic.views}}</h4>
+                <h4 class="m-0 text-center">{{topic.views}}</h4>
                 <h4 class="text-center">Views</h4>
             </div>
             <div class="container">
-                <h4 class="m-0 text-center">{{noOfPosts}}</h4>
+                <h4 class="m-0 text-center">{{topic.noOfPosts}}</h4>
                 <h4 class="text-center">Posts</h4>
             </div>
         </div>

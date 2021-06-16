@@ -56,7 +56,13 @@ export class LoginComponent implements OnInit {
         },
         (err) => {
           this.loading = false;
-          this.warning = err.error.message;
+          if (err.status === 403){
+            this.warning = "Email and password do not match";
+          }
+          else{
+            this.warning = err.message;
+          }
+
         }
       );
     }

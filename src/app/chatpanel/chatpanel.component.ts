@@ -3,14 +3,15 @@ import { Message } from '../model/Message';
 import { OnlineUserDto } from '../model/User';
 import { interval, Subscription } from 'rxjs';
 import { AuthService } from '../auth.service';
-import { ChatService } from '../test/chat.service';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ColorConverter } from '../Utils/ColorConverter';
 import { startWith, switchMap } from 'rxjs/operators';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import { MatDrawer, MatSidenavModule } from "@angular/material/sidenav";
+import { MatDrawer } from "@angular/material/sidenav";
 import { Router } from "@angular/router";
+import { ChatService } from "./chat.service";
 
 
 @Component({
@@ -30,7 +31,7 @@ export class ChatpanelComponent implements OnInit, OnChanges {
   public currentUser: OnlineUserDto;
   public selectedUser: OnlineUserDto;
   public message: string;
-  public onlUsers: OnlineUserDto[] = [];
+  public onlUsers: OnlineUserDto[];
   public timeInterval: Subscription;
   public colorUtils;
   public isLogIn: boolean;
@@ -44,13 +45,14 @@ export class ChatpanelComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.onlUsers = [];
+    this.colorUtils = new ColorConverter();
     this.noOfUsersHavingNewMsgs = 0;
 
     // catch payload from login
     this.auth.payload.subscribe(p => {
-      console.log(" ");
       this.isLogIn = (this.auth.readToken()!=null)?true:false;
-      this.currentUser.username = this.auth.readToken().username;
+      this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
     });
 
     if(this.auth.readToken()!=null){
@@ -79,7 +81,7 @@ export class ChatpanelComponent implements OnInit, OnChanges {
         },(error => {
           console.log(error);
           if (error.status === 403){
-            this._snackBar.open('Your login session has expired!', 'Got it!');
+            this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
             this.auth.logout();
             this.router.navigate(['login']);
           }}));
@@ -138,7 +140,7 @@ export class ChatpanelComponent implements OnInit, OnChanges {
       this.drawer.toggle();
     }
     else{
-      this._snackBar.open('Please login to chat with others', 'Login', { duration: 5000})
+      this._snackBar.open('Please login to chat with others', 'Login', { duration: 3000})
         .onAction()
         .subscribe(() => this.router.navigateByUrl('/login'));
     }

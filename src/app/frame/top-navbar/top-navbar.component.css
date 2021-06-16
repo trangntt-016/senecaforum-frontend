@@ -1,0 +1,7 @@
+.navbar-brand{
+  text-decoration: none;
+  cursor: pointer;
+}
+.navbar-brand:hover{
+  color:white !important;
+}

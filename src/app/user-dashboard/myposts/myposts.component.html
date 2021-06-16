@@ -1,17 +1,17 @@
-<div class="mb-5" *ngFor="let post of posts; let i=index">
+<div class="mb-5" style="position: relative; z-index: 100"*ngFor="let post of posts; let i=index">
   <mat-accordion>
     <mat-expansion-panel #mep="matExpansionPanel" [expanded]="true">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <div class="m-2 mt-3 matcard">
-            <p class="m-0">{{post.title}}</p>
+            <a [routerLink]="['/topics',post.topic.topicId,'posts',post.postId]" class="m-0">{{post.title}}</a>
             <div class="d-flex flex-wrap">
               <h5 class="m-2">Created on: {{convertDateLastComment(post.createdOn)}}</h5>
               <div class="d-flex ml-2">
                 <div style="padding-top:10px">
-                  <div class="statusBtn acceptBtn" *ngIf="post.status==='accepted'"></div>
-                  <div class="statusBtn pendingBtn" *ngIf="post.status==='pending'"></div>
-                  <div class="statusBtn declinedBtn" *ngIf="post.status==='declined'"></div>
+                  <div class="statusBtn acceptBtn" *ngIf="post.status==='ACCEPTED'"></div>
+                  <div class="statusBtn pendingBtn" *ngIf="post.status==='PENDING'"></div>
+                  <div class="statusBtn declinedBtn" *ngIf="post.status==='DECLINED'"></div>
                 </div>
                 <h5 class="m-2">{{post.status | titlecase}}</h5>
               </div>

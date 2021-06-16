@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { TimeConverter } from '../../Utils/TimeConverter';
 import { DataManagerService } from '../../data-manager.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post, PostViewDto } from '../../model/Post';
 import { ColorConverter } from '../../Utils/ColorConverter';
+import { MatSnackBar } from "@angular/material/snack-bar";
+import { AuthService } from "../../auth.service";
 
 @Component({
   selector: 'app-table',
@@ -20,7 +22,10 @@ export class TableComponent implements OnInit {
 
   constructor(
     private dataService: DataManagerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _snackBar: MatSnackBar,
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +34,9 @@ export class TableComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.topicID = params.topicId;
       //reload data when default
+      console.log(this.topicID);
       this.dataService.getPostsByTopicId(this.topicID, 1).subscribe(posts => {
+        console.log(posts);
         this.posts = posts;
         if (this.posts != null){
           this.noOfPostsEvt.emit(posts.length);
@@ -72,7 +79,13 @@ export class TableComponent implements OnInit {
           else{
             this.noOfPostsEvt.emit(0);
           }
-        });
+        }, (error => {
+          if (error.status === 403){
+            this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+            this.auth.logout();
+            this.router.navigate(['login']);
+          }
+        }));
       }
     });
   }

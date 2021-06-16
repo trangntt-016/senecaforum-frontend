@@ -18,3 +18,8 @@
 :host ::ng-deep .mat-select-min-line, .mat-input-element{
   color:#303F9F;
 }
+
+.container{
+  position: relative;
+  z-index: 5;
+}

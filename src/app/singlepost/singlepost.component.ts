@@ -16,6 +16,7 @@ import { CommentServiceService } from './comment-service.service';
 import { AuthService } from '../auth.service';
 import { Subscription } from "rxjs";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { TopicStats } from "../model/Topic";
 
 @Component({
   selector: 'app-singlepost',
@@ -25,11 +26,12 @@ import { MatSnackBar } from "@angular/material/snack-bar";
 })
 export class SinglepostComponent implements OnInit {
   private postId: number;
-  private dataSub: Subscription;
+  private topicId: string;
+  private topicSub: Subscription;
   private routeSub: Subscription;
   private postSub: Subscription;
   public post: Post;
-  public noOfPosts: number;
+  public topic: TopicStats;
   public commenter: User;
   public comments: Comment[];
   public comment: Comment;
@@ -53,20 +55,27 @@ export class SinglepostComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     this.ckConfig = new CkPostConfig().ckCommentConfig;
-
+    const utils = new TagsConverter();
     this.routeSub = this.activatedRoute.params.subscribe(params => {
       this.postId = +params.postId;
+      this.topicId = params.topicId;
     });
 
+    this.comment = new Comment();
     this.commenter = new User();
     if(this.auth.readToken()!=null){
       this.commenter.username = this.auth.readToken().username;
-    }
-    else{
-      console.log(this.commenter);
+      this.comment.commenter = this.commenter;
     }
 
-    const utils = new TagsConverter();
+    this.topicSub = this.dataService.getTopicStats(this.topicId).subscribe((topic) => {
+      this.topic = topic;
+    },(error => {
+      if (error.status === 403){
+        this._snackBar.open('Your login session has expired!', 'Got it!');
+        this.auth.logout();
+        this.router.navigate(['login']);
+      }}));
 
     this.postSub = this.dataService.getPostByPostId(this.postId).subscribe((data) => {
       this.post = data;
@@ -74,9 +83,7 @@ export class SinglepostComponent implements OnInit {
       if (data.tags != '' &&data.tags != undefined){
         this.tags = utils.getMatChips(data.tags);
       }
-      this.dataSub = this.dataService.getPostsSize(this.post.topic.topicId).subscribe(size => {
-        this.noOfPosts = size;
-      });
+
     }, (error => {
       if (error.status === 403){
         this._snackBar.open('Your login session has expired!', 'Got it!');
@@ -87,7 +94,7 @@ export class SinglepostComponent implements OnInit {
 
   ngOnDestroy():void{
     this.postSub.unsubscribe();
-    this.dataSub.unsubscribe();
+    this.topicSub.unsubscribe();
     this.routeSub.unsubscribe();
   }
 
@@ -103,20 +110,20 @@ export class SinglepostComponent implements OnInit {
       this.comment.enabled = this.model.enabled;
       this.commentService.createNewComment(this.comment, this.post.postId).subscribe(
         (comments) => {
-          console.log(comments);
           this.comments = comments;
           this.model.editorData = null;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+        }, (error => {
+          if (error.status === 403){
+            this._snackBar.open('Your login session has expired!', 'Got it!');
+            this.auth.logout();
+            this.router.navigate(['login']);
+          }}));
     }
   }
 
   edit(): void{
     if (this.auth.readToken().username == this.post.author.username){
-      this.router.navigate(['posts', this.post.postId,'edit']);
+      this.router.navigate([`users/${this.auth.readToken().userId}/posts/${this.postId}/edit`]);
     }
   }
 }

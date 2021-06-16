@@ -56,6 +56,10 @@
   width:fit-content;
 }
 
+#notify{
+  text-align: end;
+  margin-top:15px;
+}
 
 
  @media only screen and (max-width: 768px) {
@@ -69,7 +73,8 @@
       justify-content: center;
     }
    #notify{
-     justify-content: center;
+     text-align: center;
+     margin-top:25px;
    }
 }
 

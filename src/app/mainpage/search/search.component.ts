@@ -37,7 +37,7 @@ export class SearchComponent implements OnInit {
         });
       }, error => {
         if (error.status === 403){
-          this._snackBar.open('Your login session has expired!', 'Got it!');
+          this._snackBar.open('Your login session has expired!', 'Got it!',{duration: 5000});
           this.auth.logout();
           this.router.navigate(['login']);
         }

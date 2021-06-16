@@ -11,6 +11,7 @@ import { Topic } from '../model/Topic';
 
 import { DataManagerService } from '../data-manager.service';
 import { AuthService } from '../auth.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 export class EditorPost{
   constructor() {
@@ -48,7 +49,8 @@ export class NewpostComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private dataService: DataManagerService,
-    private auth: AuthService
+    private auth: AuthService,
+    private _snackBar: MatSnackBar
   ){}
 
   ngOnInit(): void {
@@ -65,7 +67,13 @@ export class NewpostComponent implements OnInit {
 
     this.dataService.getAllTopics().subscribe(topics => {
       this.topics = topics;
-    });
+    }, (error => {
+      if (error.status === 403){
+        this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+        this.auth.logout();
+        this.router.navigate(['login']);
+      }
+    }));
     this.activatedRoute.params.subscribe(params => {
       this.postId = +params.postId;
     });
@@ -84,10 +92,13 @@ export class NewpostComponent implements OnInit {
           this.model.tags = post.tags;
           this.model.title = post.title;
           },
-        (err) => {
-          console.log(err);
-        }
-      );
+         (error => {
+          if (error.status === 403){
+            this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+            this.auth.logout();
+            this.router.navigate(['login']);
+          }
+        }));
     }
   }
 
@@ -108,7 +119,7 @@ export class NewpostComponent implements OnInit {
       this.loading = true;
       // create new PostDto
       this.post.topic = utils.getTopicFromTopicId(this.model.topicId, this.topics);
-      this.post.content = this.model.editorData;
+      this.post.content = (this.model.editorData===null)?'':this.model.editorData;
       this.post.tags = this.model.tags;
       this.post.title = this.model.title;
       if(isNaN(this.postId)){
@@ -117,7 +128,14 @@ export class NewpostComponent implements OnInit {
             this.loading = false;
             this.success = true;
             this.warning = null;
-            this.router.navigate(['topics',success.topic.topicId,'posts', success.postId]);
+            if(success.status === 'ACCEPTED'){
+              this.router.navigate(['topics',success.topic.topicId,'posts', success.postId]);
+            }
+            else if(success.status==='PENDING'){
+              this._snackBar.open("Your post contains inappropriate words and need approving", "Got it!", {duration:5000});
+              this.router.navigate(['topics',success.topic.topicId,'posts', success.postId]);
+            }
+
           },
           (err) => {
             this.success = false;
@@ -132,7 +150,7 @@ export class NewpostComponent implements OnInit {
             this.loading = false;
             this.success = true;
             this.warning = null;
-            this.router.navigate(['posts', success.postId]);
+            this.router.navigate(['/topics',success.topic.topicId,'posts',success.postId]);
           },
           (err) => {
             this.success = false;

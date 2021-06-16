@@ -4,9 +4,10 @@ import { DataManagerService } from '../../data-manager.service';
 import { PostViewDto } from '../../model/Post';
 import { ViewUser } from '../../model/User';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TimeConverter } from "../../Utils/TimeConverter";
-import { Subscription } from "rxjs";
-import { AuthService } from "../../auth.service";
+import { TimeConverter } from '../../Utils/TimeConverter';
+import { Subscription } from 'rxjs';
+import { AuthService } from '../../auth.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -24,41 +25,54 @@ export class MypostsComponent implements OnInit, OnChanges{
     private dataService: DataManagerService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private auth: AuthService
+    private auth: AuthService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void{
-    if(this.user != null){
+    if (this.user != null){
       this.dataSub = this.dataService.getPostsByUserId(this.user.userId).subscribe(p => {
         this.posts = p;
-        let noOfPending = p.filter(po => po.status == 'pending').length;
+        const noOfPending = p.filter(po => po.status == 'PENDING').length;
         this.noOfPendingPosts.emit(noOfPending);
-      });
+      }, (error => {
+        if (error.status === 403){
+          this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+          this.auth.logout();
+          this.router.navigate(['login']);
+        }
+      }));
     }
 
   }
   ngOnChanges(): void{
-    if(this.user != null){
+    if (this.user != null){
       this.dataSub = this.dataService.getPostsByUserId(this.user.userId).subscribe(p => {
         this.posts = p;
-        let noOfPending = p.filter(po => po.status == 'pending').length;
+        const noOfPending = p.filter(po => po.status == 'PENDING').length;
         this.noOfPendingPosts.emit(noOfPending);
-      });
+      }, (error => {
+        if (error.status === 403){
+          this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+          this.auth.logout();
+          this.router.navigate(['login']);
+        }
+      }));
     }
 
   }
 
-  ngOnDestroy():void{
+  ngOnDestroy(): void{
     this.dataSub.unsubscribe();
   }
 
   openDialog(index): void{
-    let selectedPost = this.posts[index];
+    const selectedPost = this.posts[index];
     this.dialog.open(DialogElements).afterClosed().subscribe(res => {
       if (res == true){
         this.dataService.deleteAPost(selectedPost.postId, this.user.userId).subscribe(result => {
-          let tempPosts = this.posts;
-          tempPosts.splice(index,1);
+          const tempPosts = this.posts;
+          tempPosts.splice(index, 1);
           this.posts = tempPosts;
         }, (error => console.log(error)));
       }

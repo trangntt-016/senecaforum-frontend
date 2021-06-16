@@ -9,7 +9,7 @@
       <mat-icon color="accent" *ngIf="post.topic.topicId==6">developer_mode</mat-icon>
       <mat-icon color="warn" *ngIf="post.topic.topicId==7">attach_money</mat-icon>
       <mat-icon color="primary" *ngIf="post.topic.topicId==8">favourite</mat-icon>
-      <h4 style="font-weight: 590;color:#1A237E">&nbsp;{{post.topic.topicName}}</h4>
+      <h4 style="font-weight: 590;color:#1A237E">&nbsp;<a [routerLink]="['/topics',post.topic.topicId,'posts']" [queryParams]="{ p: 1}">{{post.topic.topicName}}</a></h4>
       <h5 style="color: #5C6BC0;">&nbsp;&middot;&nbsp;Posted by {{post.author.username}} {{convertDateLastComment(post.createdOn)}}</h5>
     </div>
   </div>
@@ -30,7 +30,7 @@
       </button>
       <button mat-button>
         <div class="d-flex">
-          <mat-icon [ngStyle]="{'color':'#C0C0C0'}"> comment</mat-icon>
+          <mat-icon [ngStyle]="{'color':'#C0C0C0'}">comment</mat-icon>
           <p class="text-secondary ml-1">{{post.noOfComments}} comments</p>
         </div>
       </button>

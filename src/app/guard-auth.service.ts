@@ -32,13 +32,15 @@ export class GuardAuthService  implements CanActivate{
     }
     // check if their token is expired
     let exp = this.auth.readToken().exp;
-    if (exp < new Date().getTime()){
+    if (exp > new Date().getTime()){
+      console.log("JWT expired ");
       this.router.navigate(['/login']);
       return false;
     }
     // check if they have permission to visit that route
     const role = this.auth.getRole();
     if(route.data.role != role){
+      console.log("Unauthorized");
       this.router.navigate(['/login']);
       return false;
     }
@@ -46,6 +48,7 @@ export class GuardAuthService  implements CanActivate{
     const userId = this.auth.readToken().userId;
     const urlUserId = route.params.userId;
     if (userId !== urlUserId){
+      console.log("credentials not match");
       this.router.navigate(['/login']);
       return false;
     }
