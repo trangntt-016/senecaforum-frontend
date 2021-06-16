@@ -61,7 +61,7 @@ export class HotpostComponent implements OnInit {
           post.content = content;
         }
         else{
-          const content = this.contentUtils.getDisplayText(post.content, 3, post.postId);
+          const content = this.contentUtils.getDisplayText(post.content, 3, post.topic.topicId, post.postId);
           post.content = content;
         }
         this.value = 'http://localhost:4200/posts/' + post.postId;
@@ -116,7 +116,7 @@ export class HotpostComponent implements OnInit {
             post.content = content;
           }
           else{
-            const content = this.contentUtils.getDisplayText(post.content, 3, post.postId);
+            const content = this.contentUtils.getDisplayText(post.content, 3, post.topic.topicId, post.postId);
             post.content = content;
           }
           this.value = 'http://localhost:4200/posts/' + post.postId;

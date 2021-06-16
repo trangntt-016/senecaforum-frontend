@@ -34,7 +34,6 @@ export class CommentComponent implements OnInit, OnChanges {
 
   ngOnChanges(): void{
     let size = Math.floor(this.comments.length/this.pageSize);
-    console.log(size);
     if(this.comments.length > 0 && size === 0){
       size = 1;
     }

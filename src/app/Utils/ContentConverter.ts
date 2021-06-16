@@ -22,29 +22,30 @@ export class ContentConverter{
     return rawContent.substr(startIdx, endIdx);
   }
 
-  getDisplayText(rawContent: string, length: number, postId: number): string{
+  getDisplayText(rawContent: string, length: number, topicId: string, postId: number): string{
     const pArray = rawContent.split('<p>');
     pArray[0] = '<p>';
     let subArrayP = null;
     let lastElem = null;
     if (pArray.length < 3){
-      return this.extractLessThanLength(pArray, postId);
+      return this.extractLessThanLength(pArray, topicId, postId);
     }
     else{
       subArrayP = pArray.slice(0, length);
       lastElem = subArrayP[length - 1].split('</p>')[0];
     }
 
-    const textViewMore = '<p>' + lastElem + '...' + '<a href="http://localhost:4200/posts/' + postId + '">View More</a></p>';
+    const textViewMore = '<p>' + lastElem + '...' + '<a href="/topics/' + topicId + '/posts/'+ postId + '">View More</a></p>';
     subArrayP[length-1] = textViewMore;
     const displayText = subArrayP.join("");
     return displayText;
   }
 
-  extractLessThanLength(pArray:string[], postId: number):string{
+  extractLessThanLength(pArray:string[], topicId: string, postId: number):string{
     let subArrayP = pArray.slice(0, pArray.length);
     let lastElem = subArrayP[pArray.length - 1].split('</p>')[0];
-    const textViewMore = '<p>' + lastElem + '...' + '<a href="http://localhost:4200/posts/' + postId + '">View More</a></p>';
+    const textViewMore = '<p>' + lastElem + '...' + '<a href="/topics/' + topicId + '/posts/'+ postId + '">View More</a></p>';
+    console.log(textViewMore);
     subArrayP[subArrayP.length - 1] = textViewMore;
     let resizedText = subArrayP.join("");
     return resizedText;

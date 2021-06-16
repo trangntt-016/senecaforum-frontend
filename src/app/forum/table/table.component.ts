@@ -34,9 +34,7 @@ export class TableComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.topicID = params.topicId;
       //reload data when default
-      console.log(this.topicID);
       this.dataService.getPostsByTopicId(this.topicID, 1).subscribe(posts => {
-        console.log(posts);
         this.posts = posts;
         if (this.posts != null){
           this.noOfPostsEvt.emit(posts.length);

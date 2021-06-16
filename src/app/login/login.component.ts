@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
           let jwt = success.headers.get("Authorization").substring("Bearer ".length);
           this.loading = false;
           this.warning = null;
+
           if (success.body.isRememberMe){
             localStorage.setItem('access_token', jwt);
           }
