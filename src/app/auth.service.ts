@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { mergeMap } from 'rxjs/operators';
+import { environment } from "../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
@@ -23,11 +24,11 @@ export class AuthService {
   }
 
   register(registerUser: AuthUser): Observable<any>{
-    return this.http.post<AuthUser>(`http://localhost:3000/api/users`, registerUser, this.httpOptions);
+    return this.http.post<AuthUser>(`${environment.userAPIBase}`, registerUser, this.httpOptions);
   }
 
   login(loginUser: LogInUser): Observable<any>{
-    return this.http.post<ViewUser>(`http://localhost:3000/api/auth`, loginUser, { observe: 'response' });
+    return this.http.post<ViewUser>(`${environment.userJWTAPIBase}`, loginUser, { observe: 'response' });
   }
 
   getToken(): string{

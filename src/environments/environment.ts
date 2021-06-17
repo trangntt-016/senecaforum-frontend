@@ -4,16 +4,12 @@
 
 export const environment = {
   production: false,
-  firebase:{
-    apiKey: "AIzaSyChP7c-AfdgcL8VZSIhbp02AtYznN0V4k0",
-    authDomain: "senecaforum.firebaseapp.com",
-    databaseURL: "https://senecaforum-default-rtdb.firebaseio.com",
-    projectId: "senecaforum",
-    storageBucket: "senecaforum.appspot.com",
-    messagingSenderId: "173135042889",
-    appId: "1:173135042889:web:84b7282bd49d70347da298",
-    measurementId: "G-WED94S18T4"
-  }
+  userAPIBase: "http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/users",
+  userJWTAPIBase: "http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/auth",
+  topicAPIBase: "http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/topics",
+  tagAPIBase: "http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/tags",
+  postAPIBase: "http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/posts",
+  wsAPIBase: "http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/ws"
 };
 
 /*

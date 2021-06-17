@@ -36,6 +36,7 @@ import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 import { TopNavbarComponent } from './frame/top-navbar/top-navbar.component';
 import { NavlistComponent } from './frame/navlist/navlist.component';
 import { InterceptTokenService } from "./intercept-token.service";
+import { AboutComponent } from './about/about.component';
 
 
 @NgModule({
@@ -66,7 +67,8 @@ import { InterceptTokenService } from "./intercept-token.service";
     ChatboxComponent,
     ChatpanelComponent,
     TopNavbarComponent,
-    NavlistComponent
+    NavlistComponent,
+    AboutComponent
   ],
     imports: [
         BrowserModule,

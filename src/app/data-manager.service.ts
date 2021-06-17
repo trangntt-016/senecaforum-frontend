@@ -4,7 +4,9 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Post, PostSearchDto, PostViewDto } from './model/Post';
 import { Topic, TopicStats } from './model/Topic';
-import { ViewUser } from "./model/User";
+import { ViewUser } from './model/User';
+import { environment } from 'src/environments/environment';
+
 
 
 @Injectable({
@@ -22,7 +24,7 @@ export class DataManagerService {
 
   getAllTags(): Observable<any> {
     return this.tags.length ? of(this.tags)
-      : this.http.get<any>('http://localhost:3000/api/tags').pipe(
+      : this.http.get<any>(`${environment.tagAPIBase}`).pipe(
         map((data) => {
           this.tags = data;
           return this.tags;
@@ -31,15 +33,15 @@ export class DataManagerService {
   }
 
   getPostsSize(topicId: string): Observable<number>{
-    return this.http.get<number>(`http://localhost:3000/api/topics/${topicId}/posts/size`);
+    return this.http.get<number>(`${environment.topicAPIBase}/${topicId}/posts/size`);
   }
 
   getAllTopics(): Observable<Topic[]>{
-    return this.http.get<Topic[]>(`http://localhost:3000/api/topics`);
+    return this.http.get<Topic[]>(`${environment.topicAPIBase}`);
   }
 
   getPostsByTopicId(topicId: string, page:number): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${page}`);
+    return this.http.get<PostViewDto[]>(`${environment.topicAPIBase}/${topicId}/posts?p=${page}`);
   }
 
   getPostsByTopicIdWithFilter(topicId: string,
@@ -49,55 +51,55 @@ export class DataManagerService {
                               e: string,
                               sortBy: string,
                               order: string): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/topics/${topicId}/posts?p=${p}&tags=${tags}&s=${s}&e=${e}&sortBy=${sortBy}&order=${order}`);
+    return this.http.get<PostViewDto[]>(`${environment.topicAPIBase}/${topicId}/posts?p=${p}&tags=${tags}&s=${s}&e=${e}&sortBy=${sortBy}&order=${order}`);
   }
 
   getPostByPostId(postId: number): Observable<Post>{
-    return this.http.get<any>(`http://localhost:3000/api/posts/${postId}`);
+    return this.http.get<any>(`${environment.postAPIBase}/${postId}`);
   }
 
   createNewPost(post: Post): Observable<any>{
-    return this.http.post<any>(`http://localhost:3000/api/posts`, post);
+    return this.http.post<any>(`${environment.postAPIBase}`, post);
   }
 
   editAPost(post: Post): Observable<any>{
-    return this.http.put<any>(`http://localhost:3000/api/posts`, post);
+    return this.http.put<any>(`${environment.postAPIBase}`, post);
   }
 
   getHotPosts(page: number): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/hot?page=${page}`);
+    return this.http.get<PostViewDto[]>(`${environment.postAPIBase}/hot?page=${page}`);
   }
 
   getTopicStats(topicId: string): Observable<TopicStats>{
-    return this.http.get<TopicStats>(`http://localhost:3000/api/topics/${topicId}/stats`);
+    return this.http.get<TopicStats>(`${environment.topicAPIBase}/${topicId}/stats`);
   }
 
   searchPostsByContent(keyword: string): Observable<PostSearchDto[]>{
-    return this.http.get<PostSearchDto[]>(`http://localhost:3000/api/posts?content=${keyword}`);
+    return this.http.get<PostSearchDto[]>(`${environment.postAPIBase}?content=${keyword}`);
   }
 
   getUserByUserId(userId: string): Observable<ViewUser>{
-    return this.http.get<ViewUser>(`http://localhost:3000/api/users/${userId}`);
+    return this.http.get<ViewUser>(`${environment.userAPIBase}/${userId}`);
   }
 
   getPostsByUserId(userId: string): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/user/${userId}`);
+    return this.http.get<PostViewDto[]>(`${environment.postAPIBase}/user/${userId}`);
   }
 
   deleteAPost(postId: number, userId: string): Observable<any>{
-    return this.http.delete<any>(`http://localhost:3000/api/posts/${postId}`);
+    return this.http.delete<any>(`${environment.postAPIBase}/${postId}`);
   }
 
   getAllPostsOrderByStatus(): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`http://localhost:3000/api/posts/all`);
+    return this.http.get<PostViewDto[]>(`${environment.postAPIBase}/all`);
   }
 
   updateStatusPosts(selectedPostIds: number[], status: string): Observable<PostViewDto[]>{
-    return this.http.put<PostViewDto[]>(`http://localhost:3000/api/posts/status?status=${status}`, selectedPostIds);
+    return this.http.put<PostViewDto[]>(`${environment.postAPIBase}/status?status=${status}`, selectedPostIds);
   }
 
   getNoOfAllPosts(): Observable<number>{
-    return this.http.get<number>(`http://localhost:3000/api/posts/size`);
+    return this.http.get<number>(`${environment.postAPIBase}/size`);
   }
 
 }

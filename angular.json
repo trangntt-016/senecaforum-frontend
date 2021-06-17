@@ -16,6 +16,11 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "hammerjs",
+              "sockjs-client",
+              "stompjs"
+            ],
             "outputPath": "dist/SenecaForum",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -53,7 +58,7 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
+                  "maximumWarning": "3mb",
                   "maximumError": "5mb"
                 },
                 {

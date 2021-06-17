@@ -32,10 +32,10 @@
     <mat-icon>person</mat-icon>
   </button>
   <mat-menu #guestMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
-    <a mat-menu-item style="text-decoration: none" href="http://localhost:4200/login">
+    <a mat-menu-item style="text-decoration: none" [routerLink]="['/login']">
       Login
     </a>
-    <a mat-menu-item style="text-decoration: none; color: black" href="http://localhost:4200/register">
+    <a mat-menu-item style="text-decoration: none; color: black" [routerLink]="['/register']">
       Register
     </a>
   </mat-menu>

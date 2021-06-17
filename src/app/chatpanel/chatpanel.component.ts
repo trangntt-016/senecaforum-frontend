@@ -9,9 +9,10 @@ import { ColorConverter } from '../Utils/ColorConverter';
 import { startWith, switchMap } from 'rxjs/operators';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import { MatDrawer } from "@angular/material/sidenav";
-import { Router } from "@angular/router";
-import { ChatService } from "./chat.service";
+import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
+import { ChatService } from './chat.service';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { ChatService } from "./chat.service";
 })
 export class ChatpanelComponent implements OnInit, OnChanges {
   @ViewChild('drawer') drawer: MatDrawer;
-  private serverUrl = 'http://localhost:3000/ws';
+  private serverUrl = environment.wsAPIBase;
   private stompClient;
   @Input()sentMessage: Message;
   @Output()selectedUsrEvt = new EventEmitter();
@@ -78,7 +79,7 @@ export class ChatpanelComponent implements OnInit, OnChanges {
           });
 
           that.onlUsers = onlineUsrs;
-        },(error => {
+        }, (error => {
           console.log(error);
           if (error.status === 403){
             this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
