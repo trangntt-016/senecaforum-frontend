@@ -16,7 +16,6 @@ import { NavbarComponent } from './forum/navbar/navbar.component';
 import { TableComponent } from './forum/table/table.component';
 import { PaginatorComponent } from './forum/paginator/paginator.component';
 import { FilterComponent } from './forum/filter/filter.component';
-import { FooterComponent } from './footer/footer.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { HotpostComponent } from './mainpage/hotpost/hotpost.component';
 import { SearchComponent } from './mainpage/search/search.component';
@@ -35,7 +34,7 @@ import { ChatboxComponent } from './chatbox/chatbox.component';
 import { ChatpanelComponent } from './chatpanel/chatpanel.component';
 import { TopNavbarComponent } from './frame/top-navbar/top-navbar.component';
 import { NavlistComponent } from './frame/navlist/navlist.component';
-import { InterceptTokenService } from "./intercept-token.service";
+import { InterceptTokenService } from './intercept-token.service';
 import { AboutComponent } from './about/about.component';
 
 
@@ -51,7 +50,6 @@ import { AboutComponent } from './about/about.component';
     TableComponent,
     PaginatorComponent,
     FilterComponent,
-    FooterComponent,
     MainpageComponent,
     HotpostComponent,
     SearchComponent,

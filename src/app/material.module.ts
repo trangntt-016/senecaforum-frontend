@@ -32,6 +32,7 @@ import { AvatarModule } from 'ngx-avatar';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatBadgeModule} from '@angular/material/badge';
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
 
 
 
@@ -66,7 +67,8 @@ import {MatBadgeModule} from '@angular/material/badge';
         MatSlideToggleModule,
         AvatarModule,
         MatDialogModule,
-        MatBadgeModule
+        MatBadgeModule,
+        PickerModule
     ],
     exports: [
         MatIconModule,
@@ -104,7 +106,8 @@ import {MatBadgeModule} from '@angular/material/badge';
         AvatarModule,
         MatDialogModule,
         MatExpansionModule,
-        MatBadgeModule
+        MatBadgeModule,
+        PickerModule
     ]
 })
 export class MaterialModule{}

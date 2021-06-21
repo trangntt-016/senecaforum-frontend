@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { TimeConverter } from '../Utils/TimeConverter';
+import { Comment } from '../model/Comment';
 
 @Component({
   selector: 'app-comment',
@@ -8,8 +9,7 @@ import { TimeConverter } from '../Utils/TimeConverter';
 })
 export class CommentComponent implements OnInit, OnChanges {
   @Input() comments: Comment[];
-  @ViewChild('tabGroup')
-  tabGroup;
+  @ViewChild('tabGroup') tabGroup;
 
   private page: number;
   private pageSize: number;
@@ -22,7 +22,7 @@ export class CommentComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.page = 0;
     this.pageSize = 5;
-    let size = Math.floor(this.comments.length/this.pageSize);
+    let size = Math.ceil(this.comments.length/this.pageSize);
     if(this.comments.length > 0 && size === 0){
       size = 1;
     }

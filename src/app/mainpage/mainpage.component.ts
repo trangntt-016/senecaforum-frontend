@@ -5,7 +5,7 @@ import { TimeConverter } from '../Utils/TimeConverter';
 import { ChipColor, TagsConverter } from '../Utils/TagsConverter';
 import { ContentConverter } from '../Utils/ContentConverter';
 import { ActivatedRoute } from "@angular/router";
-import { MainpageService } from "./mainpage.service";
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: 'app-mainpage',
@@ -22,7 +22,8 @@ export class MainpageComponent implements OnInit {
 
   constructor(
     private dataService: DataManagerService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private auth: AuthService
   ) { }
 
   ngOnInit(): void {

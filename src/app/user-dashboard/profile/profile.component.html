@@ -4,7 +4,7 @@
       <ngx-avatar
         name={{user.username}}
         textSizeRatio="2"
-        bgColor={{avaColor}}
+        bgColor={{setColor(user.username)}}
         *ngIf="user"></ngx-avatar>
     </div>
     <mat-card-title *ngIf="user">{{user.username}}</mat-card-title>

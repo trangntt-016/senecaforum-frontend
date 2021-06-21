@@ -38,7 +38,6 @@ export class UserPostsComponent implements OnInit, OnDestroy {
       this.length = p.length;
       this.slicingPosts = this.posts.slice(this.pageSize*this.pageIndex,this.pageSize*this.pageIndex+this.pageSize);
       const noOfPending = p.filter(po => po.status == 'PENDING').length;
-      console.log(noOfPending);
       this.noOfPendingPosts.emit(noOfPending);
     })
   }
@@ -73,12 +72,12 @@ export class UserPostsComponent implements OnInit, OnDestroy {
 
   acceptSelected(): void{
     this.dataService.updateStatusPosts(this.selectedPostIds,'ACCEPTED').subscribe(() => {
+      this.selectedPostIds = [];
       this.dataService.getAllPostsOrderByStatus().subscribe(p=>{
         this.posts = p;
         this.length = p.length;
         this.slicingPosts = this.posts.slice(this.pageSize*this.pageIndex,this.pageSize*this.pageIndex+this.pageSize);
         const noOfPending = p.filter(po => po.status == 'PENDING').length;
-        console.log(noOfPending);
         this.noOfPendingPosts.emit(noOfPending);
       });
     })
@@ -86,12 +85,12 @@ export class UserPostsComponent implements OnInit, OnDestroy {
 
   declineSelected(): void{
     this.dataService.updateStatusPosts(this.selectedPostIds,'DECLINED').subscribe(() => {
+      this.selectedPostIds = [];
       this.dataService.getAllPostsOrderByStatus().subscribe(p=>{
         this.posts = p;
         this.length = p.length;
         this.slicingPosts = this.posts.slice(this.pageSize*this.pageIndex,this.pageSize*this.pageIndex+this.pageSize);
         const noOfPending = p.filter(po => po.status == 'PENDING').length;
-        console.log(noOfPending);
         this.noOfPendingPosts.emit(noOfPending);
       });
     })
@@ -99,12 +98,12 @@ export class UserPostsComponent implements OnInit, OnDestroy {
 
   pendingSelected(): void{
     this.dataService.updateStatusPosts(this.selectedPostIds,'PENDING').subscribe(() => {
+      this.selectedPostIds = [];
       this.dataService.getAllPostsOrderByStatus().subscribe(p=>{
         this.posts = p;
         this.length = p.length;
         this.slicingPosts = this.posts.slice(this.pageSize*this.pageIndex,this.pageSize*this.pageIndex+this.pageSize);
         const noOfPending = p.filter(po => po.status == 'PENDING').length;
-        console.log(noOfPending);
         this.noOfPendingPosts.emit(noOfPending);
       });
     })

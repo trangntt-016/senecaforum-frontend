@@ -10,16 +10,15 @@ import { ColorConverter } from '../../Utils/ColorConverter';
 export class ProfileComponent implements OnInit {
   @Input()user: ViewUser;
   @Input()noOfPendingPosts: number;
-  public avaColor: string;
   public colorUtils;
   constructor() { }
 
   ngOnInit(): void {
     this.colorUtils = new ColorConverter();
-    if(this.user != null){
-      this.avaColor = this.colorUtils.setColor(this.user.username);
-    }
+  }
 
+  public setColor(username: string): void{
+    return this.colorUtils.setColor(username);
   }
 
 }

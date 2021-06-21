@@ -26,6 +26,7 @@
     "@angular/router": "~11.2.11",
     "@auth0/angular-jwt": "^5.0.2",
     "@ckeditor/ckeditor5-angular": "^2.0.1",
+    "@ctrl/ngx-emoji-mart": "^6.0.0",
     "@ionic-native/camera": "^5.32.1",
     "@ionic-native/core": "^5.32.1",
     "@material-ui/system": "^4.11.3",

@@ -54,9 +54,6 @@ export class ChatpanelComponent implements OnInit, OnChanges {
     this.auth.payload.subscribe(p => {
       this.isLogIn = (this.auth.readToken()!=null)?true:false;
       this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
-    });
-
-    if(this.auth.readToken()!=null){
       this.isLogIn = (this.auth.readToken()!=null)?true:false;
       this.colorUtils = new ColorConverter();
       this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
@@ -80,7 +77,6 @@ export class ChatpanelComponent implements OnInit, OnChanges {
 
           that.onlUsers = onlineUsrs;
         }, (error => {
-          console.log(error);
           if (error.status === 403){
             this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
             this.auth.logout();
@@ -88,7 +84,39 @@ export class ChatpanelComponent implements OnInit, OnChanges {
           }}));
 
       this.initializeWebSocketConnection();
-    }
+    });
+    // if(this.auth.readToken()!=null){
+      this.isLogIn = (this.auth.readToken()!=null)?true:false;
+      this.colorUtils = new ColorConverter();
+      this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
+
+      const that = this;
+      this.timeInterval = interval(3000)
+        .pipe(
+          startWith(0),
+          switchMap(() => that.chatService.getOnlineUsers(that.currentUser.userId))).subscribe(users => {
+          this.noOfUsersHavingNewMsgs = 0;
+          const onlineUsrs = [];
+          users.forEach((u) => {
+            // remove currentUser from online list and recheck non duplicate value from backend
+            if (onlineUsrs.filter(o => o.username === u.username).length === 0 && u.username !== this.currentUser.username) {
+              onlineUsrs.push(u);
+            }
+            if (u.noOfNewMessages > 0 && u.noOfNewMessages != null){
+              this.noOfUsersHavingNewMsgs += 1;
+            }
+          });
+
+          that.onlUsers = onlineUsrs;
+        }, (error => {
+          if (error.status === 403){
+            this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+            this.auth.logout();
+            this.router.navigate(['login']);
+          }}));
+
+      this.initializeWebSocketConnection();
+    //}
   }
 
   ngOnChanges(): void{

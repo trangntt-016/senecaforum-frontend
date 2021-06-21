@@ -52,11 +52,18 @@
         </div>
       </div>
       <div class="pt-3 d-flex">
-        <textarea style="width: 85%; border-color: lightgray; border-radius: 5px" [(ngModel)]="text"></textarea>
+        <textarea placeholder="Type a message. Hit Enter to send" type="text" (blur)="onBlur()" (focus)="onFocus()"
+                  name="text" [(ngModel)]="text" (keydown.enter)="enter($event)"></textarea>
+        <div (click) ="toggleEmojiPicker()" class="emoji">😀</div>
         <button mat-button color="primary" class="mb-2"  (click)="send()">send</button>
+        <emoji-mart class="emoji-mart" set="{{set}}" *ngIf="showEmojiPicker" (emojiSelect)="addEmoji($event)"></emoji-mart>
       </div>
+
     </mat-expansion-panel>
+
   </mat-accordion>
+
 </div>
+
 
 

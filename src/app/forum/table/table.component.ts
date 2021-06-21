@@ -70,7 +70,6 @@ export class TableComponent implements OnInit {
         // reload data when default
         this.isSearching = false;
         this.dataService.getPostsByTopicId(this.topicID,this.p).subscribe(posts => {
-          console.log(posts);
           this.posts = posts;
           if (this.posts != null){
             this.noOfPostsEvt.emit(posts.length);

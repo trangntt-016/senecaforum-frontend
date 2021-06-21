@@ -68,4 +68,3 @@ export class OnlineUserDto {
   public noOfNewMessages: number;
   public status: string;
 }
-

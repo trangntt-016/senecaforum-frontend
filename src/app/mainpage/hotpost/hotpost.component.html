@@ -1,3 +1,6 @@
+<mat-spinner color="primary" mode="indeterminate" value="50" [diameter]="120" *ngIf="isLoading">
+  <div id="spinner"></div>
+</mat-spinner>
 <div class="rounded border mb-4 pt-3" style="height: fit-content; position: relative; z-index: 5" *ngFor="let post of posts; let i = index">
   <div class="container d-flex justify-content-between">
     <div class="container d-flex pl-0 flex-wrap">
@@ -15,7 +18,7 @@
   </div>
 
   <div class="container">
-    <h1 style="font-size:2.2em;text-transform: capitalize;" (click)="updateViews(post.postId)"><a [routerLink]="['/topics',post.topic.topicId, 'posts',post.postId]">{{post.title}}</a></h1>
+    <h1 style="font-size:2.2em;text-transform: capitalize;"><a [routerLink]="['/topics',post.topic.topicId, 'posts',post.postId]">{{post.title}}</a></h1>
     <mat-chip-list aria-label="Tags">
       <mat-chip *ngFor="let chip of allChipTags[i]" class="no-wrap" [color]="chip.color" selected>{{chip.name}}</mat-chip>
     </mat-chip-list>

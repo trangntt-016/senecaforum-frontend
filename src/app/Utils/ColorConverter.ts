@@ -30,12 +30,11 @@ export class ColorConverter{
 
   ]
   public setColor(username: string):string{
-    let color = "";
     for(let i = 0; i < 25; i++){
       if ((username.toUpperCase().charCodeAt(0)-65)==i){
-        i = 25;
+        return this.colors[i];
       }
     }
-    return color;
+    return "#F57F17";
   }
 }

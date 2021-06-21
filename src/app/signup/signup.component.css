@@ -14,8 +14,8 @@ mat-form-field {
 }
 #password2{
   position:absolute;
-  top:345px;
-  left:18px;
+  top:325px;
+  left:0px;
   font-size:x-small;
   color:red;
 }

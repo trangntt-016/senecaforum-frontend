@@ -52,7 +52,6 @@ export class LoginComponent implements OnInit {
           // emit user<ViewUser> changes to the parent component via auth service
 
           this.auth.sendPayload(payload);
-
           this.router.navigate(['hot']);
         },
         (err) => {

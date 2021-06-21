@@ -18,9 +18,12 @@ export class DataManagerService {
     private http: HttpClient
   ) { }
 
-  httpOptions:{headers: HttpHeaders} = {
-    headers: new HttpHeaders({'Access-Control-Allow-Origin':'*',})
-  }
+  httpOptions: {headers: HttpHeaders} = {
+    headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*'}
+      )
+  };
+
 
   getAllTags(): Observable<any> {
     return this.tags.length ? of(this.tags)
@@ -37,7 +40,7 @@ export class DataManagerService {
   }
 
   getAllTopics(): Observable<Topic[]>{
-    return this.http.get<Topic[]>(`${environment.topicAPIBase}`);
+    return this.http.get<Topic[]>(`${environment.topicAPIBase}`,this.httpOptions);
   }
 
   getPostsByTopicId(topicId: string, page:number): Observable<PostViewDto[]>{

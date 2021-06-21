@@ -5,9 +5,9 @@ import { ChipColor, TagsConverter } from '../../Utils/TagsConverter';
 import { ContentConverter } from '../../Utils/ContentConverter';
 import { PostViewDto } from '../../model/Post';
 import { TimeConverter } from '../../Utils/TimeConverter';
-import { MainpageService } from '../mainpage.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { Subscription } from "rxjs";
 
 @Component({
   selector: 'app-hotpost',
@@ -15,9 +15,12 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./hotpost.component.css']
 })
 export class HotpostComponent implements OnInit {
+  isLoading = false;
   private tagUtils = new TagsConverter();
   private contentUtils = new ContentConverter();
   private tags: ChipColor[];
+  private sizeSub: Subscription;
+  private postSub: Subscription;
   public posts: PostViewDto[];
   public content: string;
   public value: string;
@@ -30,25 +33,18 @@ export class HotpostComponent implements OnInit {
   constructor(
     private dataService: DataManagerService,
     private _snackBar: MatSnackBar,
-    private mainPageService: MainpageService,
     private router: Router,
     private auth: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.noOfLoads = 1;
     this.posts = [];
     this.allChipTags = [];
-    this.dataService.getNoOfAllPosts().subscribe((size) => {
-      this.noOfAllPosts = size;
-    }, (error => {
-      if (error.status === 403){
-        this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
-        this.auth.logout();
-        this.router.navigate(['login']);
-      }
-    }));
-    this.dataService.getHotPosts(this.noOfLoads).subscribe((posts) => {
+
+    this.postSub = this.dataService.getHotPosts(this.noOfLoads).subscribe((posts) => {
+      this.isLoading = false;
       this.posts = posts;
       this.posts.forEach(post => {
         if (post.content.indexOf('figure') >= 0){
@@ -64,7 +60,7 @@ export class HotpostComponent implements OnInit {
           const content = this.contentUtils.getDisplayText(post.content, 3, post.topic.topicId, post.postId);
           post.content = content;
         }
-        this.value = 'http://localhost:4200/posts/' + post.postId;
+        this.value = 'http://senecaforum-frontend.s3-website.us-east-2.amazonaws.com/topics/' + post.topic.topicId + '/posts/' + post.postId;
         this.tags = this.tagUtils.getMatChips(post.tags);
         this.allChipTags.push(this.tags);
       });
@@ -75,8 +71,22 @@ export class HotpostComponent implements OnInit {
         this.router.navigate(['login']);
       }
     }));
+
+    this.sizeSub = this.dataService.getNoOfAllPosts().subscribe((size) => {
+      this.noOfAllPosts = size;
+    }, (error => {
+      if (error.status === 403){
+        this._snackBar.open('Your login session has expired!', 'Got it!', {duration: 5000});
+        this.auth.logout();
+        this.router.navigate(['login']);
+      }
+    }));
   }
 
+  ngOnDestroy(){
+    this.sizeSub.unsubscribe();
+    this.postSub.unsubscribe();
+  }
   // handle post table
   convertDateLastComment(convertedDate: Date): string{
     const utils = new TimeConverter();
@@ -89,12 +99,8 @@ export class HotpostComponent implements OnInit {
 
   setValueCopy(index): void{
     const post = this.posts[index];
-    this.value = 'http://localhost:4200/posts/' + post.postId;
+    this.value = "http://senecaforum-frontend.s3-website.us-east-2.amazonaws.com/topics/" + post.topic.topicId + "/posts/" + post.postId;
     this._snackBar.open('Double click and...', 'Copied', { duration: 1200 });
-  }
-
-  updateViews(postId: number): void{
-    this.mainPageService.updateViews(postId);
   }
 
   loadmore(): void{
@@ -119,7 +125,7 @@ export class HotpostComponent implements OnInit {
             const content = this.contentUtils.getDisplayText(post.content, 3, post.topic.topicId, post.postId);
             post.content = content;
           }
-          this.value = 'http://localhost:4200/posts/' + post.postId;
+          this.value = "http://senecaforum-frontend.s3-website.us-east-2.amazonaws.com/topics/" + post.topic.topicId + "/posts/" + post.postId;
           this.tags = this.tagUtils.getMatChips(post.tags);
           this.allChipTags.push(this.tags);
         });

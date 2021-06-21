@@ -23,6 +23,19 @@ import { AuthService } from "../auth.service";
   styleUrls: ['./chatbox.component.css']
 })
 export class ChatboxComponent implements OnInit, OnChanges {
+  // emoji
+  showEmojiPicker = false;
+  sets = [
+    'native',
+    'google',
+    'twitter',
+    'facebook',
+    'emojione',
+    'apple',
+    'messenger'
+  ];
+  set = 'twitter';
+  // send chat
   @Input()selectedUser: OnlineUserDto;
   @Output()isCloseChatBoxEvt = new EventEmitter();
   @Output()sentMessageEvt = new EventEmitter();
@@ -32,7 +45,24 @@ export class ChatboxComponent implements OnInit, OnChanges {
   public onlUsers: OnlineUserDto[] = [];
   public colorUtils;
   public timeUtils;
+  public selectedEmoji: any;
 
+
+  toggleEmojiPicker() {
+    this.showEmojiPicker = !this.showEmojiPicker;
+  }
+
+  addEmoji(event) {
+    const { text } = this;
+    const message = `${text}${event.emoji.native}`;
+    this.text = message;
+  }
+
+  onFocus() {
+    this.showEmojiPicker = false;
+  }
+  onBlur() {
+  }
 
   constructor(
     private auth: AuthService
@@ -44,6 +74,7 @@ export class ChatboxComponent implements OnInit, OnChanges {
     this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
     this.timeUtils = new TimeConverter();
     this.colorUtils = new ColorConverter();
+    this.text = '';
   }
 
   public setColor(username: string): void{
@@ -64,10 +95,20 @@ export class ChatboxComponent implements OnInit, OnChanges {
     const converted = JSON.stringify(mes);
     this.sentMessageEvt.emit(converted);
     this.messages.push(mes);
-    // this.messagesEvt.emit(this.messages);
-
-    this.text = null;
+    this.text = '';
   }
 
+  select($event)
+  {
+    this.selectedEmoji = $event.emoji;
+  }
 
+  enter(event: any) {
+    this.text = event.target.value;
+    const mes = new Message(this.currentUser.userId, this.currentUser.username, this.selectedUser.userId, this.selectedUser.username, this.text);
+    const converted = JSON.stringify(mes);
+    this.sentMessageEvt.emit(converted);
+    this.messages.push(mes);
+    this.text = '';
+  }
 }
