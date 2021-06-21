@@ -15,6 +15,6 @@ export class CommentServiceService {
   };
 
   createNewComment(comment: Comment, postId: number): Observable<any>{
-    return this.http.post<any>(`http://localhost:3000/api/posts/${postId}/comments`, comment);
+    return this.http.post<any>(`http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/posts/${postId}/comments`, comment);
   }
 }
