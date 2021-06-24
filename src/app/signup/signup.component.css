@@ -2,6 +2,8 @@ mat-card {
   max-width: 400px;
   margin: 2em auto;
   text-align: center;
+  position: relative;
+  z-index: 500;
 }
 mat-form-field {
   display: block;
