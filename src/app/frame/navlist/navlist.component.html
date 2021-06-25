@@ -7,25 +7,25 @@
     </mat-form-field>
   </div>
 
-  <a mat-list-item >
+  <a mat-list-item [routerLink]="['/hot']">
     <mat-icon mat-list-icon>
       whatshot
     </mat-icon>
-    <p mat-line [routerLink]="['/hot']"> What's Hot? </p>
+    <p mat-line> What's Hot? </p>
   </a>
-  <a mat-list-item>
+  <a mat-list-item  [routerLink]="['/topics/Assignment_Help/posts']" [queryParams]="{ p: 1} ">
     <mat-icon mat-list-icon>
       forum
     </mat-icon>
-    <p mat-line [routerLink]="['/topics/Assignment_Help/posts']" [queryParams]="{ p: 1} "> Forum </p>
+    <p mat-line> Forum </p>
   </a>
 
   <mat-divider></mat-divider>
 
-  <a id="push-bottom" mat-list-item >
+  <a id="push-bottom" mat-list-item [routerLink]="['/about']">
     <mat-icon mat-list-icon>
       info_outline
     </mat-icon>
-    <p mat-line [routerLink]="['/about']"> About </p>
+    <p mat-line> About </p>
   </a>
 </mat-nav-list>

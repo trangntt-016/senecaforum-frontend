@@ -5,12 +5,10 @@
             <div class="container d-flex pl-0">
                 <mat-icon color="warn" *ngIf="post.topic.topicId=='Assignment_Help'">live_help</mat-icon>
                 <mat-icon color="primary" *ngIf="post.topic.topicId=='Coding_Challenges'">assignment</mat-icon>
-                <mat-icon color="accent" *ngIf="post.topic.topicId=='Coop/ Internship'">laptop</mat-icon>
+                <mat-icon color="accent" *ngIf="post.topic.topicId=='Coop_Jobs'">laptop</mat-icon>
                 <mat-icon color="warn" *ngIf="post.topic.topicId=='Exam_Prep'">work</mat-icon>
                 <mat-icon color="primary" *ngIf="post.topic.topicId=='Jobs'">people</mat-icon>
                 <mat-icon color="accent" *ngIf="post.topic.topicId=='Side_Projects'">developer_mode</mat-icon>
-                <mat-icon color="warn" *ngIf="post.topic.topicId=='Side_Projects'">attach_money</mat-icon>
-                <mat-icon color="primary" *ngIf="post.topic.topicId=='Volunteer'">favourite</mat-icon>
                 <h4 style="font-weight: 590;color:#1A237E; margin-left:4px">
                   <a [routerLink]="['/topics',post.topic.topicId,'posts']" [queryParams]="{p: '1'}">{{post.topic.topicName}}</a>
                 </h4>
@@ -61,12 +59,10 @@
         <div class="container d-flex">
           <mat-icon color="warn" *ngIf="post.topic.topicId=='Assignment_Help'">live_help</mat-icon>
           <mat-icon color="primary" *ngIf="post.topic.topicId=='Coding_Challenges'">assignment</mat-icon>
-          <mat-icon color="accent" *ngIf="post.topic.topicId=='Coop/ Internship'">laptop</mat-icon>
+          <mat-icon color="accent" *ngIf="post.topic.topicId=='Coop_Jobs'">laptop</mat-icon>
           <mat-icon color="warn" *ngIf="post.topic.topicId=='Exam_Prep'">work</mat-icon>
           <mat-icon color="primary" *ngIf="post.topic.topicId=='Jobs'">people</mat-icon>
           <mat-icon color="accent" *ngIf="post.topic.topicId=='Side_Projects'">developer_mode</mat-icon>
-          <mat-icon color="warn" *ngIf="post.topic.topicId=='Side_Projects'">attach_money</mat-icon>
-          <mat-icon color="primary" *ngIf="post.topic.topicId=='Volunteer'">favourite</mat-icon>
             <h4 style="font-weight: 590;color:#1A237E;font-size:25px; padding-left:10px;">{{post.topic.topicName}}</h4>
         </div>
         <div class="container">

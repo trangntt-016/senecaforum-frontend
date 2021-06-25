@@ -150,7 +150,13 @@ export class NewpostComponent implements OnInit {
             this.loading = false;
             this.success = true;
             this.warning = null;
-            this.router.navigate(['/topics',success.topic.topicId,'posts',success.postId]);
+            if(success.status === 'ACCEPTED'){
+              this.router.navigate(['topics', success.topic.topicId,'posts', success.postId]);
+            }
+            else if(success.status ==='PENDING'){
+              this._snackBar.open('Your post contains inappropriate words and need approving', "Got it!", {duration:5000});
+              this.router.navigate(['topics', success.topic.topicId, 'posts', success.postId]);
+            }
           },
           (err) => {
             this.success = false;
