@@ -88,7 +88,10 @@ export class ChatpanelComponent implements OnInit, OnChanges {
     // if(this.auth.readToken()!=null){
       this.isLogIn = (this.auth.readToken()!=null)?true:false;
       this.colorUtils = new ColorConverter();
-      this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
+      if(this.auth.readToken()!=null) {
+        this.currentUser = new OnlineUserDto(this.auth.readToken().userId, this.auth.readToken().username);
+      }
+
 
       const that = this;
       this.timeInterval = interval(3000)

@@ -50,8 +50,8 @@ export class CkPostConfig{
   };
   ckNewConfig = {
     cloudServices: {
-      tokenUrl: 'https://81293.cke-cs.com/token/dev/3518ddeeba59cad3ac3d194499902ee44ed67221f2e1684708bb6e2446fc',
-      uploadUrl: 'https://81293.cke-cs.com/easyimage/upload/'
+      tokenUrl: 'https://82524.cke-cs.com/token/dev/98e0ea6a96147f950bf24062cfef2cfa88d28a53b9b1fcc52e878e6c0a22',
+      uploadUrl: 'https://82524.cke-cs.com/easyimage/upload/'
     },
     toolbar: {
       items: [

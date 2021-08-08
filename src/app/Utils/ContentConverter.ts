@@ -45,7 +45,6 @@ export class ContentConverter{
     let subArrayP = pArray.slice(0, pArray.length);
     let lastElem = subArrayP[pArray.length - 1].split('</p>')[0];
     const textViewMore = '<p>' + lastElem + '...' + '<a href="/topics/' + topicId + '/posts/'+ postId + '">View More</a></p>';
-    console.log(textViewMore);
     subArrayP[subArrayP.length - 1] = textViewMore;
     let resizedText = subArrayP.join("");
     return resizedText;
