@@ -6,6 +6,8 @@ import { Post, PostSearchDto, PostViewDto } from './model/Post';
 import { Topic, TopicStats } from './model/Topic';
 import { ViewUser } from './model/User';
 import { environment } from 'src/environments/environment';
+import { QueryParams } from "./model/QueryParams";
+import { PostsForumResult } from "./model/PostsForumResult";
 
 
 
@@ -43,18 +45,25 @@ export class DataManagerService {
     return this.http.get<Topic[]>(`${environment.topicAPIBase}`,this.httpOptions);
   }
 
-  getPostsByTopicId(topicId: string, page:number): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`${environment.topicAPIBase}/${topicId}/posts?p=${page}`);
-  }
 
-  getPostsByTopicIdWithFilter(topicId: string,
-                              p: number,
-                              tags: string,
-                              s: string,
-                              e: string,
-                              sortBy: string,
-                              order: string): Observable<PostViewDto[]>{
-    return this.http.get<PostViewDto[]>(`${environment.topicAPIBase}/${topicId}/posts?p=${p}&tags=${tags}&s=${s}&e=${e}&sortBy=${sortBy}&order=${order}`);
+  getPostsByTopicIdWithFilter(queryParams: QueryParams): Observable<PostsForumResult>{
+    let query = `${environment.topicAPIBase}/${queryParams.topicId}/posts?p=${queryParams.p}`;
+    if (queryParams.tags !== undefined){
+      query += '&tags=' + queryParams.tags;
+    }
+    if(queryParams.s !== undefined){
+      query += '&s=' + queryParams.s;
+    }
+    if(queryParams.e !== undefined){
+      query += '&e=' + queryParams.e;
+    }
+    if(queryParams.sortBy !== undefined){
+      query += '&sortBy=' + queryParams.sortBy;
+    }
+    if(queryParams.order !== undefined){
+      query += '&order=' + queryParams.order;
+    }
+    return this.http.get<PostsForumResult>(query);
   }
 
   getPostByPostId(postId: number): Observable<Post>{

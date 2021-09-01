@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 
-<!--<app-navbar [topics]="topics"></app-navbar>-->
 <br>
 <br>
 <div id="handler">
@@ -18,9 +17,7 @@
     <app-filter></app-filter>
 </div>
 <div class="table-responsive-sm table-responsive-md table-responsive-lg" style="z-index: 5;">
-  <app-table (noOfPostsEvt)="handleNoOfPosts($event)"></app-table>
-  <!--  emit pageId changes-->
-  <app-paginator *ngIf="shouldDisplayPagi"></app-paginator>
+  <app-table></app-table>
 </div>
 
 

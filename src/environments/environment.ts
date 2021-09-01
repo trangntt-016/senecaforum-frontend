@@ -2,25 +2,25 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const environment = {
-  production: false,
-  userAPIBase: 'http://34.130.176.133:3000/api/users',
-  userJWTAPIBase: 'http://34.130.176.133:3000/api/auth',
-  topicAPIBase: 'http://34.130.176.133:3000/api/topics',
-  tagAPIBase: 'http://34.130.176.133:3000/api/tags',
-  postAPIBase: 'http://34.130.176.133:3000/api/posts',
-  wsAPIBase: 'http://34.130.176.133:3000/ws'
-};
-
 // export const environment = {
 //   production: false,
-//   userAPIBase: 'http://localhost:3000/api/users',
-//   userJWTAPIBase: 'http://localhost:3000/api/auth',
-//   topicAPIBase: 'http://localhost:3000/api/topics',
-//   tagAPIBase: 'http://localhost:3000/api/tags',
-//   postAPIBase: 'http://localhost:3000/api/posts',
-//   wsAPIBase: 'http://localhost:3000/ws'
+//   userAPIBase: 'http://34.130.176.133:3000/api/users',
+//   userJWTAPIBase: 'http://34.130.176.133:3000/api/auth',
+//   topicAPIBase: 'http://34.130.176.133:3000/api/topics',
+//   tagAPIBase: 'http://34.130.176.133:3000/api/tags',
+//   postAPIBase: 'http://34.130.176.133:3000/api/posts',
+//   wsAPIBase: 'http://34.130.176.133:3000/ws'
 // };
+
+export const environment = {
+  production: false,
+  userAPIBase: 'http://localhost:3000/api/users',
+  userJWTAPIBase: 'http://localhost:3000/api/auth',
+  topicAPIBase: 'http://localhost:3000/api/topics',
+  tagAPIBase: 'http://localhost:3000/api/tags',
+  postAPIBase: 'http://localhost:3000/api/posts',
+  wsAPIBase: 'http://localhost:3000/ws'
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

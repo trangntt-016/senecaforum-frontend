@@ -100,26 +100,10 @@ export class TimeConverter{
 
     public convertToYYYYMMDD(dateString: string): string{
         const convertedDate = new Date(dateString);
-        const dd = String(convertedDate.getDate()). padStart(2, '0');
-        const mm = String(convertedDate.getMonth() + 1). padStart(2, '0');
+        const dd = String(convertedDate.getDate()).padStart(2, '0');
+        const mm = String(convertedDate.getMonth() + 1).padStart(2, '0');
         const yyyy = convertedDate.getFullYear();
         return yyyy + '-' + mm + '-' + dd;
     }
 
-    public plusDate(end: string): string{
-      if(end != null|| end!= ""){
-        const splitArr = [];
-        splitArr.push(end.slice(0,8),end.slice(8,10));
-        const date = parseInt(end.substring(8, 10)) + 1;
-        if (date >= 10){
-          splitArr[1] = date.toString();
-          end = splitArr.join('');
-        }
-        else{
-          splitArr[1] = '0' + date.toString();
-          end = splitArr.join("");
-        }
-      }
-      return end;
-    }
 }

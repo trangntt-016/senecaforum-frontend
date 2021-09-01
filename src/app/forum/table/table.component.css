@@ -27,4 +27,16 @@ p,h3{
   margin:0;
 }
 
+:host ::ng-deep .mat-paginator-container{
+  background-color: #fafafa;
+  color: #1A237E;
+  position:relative;
+  width: 100%;
+  z-index: 5;
+}
+
+:host ::ng-deep .mat-drawer-container{
+  z-index:0;
+}
+
 

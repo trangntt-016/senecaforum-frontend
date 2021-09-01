@@ -15,10 +15,10 @@ import { AuthService } from "../auth.service";
 
 export class ForumComponent implements OnInit, OnDestroy {
   @Output() p: number; // pageIdx
-  public posts: any[] = null;
-  public shouldDisplayPagi: boolean;
   private mySub: Subscription;
-  public username: string;
+  posts: any[] = null;
+  username: string;
+
 
   constructor(
     private dataService: DataManagerService,
@@ -47,14 +47,6 @@ export class ForumComponent implements OnInit, OnDestroy {
     this.router.navigate([`posts/new`]);
   }
 
-  handleNoOfPosts(event): void{
-   if(event > 0){
-     this.shouldDisplayPagi = true;
-   }
-   else{
-     this.shouldDisplayPagi = false;
-   }
-  }
 
   ngOnDestroy(): void{
     this.mySub.unsubscribe();

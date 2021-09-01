@@ -4,20 +4,23 @@ import { NgForm } from '@angular/forms';
 import { TimeConverter } from '../../Utils/TimeConverter';
 import { DataManagerService } from '../../data-manager.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { QueryParams } from "../../model/QueryParams";
+import { URLUtils } from "../../Utils/URLUtils";
 
 export class FilterKeywords{
-  constructor() {
-    this.tags = null;
-    this.s = new Date('2021-01-01');
-    this.e = new Date();
-    this.sortBy = 'posts';
-    this.order = 'desc';
-  }
   tags: string;
   s: Date;
   e: Date;
   sortBy: string;
-  order: string
+  order: string;
+
+  constructor() {
+    this.tags = null;
+    this.s = new Date('2021-06-16');
+    this.e = new Date();
+    this.sortBy = 'posts';
+    this.order = 'desc';
+  }
 }
 
 @Component({
@@ -27,10 +30,11 @@ export class FilterKeywords{
 })
 export class FilterComponent implements OnInit {
   private topicID: number;
-  public tags: any;
-  public currentTag: any;
-  public filteredKeyword = new FilterKeywords();
-  public isDisplayFilter = false;
+  tags: any;
+  currentTag: any;
+  filteredKeyword = new FilterKeywords();
+  isDisplayFilter = false;
+
   constructor(
     private dataService: DataManagerService,
     private activatedRoute: ActivatedRoute,
@@ -47,12 +51,7 @@ export class FilterComponent implements OnInit {
   handleDisplayFilter( event ): void {
     const targetElement = event.target.attributes[1].value;
     if (targetElement === 'pi pi-filter'){
-      if (!this.isDisplayFilter){
-        this.isDisplayFilter = true;
-      }
-      else{
-        this.isDisplayFilter = false;
-      }
+      this.isDisplayFilter = !this.isDisplayFilter;
     }
   }
 
@@ -67,13 +66,13 @@ export class FilterComponent implements OnInit {
   }
 
   onSubmit(f: NgForm): void {
+    this.isDisplayFilter = false;
     const utils = new TimeConverter();
 
     f.value.start = utils.convertToYYYYMMDD(f.value.start);
     f.value.end = utils.convertToYYYYMMDD(f.value.end);
-    f.value.searchTag  = (f.value.searchTag === undefined) ? '' : f.value.searchTag;
 
-    this.router.navigate([`topics/${this.topicID}/posts`], {queryParams:
+    this.router.navigate([`/topics/${this.topicID}/posts`], {queryParams:
         {
           p: 1,
           tags: f.value.searchTag,

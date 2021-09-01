@@ -25,7 +25,6 @@
 .chatpanel-container{
   display:flex;
   flex-direction: column;
-  overflow: hidden !important;
   background-color: transparent;
 }
 
@@ -62,6 +61,20 @@
 :host ::ng-deep .mat-list-item:hover{
   background-color:lightgray;
   cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  height: 2px;
+  background: transparent; /* make scrollbar transparent */
+}
+
+:host ::ng-deep .mat-drawer-inner-container::-webkit-scrollbar {
+  display: none;
+}
+
+:host ::ng-deep .mat-drawer-container{
+  z-index:-10;
 }
 @media only screen and (max-width: 1024px) {
   .chat-panel-wrapper{

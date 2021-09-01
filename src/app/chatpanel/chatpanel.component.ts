@@ -13,6 +13,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { Router } from '@angular/router';
 import { ChatService } from './chat.service';
 import { environment } from '../../environments/environment';
+import { Topic } from "../model/Topic";
 
 
 @Component({
@@ -177,4 +178,5 @@ export class ChatpanelComponent implements OnInit, OnChanges {
         .subscribe(() => this.router.navigateByUrl('/login'));
     }
   }
+
 }

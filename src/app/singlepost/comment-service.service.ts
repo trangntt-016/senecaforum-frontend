@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Comment } from '../model/Comment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,6 @@ export class CommentServiceService {
   };
 
   createNewComment(comment: Comment, postId: number): Observable<any>{
-    return this.http.post<any>(`http://ec2-18-220-245-72.us-east-2.compute.amazonaws.com:3000/api/posts/${postId}/comments`, comment);
+    return this.http.post<any>(`${environment.postAPIBase}/${postId}/comments`, comment);
   }
 }

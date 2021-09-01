@@ -1,10 +1,10 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { MenuItem } from 'primeng/api';
 import { DataManagerService } from '../../data-manager.service';
-import { Topic } from '../../model/Topic';
-import { Subscription } from 'rxjs';
-import { Router } from "@angular/router";
+import { Topic} from '../../model/Topic';
+import { Observable, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -12,7 +12,7 @@ import { Router } from "@angular/router";
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  public topics: Topic[];
+  public topics$: Observable<Topic[]>;
   public items: MenuItem[];
   public isMobile: boolean;
   private mySub: Subscription;
@@ -37,9 +37,11 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    this.mySub = this.dataService.getAllTopics().subscribe(topics =>{
-      this.topics = topics;
-    });
+    this.topics$ = this.dataService.getAllTopics();
+  }
+
+  isActive(url){
+    return this.router.url.includes(url);
   }
 
 }

@@ -1,4 +1,4 @@
-<div *ngIf="posts==null && isSearching == true" class="container text-center">
+<div *ngIf="posts==null" class="container text-center">
   <h3>No results match your keywords!</h3>
 </div>
 <table class="table table-hover mt-3">
@@ -56,4 +56,10 @@
   </tr>
   </tbody>
 </table>
+
+<mat-paginator [length]="length"
+               [pageSize]="10"
+               [pageIndex] = "p-1"
+               (page)="pageEvent($event)">
+</mat-paginator>
 

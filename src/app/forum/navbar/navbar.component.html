@@ -1,21 +1,22 @@
 <!--<p-menubar [model]="items" (click) = "activeMenu($event)"></p-menubar>-->
-<div style="position: relative; z-index: 5; display:flex; justify-content: center; flex-wrap: wrap" *ngIf="!isMobile">
-  <div *ngFor="let t of topics">
-    <button mat-button
-            [routerLink]="['/topics/'+t.topicId+'/posts']" [queryParams]="{ p: 1}"
-            routerLinkActive="mat-accent"
-            [routerLinkActiveOptions]="{ exact: true}"
-            >{{t.topicName}}</button>
+<ul style="position: relative; z-index: 5; display:flex; justify-content: center; flex-wrap: wrap" *ngIf="!isMobile">
+<div *ngFor="let t of topics$ | async">
+  <button mat-button
+          [routerLink]="['/topics/'+t.topicId+'/posts']"
+          [queryParams]="{p:1}"
+          [class.isActive]="isActive('/topics/'+t.topicId+'/posts')"
+  >{{t.topicName}}</button>
 
   </div>
-</div>
+
+</ul>
 
 <mat-nav-list style="position: relative; z-index: 5;" *ngIf="isMobile">
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       Topics
     </mat-expansion-panel-header>
-    <a mat-list-item routerLink *ngFor="let t of topics" [routerLink]="['/topics/'+t.topicId+'/posts']" [queryParams]="{ p: 1}" >
+    <a mat-list-item routerLink *ngFor="let t of topics$ | async " [routerLink]="['/topics/'+t.topicId+'/posts']" [queryParams]="{ p: 1}" >
       <span style="width: 100%"><button mat-button>{{t.topicName}}</button></span>
     </a>
   </mat-expansion-panel>

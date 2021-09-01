@@ -14,7 +14,6 @@ import { SinglepostComponent } from './singlepost/singlepost.component';
 import { CommentComponent } from './comment/comment.component';
 import { NavbarComponent } from './forum/navbar/navbar.component';
 import { TableComponent } from './forum/table/table.component';
-import { PaginatorComponent } from './forum/paginator/paginator.component';
 import { FilterComponent } from './forum/filter/filter.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
 import { HotpostComponent } from './mainpage/hotpost/hotpost.component';
@@ -48,7 +47,6 @@ import { AboutComponent } from './about/about.component';
     CommentComponent,
     NavbarComponent,
     TableComponent,
-    PaginatorComponent,
     FilterComponent,
     MainpageComponent,
     HotpostComponent,
